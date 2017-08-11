@@ -4,10 +4,11 @@ package com.apero_area.aperoarea;
  * Created by micka on 10-Aug-17.
  */
 
-public class product {
+public class Product {
 
     private int id;
     private String name;
+    private String description;
     private String price;
 
     //getters & setters
@@ -37,5 +38,12 @@ public class product {
         this.price = price;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
 

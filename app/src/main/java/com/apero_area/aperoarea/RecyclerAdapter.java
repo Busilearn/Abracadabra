@@ -13,10 +13,10 @@ import java.util.List;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
-    private List<product> products;
+    private List<Product> Products;
 
-    public RecyclerAdapter (List<product> products) {
-        this.products = products;
+    public RecyclerAdapter (List<Product> Products) {
+        this.Products = Products;
     }
 
     @Override
@@ -27,22 +27,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.name.setText(products.get(position).getName());
-        holder.full_name.setText(products.get(position).getPrice());
+        holder.name.setText(Products.get(position).getName());
+        holder.description.setText(Products.get(position).getDescription());
+        holder.price.setText(Products.get(position).getPrice());
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return Products.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name, full_name;
+        TextView name, description, price;
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView)itemView.findViewById(R.id.name);
-            full_name = (TextView)itemView.findViewById(R.id.full_name);
+            description = (TextView)itemView.findViewById(R.id.description);
+            price = (TextView)itemView.findViewById(R.id.price);
+
 
         }
     }

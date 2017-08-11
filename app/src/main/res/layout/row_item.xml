@@ -1,26 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:text="mickael"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/name"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginBottom="15dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="mickael@test.com"
-        android:textSize="18sp"
+        android:text="Produit 1"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginStart="15dp"
+        android:id="@+id/name"
+        android:layout_marginLeft="15dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="10.2"
+            android:textSize="18sp"
+            android:gravity="end"
+            android:layout_marginStart="15dp"
+            android:id="@+id/price"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="€"
+            android:textSize="18sp"
+            android:gravity="end"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/lorem_ipsum"
+        android:textSize="18sp"
         android:gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/full_name"/>
+        android:layout_marginStart="10dp"
+        android:id="@+id/description"
+        android:layout_marginLeft="10dp" />
+
 </LinearLayout>

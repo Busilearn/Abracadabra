@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerAdapter adapter;
-    private List<product> products;
+    private List<Product> products;
     private ApiInterface apiInterface;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +33,26 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        String username = "ck_fb2a39bf26ad4535b96a3d4e3a518e9378825148";
-        String password = "cs_3709ea5013a44e175a5079bd67204f092a4a2d5e";
-
-        String base = username + ":" + password;
-        String authHeader ="Basic" + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
-
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<product>> call = apiInterface.getProduct(authHeader);
+        Call<List<Product>> call = apiInterface.getProduct();
 
 
-        call.enqueue(new Callback<List<product>>() {
+        call.enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<List<product>> call, Response<List<product>> response) {
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 products = response.body();
-                Log.d("test", products.toString());
-               /* adapter = new RecyclerAdapter(products);
-                recyclerView.setAdapter(adapter);*/
+                if (products.size() != 0) {
+                    Log.d("test", products.get(1).getName());
+
+                    adapter = new RecyclerAdapter(products);
+                    recyclerView.setAdapter(adapter);
+                }
             }
 
             @Override
-            public void onFailure(Call<List<product>> call, Throwable t) {
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.d("test", "echec");
 
             }
         });
