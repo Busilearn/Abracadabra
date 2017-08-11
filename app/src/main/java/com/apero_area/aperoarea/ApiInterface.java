@@ -1,6 +1,8 @@
 package com.apero_area.aperoarea;
 
 
+import com.apero_area.aperoarea.Model.Product;
+
 import java.util.List;
 
 import retrofit2.Call;

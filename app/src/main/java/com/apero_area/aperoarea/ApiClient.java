@@ -1,7 +1,5 @@
 package com.apero_area.aperoarea;
 
-import android.util.Base64;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

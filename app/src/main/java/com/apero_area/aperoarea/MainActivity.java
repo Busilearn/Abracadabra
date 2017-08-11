@@ -2,9 +2,16 @@ package com.apero_area.aperoarea;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.apero_area.aperoarea.Model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private List<Product> products;
     private ApiInterface apiInterface;
+    private ImageView imageView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +38,28 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager (this);
-        recyclerView.setLayoutManager(layoutManager);
+        //recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                Log.d("test","click");
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<List<Product>> call = apiInterface.getProduct();
@@ -43,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 products = response.body();
                 if (products.size() != 0) {
-                    Log.d("test", products.get(1).getName());
+                    Log.d("test", products.get(1).getImages().get(0).getSrc());
 
                     adapter = new RecyclerAdapter(products);
                     recyclerView.setAdapter(adapter);
@@ -52,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Log.d("test", "echec");
+                Log.d("test", "echec" + t);
 
             }
         });
