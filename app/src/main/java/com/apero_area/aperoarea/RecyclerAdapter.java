@@ -44,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(products.get(position).getName());
-        holder.description.setText(products.get(position).getDescription());
+        holder.short_description.setText(products.get(position).getShort_description());
         holder.price.setText(products.get(position).getPrice());
 
         holder.bind(products.get(position), listener);
@@ -64,13 +64,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name, description, price;
+        TextView name, short_description, price;
         ImageView image;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView)itemView.findViewById(R.id.name);
-            description = (TextView)itemView.findViewById(R.id.description);
+            short_description = (TextView)itemView.findViewById(R.id.short_description);
             price = (TextView)itemView.findViewById(R.id.price);
             image = (ImageView)itemView.findViewById(R.id.imageProduct);
         }

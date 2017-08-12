@@ -19,6 +19,7 @@ public class Product extends RealmObject {
     private String average_rating;
     private String rating_count;
     private RealmList<Images> images;
+    private String short_description;
 
 
     //getters & setters
@@ -78,6 +79,13 @@ public class Product extends RealmObject {
 
     public void setImages(RealmList<Images> images) {
         this.images = images;
+    }
+
+    public String getShort_description() {
+        return short_description;
+    }
+
+    public void setShort_description(String short_description) { this.short_description = short_description;
     }
 }
 
