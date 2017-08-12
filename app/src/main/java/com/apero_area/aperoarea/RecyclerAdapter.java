@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,11 +44,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.name.setText(products.get(position).getName());
         holder.short_description.setText(products.get(position).getShort_description());
         holder.price.setText(products.get(position).getPrice());
-
+final int test = position;
         holder.bind(products.get(position), listener);
 
 
@@ -54,6 +56,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 .load(products.get(position).getImages().get(0).getSrc())
                 .error(R.mipmap.ic_launcher)
                 .into(holder.image);
+
+        holder.addproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              // Log.d("test", products.get(test).getName());
+                Log.d("test", "click");
+            }
+        });
     }
 
     @Override
@@ -66,6 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         TextView name, short_description, price;
         ImageView image;
+        ImageButton addproduct, minusproduct;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +84,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             short_description = (TextView)itemView.findViewById(R.id.short_description);
             price = (TextView)itemView.findViewById(R.id.price);
             image = (ImageView)itemView.findViewById(R.id.imageProduct);
+            addproduct = (ImageButton) itemView.findViewById(R.id.addproduct);
+            minusproduct = (ImageButton) itemView.findViewById(R.id.minusproduct);
+
         }
 
         public void bind(final Product products, final OnItemClickListener listener) {
@@ -82,6 +96,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
         }
+
+
+
+
     }
 
 }
