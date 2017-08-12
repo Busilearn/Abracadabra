@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,12 +19,21 @@ import java.util.List;
  * Created by micka on 10-Aug-17.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> implements RecyclerView.OnItemTouchListener {
-    private List<Product> Products;
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+    private List<Product> products;
 
-    public RecyclerAdapter (List<Product> Products) {
-        this.Products = Products;
+
+    public interface OnItemClickListener {
+        void onItemClick(Product item);
     }
+
+    private final OnItemClickListener listener;
+
+    public RecyclerAdapter(List<Product> products, OnItemClickListener listener) {
+        this.products = products;
+        this.listener = listener;
+    }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,43 +43,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.name.setText(Products.get(position).getName());
-        holder.description.setText(Products.get(position).getDescription());
-        holder.price.setText(Products.get(position).getPrice());
+        holder.name.setText(products.get(position).getName());
+        holder.description.setText(products.get(position).getDescription());
+        holder.price.setText(products.get(position).getPrice());
+
+        holder.bind(products.get(position), listener);
+
 
         Picasso.with(holder.image.getContext())
-                .load(Products.get(position).getImages().get(0).getSrc())
+                .load(products.get(position).getImages().get(0).getSrc())
                 .error(R.mipmap.ic_launcher)
                 .into(holder.image);
-
-
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });*/
-
     }
 
     @Override
     public int getItemCount() {
-        return Products.size();
+        return products.size();
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-    }
-
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -84,8 +73,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             description = (TextView)itemView.findViewById(R.id.description);
             price = (TextView)itemView.findViewById(R.id.price);
             image = (ImageView)itemView.findViewById(R.id.imageProduct);
+        }
 
-
+        public void bind(final Product products, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(products);
+                }
+            });
         }
     }
 

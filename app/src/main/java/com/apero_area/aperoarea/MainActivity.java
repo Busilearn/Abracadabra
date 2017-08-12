@@ -1,17 +1,15 @@
 package com.apero_area.aperoarea;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.apero_area.aperoarea.Model.Product;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,13 +26,14 @@ public class MainActivity extends AppCompatActivity {
     private List<Product> products;
     private ApiInterface apiInterface;
     private ImageView imageView;
+    private Realm realm;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Get a Realm instance for this thread
-        Realm realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager (this);
@@ -43,27 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                Log.d("test","click");
-
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<List<Product>> call = apiInterface.getProduct();
-
 
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -71,9 +51,18 @@ public class MainActivity extends AppCompatActivity {
 
                 products = response.body();
                 if (products.size() != 0) {
-                    Log.d("test", products.get(1).getImages().get(0).getSrc());
+                    adapter = new RecyclerAdapter(products, new RecyclerAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Product products) {
+                            Log.d("test","click " + products);
+                            realm.beginTransaction();
+                            Product productsRealm = realm.copyToRealm(products);
+                            realm.commitTransaction();
 
-                    adapter = new RecyclerAdapter(products);
+                            Intent intent = new Intent(MainActivity.this, ProductView.class);
+                            startActivity(intent);
+                        }
+                    });
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -81,11 +70,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Log.d("test", "echec" + t);
-
             }
         });
-
-
     }
 
 }
