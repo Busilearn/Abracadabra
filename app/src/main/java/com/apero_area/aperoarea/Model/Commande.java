@@ -5,4 +5,5 @@ package com.apero_area.aperoarea.Model;
  */
 
 public class Commande {
+    
 }
