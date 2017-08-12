@@ -38,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager (this);
         //recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-
+        // Build of the retrofit object
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        // Make the request
         Call<List<Product>> call = apiInterface.getProduct();
-
+        //
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
