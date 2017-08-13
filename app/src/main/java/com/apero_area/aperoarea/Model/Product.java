@@ -3,14 +3,13 @@ package com.apero_area.aperoarea.Model;
 
 import java.util.List;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
+
 
 /**
  * Created by micka on 10-Aug-17.
  */
 
-public class Product extends RealmObject {
+public class Product {
 
     private int id;
     private String name;
@@ -18,7 +17,7 @@ public class Product extends RealmObject {
     private String price;
     private String average_rating;
     private String rating_count;
-    private RealmList<Images> images;
+    private List<Images> images;
     private String short_description;
 
 
@@ -72,20 +71,19 @@ public class Product extends RealmObject {
         this.rating_count = rating_count;
     }
 
-
-    public RealmList<Images> getImages() {
-        return images;
-    }
-
-    public void setImages(RealmList<Images> images) {
-        this.images = images;
-    }
-
     public String getShort_description() {
         return short_description;
     }
 
     public void setShort_description(String short_description) { this.short_description = short_description;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 }
 

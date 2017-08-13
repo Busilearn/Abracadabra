@@ -6,7 +6,7 @@ import io.realm.RealmObject;
  * Created by micka on 11-Aug-17.
  */
 
-public class Images extends RealmObject {
+public class Images {
 
     private String src;
 

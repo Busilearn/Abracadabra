@@ -13,10 +13,9 @@
         android:id="@+id/imageProduct"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="1"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <LinearLayout

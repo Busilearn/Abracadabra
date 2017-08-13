@@ -10,10 +10,10 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.apero_area.aperoarea.Model.Product;
+import com.google.gson.Gson;
 
 import java.util.List;
 
-import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,19 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private List<Product> products;
     private ApiInterface apiInterface;
     private ImageView imageView;
-    private Realm realm;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get a Realm instance for this thread
-        realm = Realm.getDefaultInstance();
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager (this);
-        //recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+        recyclerView.setLayoutManager(layoutManager);
+        //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
 
         // Build of the retrofit object
@@ -56,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(Product products) {
                             Log.d("test","click " + products);
-                            realm.beginTransaction();
-                            Product productsRealm = realm.copyToRealm(products);
-                            realm.commitTransaction();
 
-                            Intent intent = new Intent(MainActivity.this, ProductView.class);
+                            Intent intent = new Intent(MainActivity.this, ProductViewActivity.class);
+                            Gson gson = new Gson();
+                            String productJson = gson.toJson(products);
+                            intent.putExtra("productJson", productJson);
+
                             startActivity(intent);
                         }
                     });
