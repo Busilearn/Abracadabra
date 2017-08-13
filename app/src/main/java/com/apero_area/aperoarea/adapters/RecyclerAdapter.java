@@ -52,6 +52,7 @@ final int test = position;
 
         Picasso.with(holder.image.getContext())
                 .load(products.get(position).getImages().get(0).getSrc())
+                .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.image);
 

@@ -1,6 +1,10 @@
 package com.apero_area.aperoarea.models;
 
 
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
+
 import java.util.List;
 
 
@@ -48,7 +52,7 @@ public class Product {
     }
 
     public String getDescription() {
-        return description;
+        return String.valueOf(stripHtml(description));
     }
 
     public void setDescription(String description) {
@@ -72,7 +76,7 @@ public class Product {
     }
 
     public String getShort_description() {
-        return short_description;
+        return String.valueOf(stripHtml(short_description));
     }
 
     public void setShort_description(String short_description) { this.short_description = short_description;
@@ -84,6 +88,17 @@ public class Product {
 
     public void setImages(List<Images> images) {
         this.images = images;
+    }
+
+
+
+
+    public Spanned stripHtml(String html) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(html);
+        }
     }
 }
 

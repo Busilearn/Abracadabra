@@ -45,6 +45,7 @@ public class ProductViewActivity extends AppCompatActivity {
 
         Picasso.with(getBaseContext())
                 .load(product.getImages().get(0).getSrc())
+                .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(image);
 

@@ -1,11 +1,16 @@
 package com.apero_area.aperoarea.activities;
 
 import android.app.ActionBar;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private List<Product> products;
     private ApiInterface apiInterface;
-    private ImageView imageView;
-    private Button checkOut;
+    private ProgressDialog progress;
+    private AlertDialog alertDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
-        checkOut = (Button)findViewById(R.id.checkOut);
+
+        progress = ProgressDialog.show(this, "Chargement des données",
+                "En cours de chargement, veuillez patienter", true);
+
+        alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Pas de connexion");
+        alertDialog.setMessage("Merci d'activer votre connexion internet");
 
         // Build of the retrofit object
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                progress.dismiss();
 
                 products = response.body();
                 if (products.size() != 0) {
@@ -77,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
+                progress.dismiss();
+                alertDialog.show();
                 Log.d("test", "echec" + t);
             }
         });
@@ -100,6 +114,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
