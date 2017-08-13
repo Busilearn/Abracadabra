@@ -1,7 +1,7 @@
-package com.apero_area.aperoarea;
+package com.apero_area.aperoarea.interfaces;
 
 
-import com.apero_area.aperoarea.Model.Product;
+import com.apero_area.aperoarea.models.Product;
 
 import java.util.List;
 

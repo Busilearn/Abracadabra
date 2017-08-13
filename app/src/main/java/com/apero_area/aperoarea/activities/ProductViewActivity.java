@@ -1,13 +1,18 @@
-package com.apero_area.aperoarea;
+package com.apero_area.aperoarea.activities;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apero_area.aperoarea.Model.Product;
+import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.models.Product;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -42,6 +47,35 @@ public class ProductViewActivity extends AppCompatActivity {
                 .load(product.getImages().get(0).getSrc())
                 .error(R.mipmap.ic_launcher)
                 .into(image);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //ajoute les entrées de menu_test à l'ActionBar
+        getMenuInflater().inflate(R.menu.menu_test, menu);
+        return true;
+    }
+
+    //gère le click sur une action de l'ActionBar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_checkout:
+                Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        //code it to launch an intent to the activity you want
+        finish();
+        return true;
     }
 
 }

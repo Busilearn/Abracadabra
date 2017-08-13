@@ -1,6 +1,4 @@
-package com.apero_area.aperoarea.Model;
-
-import io.realm.RealmObject;
+package com.apero_area.aperoarea.models;
 
 /**
  * Created by micka on 11-Aug-17.

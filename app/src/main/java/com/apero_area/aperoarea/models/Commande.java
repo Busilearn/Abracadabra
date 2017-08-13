@@ -1,4 +1,4 @@
-package com.apero_area.aperoarea.Model;
+package com.apero_area.aperoarea.models;
 
 import java.util.List;
 

@@ -1,18 +1,16 @@
-package com.apero_area.aperoarea;
+package com.apero_area.aperoarea.adapters;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.apero_area.aperoarea.Model.Product;
+import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.models.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
