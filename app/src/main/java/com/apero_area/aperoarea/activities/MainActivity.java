@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
+        
 
         progress = ProgressDialog.show(this, "Chargement des données",
                 "En cours de chargement, veuillez patienter", true);
