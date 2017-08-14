@@ -52,7 +52,7 @@ public class Product {
     }
 
     public String getDescription() {
-        return String.valueOf(stripHtml(description));
+        return String.valueOf(fromHtml(description));
     }
 
     public void setDescription(String description) {
@@ -76,7 +76,7 @@ public class Product {
     }
 
     public String getShort_description() {
-        return String.valueOf(stripHtml(short_description));
+        return String.valueOf(fromHtml(short_description));
     }
 
     public void setShort_description(String short_description) { this.short_description = short_description;
@@ -93,12 +93,15 @@ public class Product {
 
 
 
-    public Spanned stripHtml(String html) {
+    @SuppressWarnings("deprecation")
+    private static Spanned fromHtml(String html){
+        Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
         } else {
-            return Html.fromHtml(html);
+            result = Html.fromHtml(html);
         }
+        return result;
     }
 }
 

@@ -4,4 +4,15 @@
     <string name="title_activity_product_view">Détails</string>
     <string name="euros">€</string>
     <string name="title_activity_checkout">Checkout</string>
+
+    <string name="addPayment">Add Payment Method</string>
+    <string name="save">Save</string>
+    <string name="saverx">Save Rx</string>
+    <string name="saveService">Save with Service</string>
+    <string name="paymentMethods">Payment Methods</string>
+    <string name="validationErrors">Validation Errors</string>
+    <string name="ok">OK</string>
+    <string name="progressMessage">Creating Token&#8230;</string>
+    <string name="endingIn">Card ending in </string>
+
 </resources>
