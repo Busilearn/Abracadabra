@@ -1,8 +1,14 @@
 package com.apero_area.aperoarea.adapters;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -10,18 +16,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.activities.BadgeDrawable;
+import com.apero_area.aperoarea.activities.MainActivity;
 import com.apero_area.aperoarea.models.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Callback;
 
 /**
  * Created by micka on 10-Aug-17.
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+    private Context context;
     private List<Product> products;
-
+    private int cartCount;
 
     public interface OnItemClickListener {
         void onItemClick(Product item);
@@ -29,9 +40,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     private final OnItemClickListener listener;
 
-    public RecyclerAdapter(List<Product> products, OnItemClickListener listener) {
+    public RecyclerAdapter(Context context, List<Product> products, OnItemClickListener listener) {
         this.products = products;
         this.listener = listener;
+        this.cartCount = 0;
+        this.context = context;
     }
 
 
@@ -46,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.name.setText(products.get(position).getName());
         holder.short_description.setText(products.get(position).getShort_description());
         holder.price.setText(products.get(position).getPrice());
-final int test = position;
+        final int test = position;
         holder.bind(products.get(position), listener);
 
 
@@ -61,6 +74,9 @@ final int test = position;
             public void onClick(View v) {
               // Log.d("test", products.get(test).getName());
                 Log.d("test", "click");
+                cartCount++;
+                Log.d("compteur: "+cartCount,"test");
+                ((MainActivity)context).setBadgeCount(Integer.toString(cartCount));
             }
         });
     }
@@ -95,9 +111,6 @@ final int test = position;
                 }
             });
         }
-
-
-
 
     }
 

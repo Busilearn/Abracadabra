@@ -2,8 +2,11 @@ package com.apero_area.aperoarea.activities;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ApiInterface apiInterface;
     private ProgressDialog progress;
     private AlertDialog alertDialog;
+    private Menu mMenu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
+
         
 
         progress = ProgressDialog.show(this, "Chargement des données",
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                 products = response.body();
                 if (products.size() != 0) {
-                    adapter = new RecyclerAdapter(products, new RecyclerAdapter.OnItemClickListener() {
+                    adapter = new RecyclerAdapter(MainActivity.this, products, new RecyclerAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(Product products) {
                             Log.d("test","click " + products);
@@ -99,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //ajoute les entrées de menu_test à l'ActionBar
-        getMenuInflater().inflate(R.menu.menu_test, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        mMenu = menu;
         return true;
     }
+
 
     //gère le click sur une action de l'ActionBar
     @Override
@@ -111,9 +119,36 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_checkout:
                 Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
                 startActivity(intent);
+
+            case R.id.cart:
+                Intent intent2 = new Intent(this, Cart.class);
+                this.startActivity(intent2);
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
+    }
+
+    public void setBadgeCount(String count) {
+
+        Context context = getApplicationContext();
+        MenuItem itemCart = mMenu.findItem(R.id.action_cart);
+        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
+
+        BadgeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
 }

@@ -25,6 +25,10 @@
         <activity
             android:name=".activities.CheckoutActivity"
             android:label="@string/title_activity_checkout" />
+        <activity android:name=".activities.Cart"
+            android:label="cart"
+            android:parentActivityName=".activities.MainActivity"
+            />
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".activities.CheckoutActivity" />
