@@ -79,6 +79,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 ((MainActivity)context).setBadgeCount(Integer.toString(cartCount));
             }
         });
+
+            holder.minusproduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Log.d("test", products.get(test).getName());
+                    Log.d("test", "click");
+                    Log.d("compteur: " + cartCount, "test");
+                    if (cartCount > 0) {
+                        cartCount--;
+                        ((MainActivity) context).setBadgeCount(Integer.toString(cartCount));
+                    } else {
+                        // do nothing
+
+                    }
+
+                }
+            });
     }
 
     @Override
