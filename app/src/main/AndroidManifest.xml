@@ -25,7 +25,7 @@
         <activity
             android:name=".activities.CheckoutActivity"
             android:label="@string/title_activity_checkout" />
-        <activity android:name=".activities.Cart"
+        <activity android:name=".activities.CartActivity"
             android:label="cart"
             android:parentActivityName=".activities.MainActivity"
             />
