@@ -21,7 +21,9 @@ import android.widget.TextView;
 
 import com.apero_area.aperoarea.activities.MainActivity;
 import com.apero_area.aperoarea.customview.TextDrawable;
+import com.apero_area.aperoarea.models.CenterRepository;
 import com.apero_area.aperoarea.util.ColorGenerator;
+import com.apero_area.aperoarea.util.Utils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
