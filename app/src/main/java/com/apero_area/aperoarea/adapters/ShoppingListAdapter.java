@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.activities.MainActivity;
 import com.apero_area.aperoarea.customview.ItemTouchHelperViewHolder;
+import com.apero_area.aperoarea.customview.ItemTouchHelperAdapter;
 import com.apero_area.aperoarea.customview.OnStartDragListener;
 import com.apero_area.aperoarea.customview.TextDrawable;
 import com.apero_area.aperoarea.fragment.MyCartFragment;
@@ -103,7 +104,7 @@ public class ShoppingListAdapter extends
 
         Glide.with(context).load(ImageUrl).placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
-                .centerCrop().into(holder.imagView);*/
+                .centerCrop().into(holder.imagView);
 
         // Start a drag whenever the handle view it touched
         holder.imagView.setOnTouchListener(new View.OnTouchListener() {
@@ -114,7 +115,7 @@ public class ShoppingListAdapter extends
                 }
                 return false;
             }
-        });
+        });*/
 
         holder.addItem.setOnClickListener(new View.OnClickListener() {
 

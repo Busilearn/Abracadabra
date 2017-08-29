@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
 
         collapsingToolbar.setTitle("Categories");
 
-        ImageView header = (ImageView) view.findViewById(R.id.header);
+        /*ImageView header = (ImageView) view.findViewById(R.id.header);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.header);
@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
                 collapsingToolbar.setContentScrimColor(mutedColor);
                 collapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
             }
-        });
+        });*/
 
         recyclerView = (RecyclerView) view.findViewById(R.id.scrollableview);
 

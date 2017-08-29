@@ -11,10 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.activities.MainActivity;
 import com.apero_area.aperoarea.adapters.ShoppingListAdapter;
+import com.apero_area.aperoarea.adapters.ShoppingListAdapter.OnItemClickListener;
 import com.apero_area.aperoarea.customview.OnStartDragListener;
 import com.apero_area.aperoarea.customview.SimpleItemTouchHelperCallback;
 import com.apero_area.aperoarea.models.CenterRepository;
@@ -29,6 +31,7 @@ public class MyCartFragment extends Fragment implements OnStartDragListener {
     private static FrameLayout noItemDefault;
     private static RecyclerView recyclerView;
     private ItemTouchHelper mItemTouchHelper;
+    private ImageView image;
     public MyCartFragment() {
     }
 
@@ -61,7 +64,7 @@ public class MyCartFragment extends Fragment implements OnStartDragListener {
                 false);
 
         view.findViewById(R.id.slide_down).setVisibility(View.VISIBLE);
-        /*view.findViewById(R.id.slide_down).setOnTouchListener(
+        view.findViewById(R.id.slide_down).setOnTouchListener(
                 new View.OnTouchListener() {
 
                     @Override
@@ -70,11 +73,11 @@ public class MyCartFragment extends Fragment implements OnStartDragListener {
                         Utils.switchFragmentWithAnimation(R.id.frag_container,
                                 new HomeFragment(),
                                 ((MainActivity) (getContext())),
-                                Utils.HOME_FRAGMENT, AnimationType.SLIDE_DOWN);
+                                Utils.HOME_FRAGMENT, Utils.AnimationType.SLIDE_DOWN);
 
                         return false;
                     }
-                });*/
+                });
 
         // Fill Recycler View
 
@@ -107,7 +110,7 @@ public class MyCartFragment extends Fragment implements OnStartDragListener {
                                     new ProductDetailsFragment("", position,
                                             true),
                                     ((MainActivity) (getContext())), null,
-                                    AnimationType.SLIDE_LEFT);
+                                    Utils.AnimationType.SLIDE_LEFT);
 
                         }
                     });
