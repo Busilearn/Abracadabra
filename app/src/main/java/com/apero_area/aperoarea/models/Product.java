@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class Product {
 
     private int id;
+    private String productId;
     private String name;
     private String description;
     private String price;
@@ -23,6 +26,9 @@ public class Product {
     private String rating_count;
     private List<Images> images;
     private String short_description;
+    private String orderQty;
+    private String discount;
+    private String mrp;
 
 
     //getters & setters
@@ -33,6 +39,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -82,6 +96,14 @@ public class Product {
     public void setShort_description(String short_description) { this.short_description = short_description;
     }
 
+    public String getSellMRP() {
+        return price;
+    }
+
+    public void setSellMRP(String sellMRP) {
+        this.price = sellMRP;
+    }
+
     public List<Images> getImages() {
         return images;
     }
@@ -90,7 +112,41 @@ public class Product {
         this.images = images;
     }
 
+    public String getQuantity() {
+        return orderQty;
+    }
 
+    public void setQuantity(String quantity) {
+        this.orderQty = quantity;
+    }
+
+    public String getMRP() {
+        return this.mrp;
+    }
+
+    public void setMRP(String MRP) {
+        this.mrp = MRP;
+    }
+
+    public String getDiscount() {
+        return discount + "%";
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public Product(String itemName, String itemShortDesc, String itemDetail,
+                   String MRP, String discount, String sellMRP, String quantity, String orderId) {
+        this.name = itemName;
+        this.short_description = itemShortDesc;
+        this.description = itemDetail;
+        this.mrp = MRP;
+        this.discount = discount;
+        this.price = sellMRP;
+        this.orderQty = quantity;
+        this.productId = orderId;
+    }
 
 
     @SuppressWarnings("deprecation")
@@ -103,5 +159,6 @@ public class Product {
         }
         return result;
     }
+
 }
 

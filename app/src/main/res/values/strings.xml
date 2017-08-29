@@ -14,5 +14,11 @@
     <string name="ok">OK</string>
     <string name="progressMessage">Creating Token&#8230;</string>
     <string name="endingIn">Card ending in </string>
+    <string name="crash_toast_text">oups</string>
+    <string name="title_changelog">change log</string>
+    <string name="changelog_close">Fermer</string>
+    <string name="email_developer_">daniel.sautot@gmail.com</string>
+    <string name="personal_website_">Apero Area</string>
+    <string name="contact_number">0686986046</string>
 
 </resources>
