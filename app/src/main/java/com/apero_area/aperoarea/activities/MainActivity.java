@@ -34,6 +34,7 @@ import com.apero_area.aperoarea.models.Money;
 import com.apero_area.aperoarea.models.Product;
 import com.apero_area.aperoarea.util.PreferenceHelper;
 import com.apero_area.aperoarea.util.TinyDB;
+import com.apero_area.aperoarea.util.Utils;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
@@ -95,6 +96,33 @@ public class MainActivity extends AppCompatActivity {
                         true);
             }
         }
+
+        findViewById(R.id.item_counter).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Utils.vibrate(getApplicationContext());
+                        Utils.switchContent(R.id.frag_container,
+                                Utils.SHOPPING_LIST_TAG,
+                                MainActivity.this, Utils.AnimationType.SLIDE_UP);
+
+                    }
+                });
+
+        findViewById(R.id.checkout).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Utils.vibrate(getApplicationContext());
+
+                        showPurchaseDialog();
+
+                    }
+                });
 
 
         progress = ProgressDialog.show(this, "Chargement des données",
@@ -295,5 +323,83 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void showPurchaseDialog() {
+
+        AlertDialog.Builder exitScreenDialog = new AlertDialog.Builder(MainActivity.this, R.style.PauseDialog);
+
+        exitScreenDialog.setTitle("Order Confirmation")
+                .setMessage("Would you like to place this order ?");
+        exitScreenDialog.setCancelable(true);
+
+        exitScreenDialog.setPositiveButton(
+                "Place Order",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //finish();
+                        dialog.cancel();
+
+                        ArrayList<String> productId = new ArrayList<String>();
+
+                        for (Product productFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
+
+                            //add product ids to array
+                            productId.add(productFromShoppingList.getProductId());
+                        }
+
+                        //pass product id array to Apriori ALGO
+                        CenterRepository.getCenterRepository()
+                                .addToItemSetList(new HashSet<>(productId));
+
+                        //Do Minning
+                        /*FrequentItemsetData<String> data = generator.generate(
+                                CenterRepository.getCenterRepository().getItemSetList()
+                                , MINIMUM_SUPPORT);
+
+                        for (Set<String> itemset : data.getFrequentItemsetList()) {
+                            Log.e("APriori", "Item Set : " +
+                                    itemset + "Support : " +
+                                    data.getSupport(itemset));
+                        }*/
+
+                        //clear all list item
+                        CenterRepository.getCenterRepository().getListOfProductsInShoppingList().clear();
+
+                        toggleBannerVisibility();
+
+                        itemCount = 0;
+                        itemCountTextView.setText(String.valueOf(0));
+                        checkoutAmount = new BigDecimal(BigInteger.ZERO);
+                        checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
+
+                    }
+                });
+
+        exitScreenDialog.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        /*exitScreenDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Snackbar.make(ECartHomeActivity.this.getWindow().getDecorView().findViewById(android.R.id.content)
+                        , "Order Placed Successfully, Happy Shopping !!", Snackbar.LENGTH_LONG)
+                        .setAction("View Apriori Output", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivity(new Intent(ECartHomeActivity.this, APrioriResultActivity.class));
+                            }
+                        }).show();
+            }
+        });*/
+
+        AlertDialog alert11 = exitScreenDialog.create();
+        alert11.show();
+
+    }
 
 }
