@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -26,8 +27,10 @@ import android.widget.TextView;
 import com.apero_area.aperoarea.ApiClient;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.adapters.RecyclerAdapter;
+import com.apero_area.aperoarea.fragment.HomeFragment;
 import com.apero_area.aperoarea.helper.ApiInterface;
 import com.apero_area.aperoarea.helper.Connectivity;
+import com.apero_area.aperoarea.mining.AprioriFrequentItemsetGenerator;
 import com.apero_area.aperoarea.mining.FrequentItemsetData;
 import com.apero_area.aperoarea.models.CenterRepository;
 import com.apero_area.aperoarea.models.Money;
@@ -35,6 +38,7 @@ import com.apero_area.aperoarea.models.Product;
 import com.apero_area.aperoarea.util.PreferenceHelper;
 import com.apero_area.aperoarea.util.TinyDB;
 import com.apero_area.aperoarea.util.Utils;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.google.gson.Gson;
 
 import java.math.BigDecimal;
@@ -50,42 +54,64 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerAdapter adapter;
-    private List<Product> products;
-    private ApiInterface apiInterface;
-    private ProgressDialog progress;
-    private AlertDialog alertDialog;
-    private Menu mMenu;
-    private TextView checkOutAmount, itemCountTextView;
-    private BigDecimal checkoutAmount = new BigDecimal(BigInteger.ZERO);
+    public static final double MINIMUM_SUPPORT = 0.1;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    AprioriFrequentItemsetGenerator<String> generator =
+            new AprioriFrequentItemsetGenerator<>();
     private int itemCount = 0;
+    private BigDecimal checkoutAmount = new BigDecimal(BigInteger.ZERO);
     private DrawerLayout mDrawerLayout;
-    private TextView offerBanner;
 
+    private TextView checkOutAmount, itemCountTextView;
+    private TextView offerBanner;
+    private AVLoadingIndicatorView progressBar;
+
+    private NavigationView mNavigationView;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
+                new TinyDB(getApplicationContext()).getListObject(
+                        PreferenceHelper.MY_CART_LIST_LOCAL, Product.class));
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager (this);
-        recyclerView.setLayoutManager(layoutManager);
-        //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
-        recyclerView.setHasFixedSize(true);
+        itemCount = CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
+                .size();
+
+        //	makeFakeVolleyJsonArrayRequest();
 
         offerBanner = ((TextView) findViewById(R.id.new_offers_banner));
 
         itemCountTextView = (TextView) findViewById(R.id.item_count);
-        //itemCountTextView.setSelected(true);
-        //itemCountTextView.setText(String.valueOf(itemCount));
+        itemCountTextView.setSelected(true);
+        itemCountTextView.setText(String.valueOf(itemCount));
 
         checkOutAmount = (TextView) findViewById(R.id.checkout_amount);
-        //checkOutAmount.setSelected(true);
-        //checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
+        checkOutAmount.setSelected(true);
+        checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
+        offerBanner.setSelected(true);
 
-        //offerBanner.setSelected(true);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        progressBar = (AVLoadingIndicatorView) findViewById(R.id.loading_bar);
+
+        checkOutAmount.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Utils.vibrate(getApplicationContext());
+
+                Utils.switchContent(R.id.frag_container,
+                        Utils.SHOPPING_LIST_TAG, MainActivity.this,
+                        Utils.AnimationType.SLIDE_UP);
+
+            }
+        });
+
 
         if (itemCount != 0) {
             for (Product product : CenterRepository.getCenterRepository()
@@ -124,116 +150,95 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        Utils.switchFragmentWithAnimation(R.id.frag_container,
+                new HomeFragment(), this, Utils.HOME_FRAGMENT,
+                Utils.AnimationType.SLIDE_UP);
 
-        progress = ProgressDialog.show(this, "Chargement des données",
-                "En cours de chargement, veuillez patienter", true);
+        toggleBannerVisibility();
 
-        alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Pas de connexion");
-        alertDialog.setMessage("Merci d'activer votre connexion internet");
+        mNavigationView
+                .setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-        CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
-                new TinyDB(getApplicationContext()).getListObject(
-                        PreferenceHelper.MY_CART_LIST_LOCAL, Product.class));
+                        menuItem.setChecked(true);
+                        switch (menuItem.getItemId()) {
+                            case R.id.home:
 
-        itemCount = CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
-                .size();
+                                mDrawerLayout.closeDrawers();
 
-        // Build of the retrofit object
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        // Make the request
-        Call<List<Product>> call = apiInterface.getProduct();
-        //
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                progress.dismiss();
+                                Utils.switchContent(R.id.frag_container,
+                                        Utils.HOME_FRAGMENT,
+                                        MainActivity.this,
+                                        Utils.AnimationType.SLIDE_LEFT);
 
-                products = response.body();
-                if (products.size() != 0) {
-                    adapter = new RecyclerAdapter(MainActivity.this, products, new RecyclerAdapter.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Product products) {
-                            Log.d("test","click " + products);
+                                return true;
 
-                            Intent intent = new Intent(MainActivity.this, ProductViewActivity.class);
-                            Gson gson = new Gson();
-                            String productJson = gson.toJson(products);
-                            intent.putExtra("productJson", productJson);
-                            startActivity(intent);
+                            case R.id.my_cart:
+
+                                mDrawerLayout.closeDrawers();
+
+                                Utils.switchContent(R.id.frag_container,
+                                        Utils.SHOPPING_LIST_TAG,
+                                        MainActivity.this,
+                                        Utils.AnimationType.SLIDE_LEFT);
+                                return true;
+
+                            /*case R.id.apriori_result:
+
+                                mDrawerLayout.closeDrawers();
+
+                                startActivity(new Intent(MainActivity.this, APrioriResultActivity.class));
+
+                                return true;
+                                */
+
+
+                            case R.id.contact_us:
+
+                                mDrawerLayout.closeDrawers();
+
+                                Utils.switchContent(R.id.frag_container,
+                                        Utils.CONTACT_US_FRAGMENT,
+                                        MainActivity.this,
+                                        Utils.AnimationType.SLIDE_LEFT);
+                                return true;
+
+                            case R.id.settings:
+
+                                mDrawerLayout.closeDrawers();
+
+                                Utils.switchContent(R.id.frag_container,
+                                        Utils.SETTINGS_FRAGMENT_TAG,
+                                        MainActivity.this,
+                                        Utils.AnimationType.SLIDE_LEFT);
+                                return true;
+                            default:
+                                return true;
                         }
-                    });
-                    recyclerView.setAdapter(adapter);
-                }
-            }
+                    }
+                });
 
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                progress.dismiss();
-                alertDialog.show();
-                Log.d("test", "echec" + t);
-            }
-        });
+    }
+
+    public AVLoadingIndicatorView getProgressBar() {
+        return progressBar;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        mMenu = menu;
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
-
-    //gère le click sur une action de l'ActionBar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_checkout:
-                Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                startActivity(intent);
 
-            case R.id.cart:
-                Intent intent2 = new Intent(this, CartActivity.class);
-                this.startActivity(intent2);
+        switch (item.getItemId()) {
+            case R.id.action_settings:
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
-
-    }
-
-    public void setBadgeCount(String count) {
-
-        Context context = getApplicationContext();
-        MenuItem itemCart = mMenu.findItem(R.id.action_cart);
-        LayerDrawable icon = (LayerDrawable) itemCart.getIcon();
-
-        BadgeDrawable badge;
-
-        // Reuse drawable if possible
-        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
-        if (reuse != null && reuse instanceof BadgeDrawable) {
-            badge = (BadgeDrawable) reuse;
-        } else {
-            badge = new BadgeDrawable(context);
-        }
-
-        badge.setCount(count);
-        icon.mutate();
-        icon.setDrawableByLayerId(R.id.ic_badge, badge);
-    }
-
-    public void updateCheckOutAmount(BigDecimal amount, boolean increment) {
-
-        if (increment) {
-            checkoutAmount = checkoutAmount.add(amount);
-        } else {
-            if (checkoutAmount.signum() == 1)
-                checkoutAmount = checkoutAmount.subtract(amount);
-        }
-
-        checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
+        return super.onOptionsItemSelected(item);
     }
 
     public void updateItemCount(boolean ifIncrement) {
@@ -249,8 +254,16 @@ public class MainActivity extends AppCompatActivity {
         toggleBannerVisibility();
     }
 
-    public BigDecimal getCheckoutAmount() {
-        return checkoutAmount;
+    public void updateCheckOutAmount(BigDecimal amount, boolean increment) {
+
+        if (increment) {
+            checkoutAmount = checkoutAmount.add(amount);
+        } else {
+            if (checkoutAmount.signum() == 1)
+                checkoutAmount = checkoutAmount.subtract(amount);
+        }
+
+        checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
     }
 
     @Override
@@ -263,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                         .getCenterRepository().getListOfProductsInShoppingList());
     }
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -309,6 +322,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
+     * get total checkout amount
+     */
+    public BigDecimal getCheckoutAmount() {
+        return checkoutAmount;
+    }
+
+	/*
+     * Makes fake Volley request by adding request in fake Volley Queue and
+	 * return mock JSON String plese visit
+	 * com.hitesh_sahu.retailapp.domain.mock.FakeHttpStack and
+	 * FakeRequestQueue queu
+	 */
+//	private void makeFakeVolleyJsonArrayRequest() {
+//
+//		JsonArrayRequest req = new JsonArrayRequest(
+//				NetworkConstants.URL_GET_ALL_CATEGORY,
+//				new Response.Listener<JSONArray>() {
+//					@Override
+//					public void onResponse(JSONArray response) {
+//						Log.d(TAG,
+//
+//						response.toString());
+//
+////						Toast.makeText(getApplicationContext(),
+////								"Volley Fake response", Toast.LENGTH_SHORT)
+////								.show();
+//
+//						// hidepDialog();
+//					}
+//				}, new Response.ErrorListener() {
+//					@Override
+//					public void onErrorResponse(VolleyError error) {
+//						VolleyLog.d(TAG, "Error: " + error.getMessage());
+//
+//						Log.e(TAG,
+//								"------------------------" + error.getMessage());
+////						Toast.makeText(getApplicationContext(),
+////								error.getMessage(), Toast.LENGTH_SHORT).show();
+//					}
+//				});
+//
+//		// Adding request to request queue
+//		AppController.getInstance().addToFakeRequestQueue(req);
+//	}
+
+    /*
      * Get Number of items in cart
      */
     public int getItemCount() {
@@ -321,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout getmDrawerLayout() {
         return mDrawerLayout;
     }
-
 
 
     public void showPurchaseDialog() {
@@ -352,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                                 .addToItemSetList(new HashSet<>(productId));
 
                         //Do Minning
-                        /*FrequentItemsetData<String> data = generator.generate(
+                        FrequentItemsetData<String> data = generator.generate(
                                 CenterRepository.getCenterRepository().getItemSetList()
                                 , MINIMUM_SUPPORT);
 
@@ -360,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("APriori", "Item Set : " +
                                     itemset + "Support : " +
                                     data.getSupport(itemset));
-                        }*/
+                        }
 
                         //clear all list item
                         CenterRepository.getCenterRepository().getListOfProductsInShoppingList().clear();
@@ -386,12 +444,12 @@ public class MainActivity extends AppCompatActivity {
         /*exitScreenDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                Snackbar.make(ECartHomeActivity.this.getWindow().getDecorView().findViewById(android.R.id.content)
+                Snackbar.make(MainActivity.this.getWindow().getDecorView().findViewById(android.R.id.content)
                         , "Order Placed Successfully, Happy Shopping !!", Snackbar.LENGTH_LONG)
                         .setAction("View Apriori Output", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                startActivity(new Intent(ECartHomeActivity.this, APrioriResultActivity.class));
+                                startActivity(new Intent(MainActivity.this, APrioriResultActivity.class));
                             }
                         }).show();
             }

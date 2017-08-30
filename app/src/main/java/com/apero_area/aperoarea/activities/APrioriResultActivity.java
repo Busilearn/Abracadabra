@@ -14,6 +14,15 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+/*import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;*/
+
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.util.Animatrix;

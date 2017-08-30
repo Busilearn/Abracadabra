@@ -20,15 +20,15 @@ import com.apero_area.aperoarea.util.Utils;
 /**
  * Fragment that appears in the "content_frame", shows a animal.
  */
-/*
+
 public class ContactUsFragment extends Fragment {
 
     private Toolbar mToolbar;
 
-    */
+
 /**
      * Instantiates a new settings fragment.
-     *//*
+     */
 
     public ContactUsFragment() {
         // Empty constructor required for fragment subclasses
@@ -163,4 +163,4 @@ public class ContactUsFragment extends Fragment {
     }
 }
 
-*/
+

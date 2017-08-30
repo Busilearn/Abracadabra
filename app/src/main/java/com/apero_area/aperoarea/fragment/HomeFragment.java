@@ -16,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.support.v7.graphics.Palette;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.activities.MainActivity;
+import com.apero_area.aperoarea.api.ProductCategoryLoaderTask;
 import com.apero_area.aperoarea.util.Utils;
 
 /**
@@ -79,7 +81,7 @@ public class HomeFragment extends Fragment {
 
         collapsingToolbar.setTitle("Categories");
 
-        /*ImageView header = (ImageView) view.findViewById(R.id.header);
+        ImageView header = (ImageView) view.findViewById(R.id.header);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.header);
@@ -93,7 +95,7 @@ public class HomeFragment extends Fragment {
                 collapsingToolbar.setContentScrimColor(mutedColor);
                 collapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
             }
-        });*/
+        });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.scrollableview);
 
@@ -102,7 +104,7 @@ public class HomeFragment extends Fragment {
                 getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        //new ProductCategoryLoaderTask(recyclerView, getActivity()).execute();
+        new ProductCategoryLoaderTask(recyclerView, getActivity()).execute();
 
 //
 //		if (simpleRecyclerAdapter == null) {

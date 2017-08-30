@@ -98,7 +98,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
 
-            holder.minusproduct.setOnClickListener(new View.OnClickListener() {
+            /*holder.minusproduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Log.d("test", products.get(test).getName());
@@ -113,7 +113,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     }
 
                 }
-            });
+            });*/
 
     }
 
