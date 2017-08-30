@@ -3,9 +3,11 @@ package com.apero_area.aperoarea.activities;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.adapters.RecyclerAdapter;
 import com.apero_area.aperoarea.helper.ApiInterface;
 import com.apero_area.aperoarea.helper.Connectivity;
+import com.apero_area.aperoarea.mining.FrequentItemsetData;
 import com.apero_area.aperoarea.models.CenterRepository;
 import com.apero_area.aperoarea.models.Money;
 import com.apero_area.aperoarea.models.Product;
@@ -35,7 +38,10 @@ import com.google.gson.Gson;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private BigDecimal checkoutAmount = new BigDecimal(BigInteger.ZERO);
     private int itemCount = 0;
     private DrawerLayout mDrawerLayout;
+    private TextView offerBanner;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +74,17 @@ public class MainActivity extends AppCompatActivity {
         //recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setHasFixedSize(true);
 
+        offerBanner = ((TextView) findViewById(R.id.new_offers_banner));
+
+        itemCountTextView = (TextView) findViewById(R.id.item_count);
+        //itemCountTextView.setSelected(true);
+        //itemCountTextView.setText(String.valueOf(itemCount));
+
         checkOutAmount = (TextView) findViewById(R.id.checkout_amount);
         //checkOutAmount.setSelected(true);
         //checkOutAmount.setText(Money.rupees(checkoutAmount).toString());
 
-        itemCountTextView = (TextView) findViewById(R.id.item_count);
+        //offerBanner.setSelected(true);
 
         if (itemCount != 0) {
             for (Product product : CenterRepository.getCenterRepository()
@@ -222,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                         .getCenterRepository().getListOfProductsInShoppingList());
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
 
@@ -280,5 +293,7 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout getmDrawerLayout() {
         return mDrawerLayout;
     }
+
+
 
 }

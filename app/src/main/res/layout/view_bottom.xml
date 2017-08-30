@@ -11,7 +11,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#2f221a" />
+        android:background="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/new_offers_banner"
@@ -35,7 +35,7 @@
         android:id="@+id/checkout_item_root"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#2f221a"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="100">
