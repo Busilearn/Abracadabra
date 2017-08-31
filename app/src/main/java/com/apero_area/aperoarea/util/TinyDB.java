@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.apero_area.aperoarea.models.Product;
+import com.apero_area.aperoarea.model.entities.Product;
 import com.google.gson.Gson;
 
 import java.io.File;

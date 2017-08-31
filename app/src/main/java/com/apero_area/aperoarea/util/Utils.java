@@ -18,9 +18,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.apero_area.aperoarea.R;
-import com.apero_area.aperoarea.fragment.MyCartFragment;
-import com.apero_area.aperoarea.fragment.ProductOverviewFragment;
-import com.apero_area.aperoarea.fragment.SettingsFragment;
 
 import java.util.HashMap;
 import java.util.Map;

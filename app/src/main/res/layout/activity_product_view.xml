@@ -9,7 +9,7 @@
     android:layout_marginRight="5dp"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context="com.apero_area.aperoarea.activities.ProductViewActivity">
+    tools:context="com.apero_area.aperoarea.view.activities.ProductViewActivity">
 
         <ImageView
             android:id="@+id/SimpleProductImage"
