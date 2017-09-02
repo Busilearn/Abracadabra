@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.view.fragment.HomeFragment;
 import com.apero_area.aperoarea.domain.helper.Connectivity;
 import com.apero_area.aperoarea.domain.mining.AprioriFrequentItemsetGenerator;
@@ -33,7 +35,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView checkOutAmount, itemCountTextView;
     private TextView offerBanner;
     private AVLoadingIndicatorView progressBar;
+    private ApiInterface apiInterface;
 
     private NavigationView mNavigationView;
 
@@ -94,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         if (itemCount != 0) {

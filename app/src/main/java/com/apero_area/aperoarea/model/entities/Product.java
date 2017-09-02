@@ -10,74 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Product {
 
-
-    /**
-     * The item short desc.
-     */
-    private String description = "";
-
-    /**
-     * The item detail.
-     */
-    private String longDescription = "";
-
-    /**
-     * The mrp.
-     */
+    private int id;
+    private String productId;
+    private String name;
+    private String description;
+    private String price;
+    private String average_rating;
+    private String rating_count;
+    private List<Images> images;
+    private String short_description;
+    private String orderQty;
+    private String discount;
     private String mrp;
 
-    /**
-     * The discount.
-     */
-    private String discount;
 
-    /**
-     * The sell mrp.
-     */
-    private String salePrice;
+    //getters & setters
 
-    /**
-     * The quantity.
-     */
-    private String orderQty;
+    public int getId() {
+        return id;
+    }
 
-    /**
-     * The image url.
-     */
-    private String imageUrl = "";
-
-    /**
-     * The item name.
-     */
-    private String productName = "";
-
-    private String productId = "";
-
-    /**
-     * @param itemName
-     * @param itemShortDesc
-     * @param itemDetail
-     * @param MRP
-     * @param discount
-     * @param sellMRP
-     * @param quantity
-     * @param imageURL
-     */
-    public Product(String itemName, String itemShortDesc, String itemDetail,
-                   String MRP, String discount, String sellMRP, String quantity,
-                   String imageURL, String orderId) {
-        this.productName = itemName;
-        this.description = itemShortDesc;
-        this.longDescription = itemDetail;
-        this.mrp = MRP;
-        this.discount = discount;
-        this.salePrice = sellMRP;
-        this.orderQty = quantity;
-        this.imageUrl = imageURL;
-        this.productId = orderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProductId() {
@@ -89,27 +45,74 @@ public class Product {
     }
 
     public String getItemName() {
-        return productName;
+        return name;
     }
 
-    public void setItemName(String itemName) {
-        this.productName = itemName;
+    public void setItemName(String name) {
+        this.name = name;
     }
 
-    public String getItemShortDesc() {
-        return description;
+    public String getPrice() {
+        return price;
     }
 
-    public void setItemShortDesc(String itemShortDesc) {
-        this.description = itemShortDesc;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getItemDetail() {
-        return longDescription;
+        return String.valueOf(fromHtml(description));
     }
 
-    public void setItemDetail(String itemDetail) {
-        this.longDescription = itemDetail;
+    public void setItemDetail(String description) {
+        this.description = description;
+    }
+
+    public String getAverage_rating() {
+        return average_rating;
+    }
+
+    public void setAverage_rating(String average_rating) {
+        this.average_rating = average_rating;
+    }
+
+    public String getRating_count() {
+        return rating_count;
+    }
+
+    public void setRating_count(String rating_count) {
+        this.rating_count = rating_count;
+    }
+
+    public String getItemShortDesc() {
+        return String.valueOf(fromHtml(short_description));
+    }
+
+    public void setItemShortDesc(String short_description) { this.short_description = short_description;
+    }
+
+    public String getSellMRP() {
+        return price;
+    }
+
+    public void setSellMRP(String sellMRP) {
+        this.price = sellMRP;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
+    }
+
+    public String getQuantity() {
+        return orderQty;
+    }
+
+    public void setQuantity(String quantity) {
+        this.orderQty = quantity;
     }
 
     public String getMRP() {
@@ -128,32 +131,29 @@ public class Product {
         this.discount = discount;
     }
 
-    public String getDiscountNumeric() {
-        return discount;
-    }
-
-    public String getSellMRP() {
-        return salePrice;
-    }
-
-    public void setSellMRP(String sellMRP) {
-        this.salePrice = sellMRP;
-    }
-
-    public String getQuantity() {
-        return orderQty;
-    }
-
-    public void setQuantity(String quantity) {
+    public Product(String itemName, String itemShortDesc, String itemDetail,
+                   String MRP, String discount, String sellMRP, String quantity, String orderId) {
+        this.name = itemName;
+        this.short_description = itemShortDesc;
+        this.description = itemDetail;
+        this.mrp = MRP;
+        this.discount = discount;
+        this.price = sellMRP;
         this.orderQty = quantity;
+        this.productId = orderId;
     }
 
-    public String getImageURL() {
-        return imageUrl;
-    }
 
-    public void setImageURL(String imageURL) {
-        this.imageUrl = imageURL;
+    @SuppressWarnings("deprecation")
+    private static Spanned fromHtml(String html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 
 }
+

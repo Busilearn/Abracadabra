@@ -1,5 +1,6 @@
 package com.apero_area.aperoarea.model;
 
+import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
 
@@ -11,6 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import retrofit2.Call;
+
 /**
  * Created by stran on 24/08/2017.
  */
@@ -18,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CenterRepository {
 
     private static CenterRepository centerRepository;
+    private ApiInterface apiInterface;
 
     private ArrayList<ProductCategoryModel> listOfCategory = new ArrayList<ProductCategoryModel>();
     private ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory = new ConcurrentHashMap<String, ArrayList<Product>>();

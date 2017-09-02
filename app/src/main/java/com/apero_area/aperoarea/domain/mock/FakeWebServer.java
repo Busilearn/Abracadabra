@@ -1,11 +1,18 @@
 package com.apero_area.aperoarea.domain.mock;
 
+import android.support.v7.app.AlertDialog;
+
+import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+
+import retrofit2.Call;
 
 /*
  * This class serve as fake server and provides dummy product and category with real Image Urls taken from flipkart
@@ -13,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FakeWebServer {
 
     private static FakeWebServer fakeServer;
+    private ApiInterface apiInterface;
 
     public static FakeWebServer getFakeWebServer() {
 
@@ -34,29 +42,29 @@ public class FakeWebServer {
 
         listOfCategory
                 .add(new ProductCategoryModel(
-                        "Electronic",
-                        "Electric Items",
+                        "Petits producteurs",
+                        "Du vrai alcool, fort et fondant",
                         "10%",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));
+                        ""));
 
         listOfCategory
                 .add(new ProductCategoryModel(
-                        "Furnitures",
-                        "Furnitures Items",
+                        "Packs",
+                        "Voir tous nos packs",
                         "15%",
-                        "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRaUR5_wzLgBOuNtkWjOxhgaYaPBm821Hb_71xTyQ-OdUd-ojMMvw"));
+                        ""));
 
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
 
-    public void getAllElectronics() {
+    public void getProducts() {
 
         ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
         ArrayList<Product> productlist = new ArrayList<Product>(); }
 
-        // Ovens
-        /*productlist
+    /*        // Ovens
+        productlist
                 .add(new Product(
                         "Solo Microwave Oven",
                         "IFB 17PMMEC1 17 L Solo Microwave Oven",
@@ -533,7 +541,7 @@ public class FakeWebServer {
 
         if (productCategory == 0) {
 
-            getAllElectronics();
+           // getProducts();
         } else {
 
             getAllFurnitures();

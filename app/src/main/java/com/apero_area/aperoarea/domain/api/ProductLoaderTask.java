@@ -4,20 +4,37 @@ package com.apero_area.aperoarea.domain.api;
  * Created by stran on 30/08/2017.
  */
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
+import com.apero_area.aperoarea.domain.helper.ApiInterface;
+import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.adapter.ProductsInCategoryPagerAdapter;
 import com.apero_area.aperoarea.domain.mock.FakeWebServer;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.view.fragment.ProductListFragment;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * The Class ImageLoaderTask.
@@ -27,7 +44,9 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
     private Context context;
     private ViewPager viewPager;
     private TabLayout tabs;
-    private RecyclerView recyclerView;
+    private ApiInterface apiInterface;
+    private List<Product> products;
+    private AlertDialog alertDialog;
 
     public ProductLoaderTask(RecyclerView listView, Context context,
                              ViewPager viewpager, TabLayout tabs) {
@@ -71,10 +90,31 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-        FakeWebServer.getFakeWebServer().getAllElectronics();
+        //FakeWebServer.getFakeWebServer().getProducts();
+
+        // Build of the retrofit object
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+        //ArrayList<Product> productlist = new ArrayList<Product>((Collection<? extends Product>) call);
+        ArrayList<Product> productlist = new ArrayList<Product>();
+        List<Product> call = new ArrayList<Product>(Collections.unmodifiableCollection(new ArrayList<Product>(productlist)));
+        productMap.put("Chouille", productlist);
+
+
+        //HashSet<Product> call = new HashSet<Product>(productlist);
+        //List<Product> userList = new ArrayList<Product>(call);
+
+        //Collection<User> userCollection = new HashSet<User>(usersArrayList);
+
+        //List<User> userList = new ArrayList<User>(userCollection );
+
+        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
         return null;
     }
+    // Make the request
+    Call<List<Product>> call = apiInterface.getProduct();
 
     private void setUpUi() {
 
@@ -195,27 +235,49 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
     }
 
+
     private void setupViewPager() {
 
-        ProductsInCategoryPagerAdapter adapter = new ProductsInCategoryPagerAdapter(
-                ((MainActivity) context).getSupportFragmentManager());
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
-        Set<String> keys = CenterRepository.getCenterRepository().getMapOfProductsInCategory()
-                .keySet();
+                products = response.body();
+                if (products.size() != 0) {
 
-        for (String string : keys) {
+                    ProductsInCategoryPagerAdapter adapter = new ProductsInCategoryPagerAdapter(
+                            ((MainActivity) context).getSupportFragmentManager());
 
-            adapter.addFrag(new ProductListFragment(string), string);
+                    Set<String> keys = CenterRepository.getCenterRepository().getMapOfProductsInCategory()
+                            .keySet();
 
-        }
+                    for (String string : keys) {
 
-        viewPager.setAdapter(adapter);
+                        adapter.addFrag(new ProductListFragment(string), string);
+
+                    }
+
+                    viewPager.setAdapter(adapter);
 
 //		viewPager.setPageTransformer(true,
 //				new );
 
-        tabs.setupWithViewPager(viewPager);
+                    tabs.setupWithViewPager(viewPager);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                alertDialog.show();
+                Log.d("test", "echec" + t);
+            }
+        });
+
+
 
     }
+
+
 
 }
