@@ -114,7 +114,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
         return null;
     }
     // Make the request
-    Call<List<Product>> call = apiInterface.getProduct();
+    Call<ArrayList<Product>> call = apiInterface.getProduct();
 
     private void setUpUi() {
 
@@ -238,15 +238,18 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
     private void setupViewPager() {
 
-        call.enqueue(new Callback<List<Product>>() {
+        call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
                 products = response.body();
                 if (products.size() != 0) {
 
                     ProductsInCategoryPagerAdapter adapter = new ProductsInCategoryPagerAdapter(
                             ((MainActivity) context).getSupportFragmentManager());
+
+                    Gson gson = new Gson();
+                    String productJson = gson.toJson(products);
 
                     Set<String> keys = CenterRepository.getCenterRepository().getMapOfProductsInCategory()
                             .keySet();
@@ -268,7 +271,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 alertDialog.show();
                 Log.d("test", "echec" + t);
             }

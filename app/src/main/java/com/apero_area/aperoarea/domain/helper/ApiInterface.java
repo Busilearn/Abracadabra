@@ -2,6 +2,7 @@ package com.apero_area.aperoarea.domain.helper;
 
 import com.apero_area.aperoarea.model.entities.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,5 +15,5 @@ import retrofit2.http.GET;
 public interface ApiInterface {
 
     @GET("products")
-    Call<List<Product>> getProduct();
+    Call<ArrayList<Product>> getProduct();
 }

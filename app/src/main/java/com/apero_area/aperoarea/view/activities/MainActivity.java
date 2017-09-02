@@ -2,6 +2,7 @@ package com.apero_area.aperoarea.view.activities;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,7 @@ import com.apero_area.aperoarea.util.PreferenceHelper;
 import com.apero_area.aperoarea.util.TinyDB;
 import com.apero_area.aperoarea.util.Utils;
 import com.apero_area.aperoarea.view.fragment.WhatsNewDialog;
+import com.google.gson.Gson;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.math.BigDecimal;
@@ -39,6 +41,8 @@ import java.util.List;
 import java.util.Set;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView checkOutAmount, itemCountTextView;
     private TextView offerBanner;
     private AVLoadingIndicatorView progressBar;
-    private ApiInterface apiInterface;
 
     private NavigationView mNavigationView;
 
@@ -62,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
+
+
                 new TinyDB(getApplicationContext()).getListObject(
                         PreferenceHelper.MY_CART_LIST_LOCAL, Product.class));
 

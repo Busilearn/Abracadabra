@@ -3,27 +3,39 @@ package com.apero_area.aperoarea.model.entities;
 
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class Product {
 
     private int id;
-    private String productId;
-    private String name;
-    private String description;
+    private String productId = "1";
+    private String name = "";
+    private String description = "";
     private String price;
     private String average_rating;
     private String rating_count;
     private List<Images> images;
-    private String short_description;
-    private String orderQty;
-    private String discount;
-    private String mrp;
+    private String short_description = "";
+    private String orderQty = "5";
+    private String discount = "10";
+    private String mrp = "2";
+    private String imageUrl = "";
+
+
+    public Product(String itemName, String itemShortDesc, String itemDetail,
+                   String MRP, String discount, String sellMRP, String quantity,String imageUrl, String orderId) {
+        this.name = itemName;
+        this.short_description = itemShortDesc;
+        this.description = itemDetail;
+        this.mrp = MRP;
+        this.discount = discount;
+        this.price = sellMRP;
+        this.orderQty = quantity;
+        this.imageUrl = imageUrl;
+        this.productId = orderId;
+    }
 
 
     //getters & setters
@@ -131,17 +143,14 @@ public class Product {
         this.discount = discount;
     }
 
-    public Product(String itemName, String itemShortDesc, String itemDetail,
-                   String MRP, String discount, String sellMRP, String quantity, String orderId) {
-        this.name = itemName;
-        this.short_description = itemShortDesc;
-        this.description = itemDetail;
-        this.mrp = MRP;
-        this.discount = discount;
-        this.price = sellMRP;
-        this.orderQty = quantity;
-        this.productId = orderId;
+    public String getImageURL() {
+        return imageUrl;
     }
+
+    public void setImageURL(String imageURL) {
+        this.imageUrl = imageURL;
+    }
+
 
 
     @SuppressWarnings("deprecation")
@@ -154,6 +163,5 @@ public class Product {
         }
         return result;
     }
-
 }
 

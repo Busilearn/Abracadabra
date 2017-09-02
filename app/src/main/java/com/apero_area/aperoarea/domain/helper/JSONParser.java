@@ -186,9 +186,9 @@ public class JSONParser {
 											 *
 											 * .getString("avbleQuantity"),
 											 */
-                                                "0", /*productListObjecty
+                                                "0", productListObjecty
 
-                                                .getString("imageUrl"),*/
+                                                .getString("imageUrl"),
                                                 productListObjecty
                                                         .getString("productId")));
 
@@ -282,9 +282,9 @@ public class JSONParser {
 							 *
 							 * .getString("avbleQuantity"),
 							 */
-                                        "0", /*productListObjecty
+                                        "0", productListObjecty
 
-                                        .getString("imageUrl"),*/ productListObjecty
+                                        .getString("imageUrl"), productListObjecty
                                         .getString("productId")));
 
                                 Log.d("GetAllProduct",
