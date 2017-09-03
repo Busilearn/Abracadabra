@@ -51,6 +51,8 @@ public class ProductOverviewFragment extends Fragment {
         FakeWebServer.getFakeWebServer().getAllProducts(
                 AppConstants.CURRENT_CATEGORY);
 
+
+
         // TODO We Can use Async task But pallete creation is problemitic job
         // will
         // get back to it later

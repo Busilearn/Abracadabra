@@ -1,13 +1,17 @@
 package com.apero_area.aperoarea.domain.mock;
 
+import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.apero_area.aperoarea.domain.api.ApiClient;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
+import com.apero_area.aperoarea.view.activities.MainActivity;
+import com.apero_area.aperoarea.view.fragment.ProductOverviewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,7 @@ public class FakeWebServer {
     private static FakeWebServer fakeServer;
     private ApiInterface apiInterface;
     private ArrayList<Product> products;
+    private Context context;
 
     public static FakeWebServer getFakeWebServer() {
 
@@ -60,30 +65,45 @@ public class FakeWebServer {
 
     public void getAllElectronics() {
 
-        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
         //ArrayList<Product> productlist = new ArrayList<Product>();
 
         // Build of the retrofit object
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         // Make the request
-
-
-
-        Callback<ArrayList<Product>> responseCallback = new Callback<ArrayList<Product>>(){
+        Call<ArrayList<Product>> call = apiInterface.getProduct();
+        //        apiInterface.getProduct().enqueue();
+        call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+            /*public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
                 ArrayList<Product> productlist = new ArrayList<Product>();
 
 
-                products = response.body();
+                ArrayList<Product> products = response.body();
+
                 if (products.size() != 0) {
                     Log.d("test", "réussite" );
                     products.get(0).getImages().get(0).getSrc();
-                    //Log.d("test", products.get(0).getImages().get(0).getSrc() );
+                    Log.d("test", products.get(0).getImages().get(0).getSrc() );
                     //productMap.put("Microwave oven", products);
+
                 }
+            }*/
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response)  {
+                ArrayList<Product> productlist = response.body();
+                //Log.i("success","Inside "+productlist.toString());
+                // here i get the data
+                accessProducts(productlist);
+            }
+            private void accessProducts(ArrayList<Product> productlist) {
+
+                if (productlist.size() != 0) {
+                    productMap.put("Microwave oven", productlist);
+                    Log.i("success", "Inside " + productlist.toString());
+                }
+
             }
 
             @Override
@@ -92,8 +112,8 @@ public class FakeWebServer {
                 //alertDialog.show();
                 Log.d("test", "echec" + t);
             }
-        };
-        Log.d("test", products.get(0).getImages().get(0).getSrc() );
+        });
+
 
         // Ovens
         /*productlist
@@ -284,17 +304,16 @@ public class FakeWebServer {
         productMap.put("Vaccum Cleaner", productlist);
         */
 
-        //Log.d("test", String.valueOf(productMap.get("Microwave oven").size()));
+        //Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
         CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
 
 
     }
 
-    public void getData(Callback<ArrayList<Product>> callback){
-        Call<ArrayList<Product>> call = apiInterface.getProduct();
-        call.enqueue(callback);
-    }
+    /*public void getData(Callback<DataResponse> callback){
+        apiClient.getData().enqueue(callback);
+    }*/
 
     public void getAllFurnitures() {
 
