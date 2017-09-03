@@ -1,20 +1,22 @@
 package com.apero_area.aperoarea.domain.mock;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.api.CallbackT;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
-import com.apero_area.aperoarea.view.activities.MainActivity;
-import com.apero_area.aperoarea.view.fragment.ProductOverviewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
@@ -63,11 +65,14 @@ public class FakeWebServer {
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
 
-    public void getAllElectronics() {
+        public void getAllElectronics( final CallbackT<ArrayList<Product>> callback) {
 
-        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
-        //ArrayList<Product> productlist = new ArrayList<Product>();
+            final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+
+            final ArrayList<Product> productlist = new ArrayList<Product>();
+
+
 
         // Build of the retrofit object
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -91,20 +96,21 @@ public class FakeWebServer {
 
                 }
             }*/
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response)  {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+
+                // add the parsed response body data (parsed pojo object list in this case)
+                // to the arrayList with the addAll(Collection<type>) method
                 ArrayList<Product> productlist = response.body();
-                //Log.i("success","Inside "+productlist.toString());
-                // here i get the data
-                accessProducts(productlist);
-            }
-            private void accessProducts(ArrayList<Product> productlist) {
 
-                if (productlist.size() != 0) {
-                    productMap.put("Microwave oven", productlist);
-                    Log.i("success", "Inside " + productlist.toString());
-                }
+                //if (callback != null)
+                  //  callback.onSuccess(productlist);
 
+                callback.next(productlist);
+
+                //Log.i("success", "Inside " + productlist.toString());
             }
+
+
 
             @Override
             public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
@@ -113,7 +119,8 @@ public class FakeWebServer {
                 Log.d("test", "echec" + t);
             }
         });
-
+            productMap.put("Microwave oven", productlist);
+            Log.i("test", "Inside " + callback.toString());
 
         // Ovens
         /*productlist
@@ -596,7 +603,27 @@ public class FakeWebServer {
 
         if (productCategory == 0) {
 
-            getAllElectronics();
+           //getAllElectronics(ArrayList<Product>);
+            getAllElectronics(new CallbackT<ArrayList<Product>>() {
+                           @Override
+                           public void next(ArrayList<Product> productlist) {
+                               // use the results
+                           }
+                       }
+            );
+
+            /*getAllElectronics(new CallbackT() {
+                                  @Override
+                                  public void onSuccess(ArrayList<Product> productlist) {
+                                      // use the results
+                                  }
+
+                                  @Override
+                                  public void onError(@NonNull Throwable throwable) {
+
+                                  }
+                              }
+            );*/
         } else {
 
             getAllFurnitures();
