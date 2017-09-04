@@ -1,11 +1,7 @@
 package com.apero_area.aperoarea.domain.mock;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.apero_area.aperoarea.domain.api.ApiClient;
 import com.apero_area.aperoarea.domain.api.CallbackT;
@@ -15,25 +11,18 @@ import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class FakeWebServer {
 
     private static FakeWebServer fakeServer;
     private ApiInterface apiInterface;
+    private ArrayList<Product> products;
     private Context context;
-
-    ConcurrentHashMap<String, ArrayList<Product>> productMap;
 
     public static FakeWebServer getFakeWebServer() {
 
@@ -70,63 +59,25 @@ public class FakeWebServer {
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
 
+        public void getAllElectronics( final CallbackT<ArrayList<Product>> callback) {
 
-    public interface GetProductListCallback{
-        void onSuccess(ArrayList<Product> product);
-
-    }
-
-
-        public void getAllElectronics(final GetProductListCallback callback) {
-
-            productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
-
-
+            final ArrayList<Product> productlist = new ArrayList<Product>();
 
         // Build of the retrofit object
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-
-            Observable<ArrayList<Product>> result =  apiInterface.getProduct();
-
-            result.subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<ArrayList<Product>>() {
-                            @Override
-                            public final void onCompleted() {
-                                // do nothing
-                            }
-
-                            @Override
-                            public final void onError(Throwable e) {
-                                Log.e("test", e.getMessage());
-                            }
-
-                            @Override
-                            public void onNext(ArrayList<Product> products) {
-                                callback.onSuccess(products);
-                            }
-                        });
-
-
         // Make the request
-        /*Call<ArrayList<Product>> call = apiInterface.getProduct();
+        Call<ArrayList<Product>> call = apiInterface.getProduct();
         //        apiInterface.getProduct().enqueue();
         call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
-                // add the parsed response body data (parsed pojo object list in this case)
-                // to the arrayList with the addAll(Collection<type>) method
                 ArrayList<Product> productlist = response.body();
 
-                if (productlist.size() != 0) {
-                    Log.d("test", "réussite" );
-                    productlist.get(0).getImages().get(0).getSrc();
-                    Log.d("test", productlist.get(0).getImages().get(0).getSrc() );
-                    callback.next(productlist);
+                //if (callback != null)
+                  //  callback.onSuccess(productlist);
 
-                }
+                callback.next(productlist);
             }
 
 
@@ -137,7 +88,8 @@ public class FakeWebServer {
                 //alertDialog.show();
                 Log.d("test", "echec" + t);
             }
-        });*/
+        });
+
 
 
         // Ovens
@@ -330,18 +282,14 @@ public class FakeWebServer {
         */
 
         //Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
-            //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
 
-        }
 
-    /*public void getData(Callback<DataResponse> callback){
-        apiClient.getData().enqueue(callback);
-    }*/
+    }
 
     public void getAllFurnitures() {
 
-        //ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
         ArrayList<Product> productlist = new ArrayList<Product>();
 
@@ -620,30 +568,30 @@ public class FakeWebServer {
 
         if (productCategory == 0) {
 
-           getAllElectronics(new GetProductListCallback() {
-               @Override
-               public void onSuccess(ArrayList<Product> products) {
-                   if (products.size() != 0) {
-                       Log.d("test", "réussite" );
-                       products.get(0).getImages().get(0).getSrc();
-                       Log.d("test", products.get(0).getImages().get(0).getSrc() );
-                       productMap.put("Microwave oven", products);
-                       Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
-                       CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
-                   }
-               }
-           });
-            /*getAllElectronics(new CallbackT<ArrayList<Product>>() {
+           //getAllElectronics(ArrayList<Product>);
+            getAllElectronics(new CallbackT<ArrayList<Product>>() {
                            @Override
                            public void next(ArrayList<Product> productlist) {
+                               final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
                                productMap.put("Microwave oven", productlist);
-                               Log.i("test ajout", String.valueOf(productMap.get("Microwave oven").size()));
-
-                               Log.i("test", "Inside " + productlist.get(0).getItemName());
+                               CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+                               Log.i("test", "Inside " + productMap.toString());
                            }
                        }
-            );*/
+            );
 
+            /*getAllElectronics(new CallbackT() {
+                                  @Override
+                                  public void onSuccess(ArrayList<Product> productlist) {
+                                      // use the results
+                                  }
+
+                                  @Override
+                                  public void onError(@NonNull Throwable throwable) {
+
+                                  }
+                              }
+            );*/
         } else {
 
             getAllFurnitures();

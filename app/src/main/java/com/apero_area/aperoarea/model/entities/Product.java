@@ -10,18 +10,18 @@ import java.util.List;
 public class Product {
 
     private int id;
-    private String productId = "1";
-    private String name = "";
-    private String description = "";
+    private String productId;
+    private String name;
+    private String description;
     private String price;
     private String average_rating;
     private String rating_count;
     private List<Images> images;
-    private String short_description = "";
-    private String orderQty = "5";
-    private String discount = "10";
-    private String mrp = "2";
-    private String imageUrl = "";
+    private String short_description;
+    private String orderQty;
+    private String discount;
+    private String mrp;
+    private String imageUrl;
 
 
     public Product(String itemName, String itemShortDesc, String itemDetail,
