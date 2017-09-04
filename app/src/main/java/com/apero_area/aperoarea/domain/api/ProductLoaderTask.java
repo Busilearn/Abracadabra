@@ -113,8 +113,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
         return null;
     }
-    // Make the request
-    Call<ArrayList<Product>> call = apiInterface.getProduct();
+
 
     private void setUpUi() {
 
@@ -238,12 +237,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
     private void setupViewPager() {
 
-        call.enqueue(new Callback<ArrayList<Product>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
 
-                products = response.body();
-                if (products.size() != 0) {
 
                     ProductsInCategoryPagerAdapter adapter = new ProductsInCategoryPagerAdapter(
                             ((MainActivity) context).getSupportFragmentManager());
@@ -266,16 +260,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 //				new );
 
                     tabs.setupWithViewPager(viewPager);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
-                alertDialog.show();
-                Log.d("test", "echec" + t);
-            }
-        });
 
 
 

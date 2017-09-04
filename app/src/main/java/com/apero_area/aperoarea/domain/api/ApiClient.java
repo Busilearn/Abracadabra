@@ -3,6 +3,8 @@ package com.apero_area.aperoarea.domain.api;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+
 
 /**
  * Created by stran on 01/09/2017.
@@ -26,6 +28,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .baseUrl(BASE_URL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())

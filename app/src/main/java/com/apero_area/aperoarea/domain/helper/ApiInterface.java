@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import rx.Observable;
 
 /**
  * Created by stran on 01/09/2017.
@@ -14,5 +15,5 @@ import retrofit2.http.GET;
 public interface ApiInterface {
 
     @GET("products")
-    Call<ArrayList<Product>> getProduct();
+    Observable<ArrayList<Product>> getProduct();
 }

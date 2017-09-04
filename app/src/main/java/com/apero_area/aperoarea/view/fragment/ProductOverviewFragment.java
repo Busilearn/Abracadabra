@@ -18,6 +18,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -249,7 +250,6 @@ public class ProductOverviewFragment extends Fragment {
         for (String string : keys) {
             adapter.addFrag(new ProductListFragment(string), string);
         }
-
         viewPager.setAdapter(adapter);
 //		viewPager.setPageTransformer(true,
 //				Utils.currentPageTransformer(getActivity()));
