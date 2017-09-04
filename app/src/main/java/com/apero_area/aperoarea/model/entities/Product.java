@@ -3,6 +3,7 @@ package com.apero_area.aperoarea.model.entities;
 
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class Product {
     private String imageUrl;
 
 
+
     public Product(String itemName, String itemShortDesc, String itemDetail,
                    String MRP, String discount, String sellMRP, String quantity,String imageUrl, String orderId) {
         this.name = itemName;
@@ -34,6 +36,7 @@ public class Product {
         this.price = sellMRP;
         this.orderQty = quantity;
         this.imageUrl = imageUrl;
+        //imageUrl = getImages().get(0).getSrc();
         this.productId = orderId;
     }
 
@@ -144,6 +147,7 @@ public class Product {
     }
 
     public String getImageURL() {
+        //imageUrl = getImages().get(0).getSrc();
         return imageUrl;
     }
 
