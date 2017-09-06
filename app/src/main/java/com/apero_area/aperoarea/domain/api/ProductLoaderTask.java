@@ -19,7 +19,7 @@ import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.adapter.ProductsInCategoryPagerAdapter;
-import com.apero_area.aperoarea.domain.mock.FakeWebServer;
+import com.apero_area.aperoarea.domain.mock.WebServer;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.view.fragment.ProductListFragment;
 import com.google.gson.Gson;
@@ -91,25 +91,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
         }
 
         //FakeWebServer.getFakeWebServer().getProducts();
-
-        // Build of the retrofit object
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
-        //ArrayList<Product> productlist = new ArrayList<Product>((Collection<? extends Product>) call);
-        ArrayList<Product> productlist = new ArrayList<Product>();
-        List<Product> call = new ArrayList<Product>(Collections.unmodifiableCollection(new ArrayList<Product>(productlist)));
-        productMap.put("Chouille", productlist);
-
-
-        //HashSet<Product> call = new HashSet<Product>(productlist);
-        //List<Product> userList = new ArrayList<Product>(call);
-
-        //Collection<User> userCollection = new HashSet<User>(usersArrayList);
-
-        //List<User> userList = new ArrayList<User>(userCollection );
-
-        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
         return null;
     }

@@ -1,9 +1,13 @@
 package com.apero_area.aperoarea.view.fragment;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.helper.ApiInterface;
+import com.apero_area.aperoarea.domain.mock.WebServerSync;
+import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.adapter.ProductsInCategoryPagerAdapter;
-import com.apero_area.aperoarea.domain.mock.FakeWebServer;
+import com.apero_area.aperoarea.domain.mock.WebServer;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.util.AppConstants;
 import com.apero_area.aperoarea.util.Utils;
@@ -24,7 +28,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by stran on 29/08/2017.
@@ -48,9 +58,11 @@ public class ProductOverviewFragment extends Fragment {
 
         getActivity().setTitle("Products");
 
-        // Simulate Web service calls
-        FakeWebServer.getFakeWebServer().getAllProducts(
+        // Not simulate Web service calls
+
+        WebServer.getWebServer().getAllProducts(
                 AppConstants.CURRENT_CATEGORY);
+
 
 
 

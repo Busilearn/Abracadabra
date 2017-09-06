@@ -6,9 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.domain.mock.WebServerSync;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.adapter.CategoryListAdapter;
-import com.apero_area.aperoarea.domain.mock.FakeWebServer;
+import com.apero_area.aperoarea.domain.mock.WebServer;
 import com.apero_area.aperoarea.util.AppConstants;
 import com.apero_area.aperoarea.util.Utils;
 import com.apero_area.aperoarea.view.fragment.ProductOverviewFragment;
@@ -82,7 +83,7 @@ public class ProductCategoryLoaderTask extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-        FakeWebServer.getFakeWebServer().addCategory();
+        WebServer.getWebServer().addCategory();
 
         return null;
     }

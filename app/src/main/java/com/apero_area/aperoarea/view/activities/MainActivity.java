@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.domain.api.ApiClient;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
+import com.apero_area.aperoarea.domain.mock.WebServer;
 import com.apero_area.aperoarea.view.fragment.HomeFragment;
 import com.apero_area.aperoarea.domain.helper.Connectivity;
 import com.apero_area.aperoarea.domain.mining.AprioriFrequentItemsetGenerator;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,14 +68,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        WebServer.getWebServer();
+
+        //Log.i("test", "Inside getProductsremote" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
+
+
         CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
 
 
                 new TinyDB(getApplicationContext()).getListObject(
                         PreferenceHelper.MY_CART_LIST_LOCAL, Product.class));
 
+
+
         itemCount = CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
                 .size();
+
 
         //	makeFakeVolleyJsonArrayRequest();
 

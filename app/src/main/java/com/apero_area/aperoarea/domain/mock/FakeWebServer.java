@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+/*
 
 public class FakeWebServer {
 
@@ -73,7 +74,7 @@ public class FakeWebServer {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         // Make the request
         Call<ArrayList<Product>> call = apiInterface.getProduct();
-        //        apiInterface.getProduct().enqueue();
+
         call.enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
@@ -84,6 +85,7 @@ public class FakeWebServer {
                   //  callback.onSuccess(productlist);
 
                 callback.next(productlist);
+                //Log.i("test", "Inside fakeweb" + productlist.toString());
             }
 
 
@@ -160,6 +162,7 @@ public class FakeWebServer {
                         "oven_5"));
 
 
+*/
 /*
         ArrayList<Product> tvList = new ArrayList<Product>();
 
@@ -285,14 +288,15 @@ public class FakeWebServer {
                         "v_cleaner_5"));
 
         productMap.put("Vaccum Cleaner", productlist);
-        */
+        *//*
+
 
         //Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
 
             productMap.put("Microwave oven", productlist);
-            CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+            //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
-            Log.i("test", "Inside " + productMap.toString());
+            Log.i("test", "Inside center repo in fake" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
 
     }
 
@@ -569,7 +573,9 @@ public class FakeWebServer {
 
         productMap.put("Almirah", productlist);
 
-        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+        //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+
+
 
     }
 
@@ -582,16 +588,18 @@ public class FakeWebServer {
                            @Override
                            public void next(ArrayList<Product> productlist) {
 
-                               /*ArrayList<String>  mStringList= new ArrayList<String>();
+                               */
+/*ArrayList<String>  mStringList= new ArrayList<String>();
                                mStringList.add(productlist.get(0).getImages().get(0).getSrc());
                                productlist.add(mStringList);
                                String[] mStringArray = new String[mStringList.size()];
-                               mStringArray = mStringList.toArray(mStringArray);*/
+                               mStringArray = mStringList.toArray(mStringArray);*//*
+
 
                                final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
                                productMap.put("Microwave oven", productlist);
-                               CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
-                               Log.i("test", "Inside " + productMap.toString());
+                               //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+                               //Log.i("test", "Inside " + productMap.toString());
 
                                //productlist.get(0).getImages().get(0).getSrc();
                                //Log.i("test", productlist.get(0).getImages().get(0).getSrc());
@@ -601,7 +609,8 @@ public class FakeWebServer {
                        }
             );
 
-            /*getAllElectronics(new CallbackT() {
+            */
+/*getAllElectronics(new CallbackT() {
                                   @Override
                                   public void onSuccess(ArrayList<Product> productlist) {
                                       // use the results
@@ -612,13 +621,49 @@ public class FakeWebServer {
 
                                   }
                               }
-            );*/
+            );*//*
+
         } else {
 
             getAllFurnitures();
 
+
         }
+
+
 
     }
 
+    */
+/*public void getProductsremote () {
+
+        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+
+        // Build of the retrofit object
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        // Make the request
+        Call<ArrayList<Product>> call = apiInterface.getProduct();
+        //        apiInterface.getProduct().enqueue();
+        call.enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+
+                ArrayList<Product> productlist = response.body();
+                productMap.put("Microwave oven", productlist);
+                //Log.i("test", "Inside getProductsremote" + productlist.toString());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+
+                //alertDialog.show();
+                Log.d("test", "echec" + t);
+            }
+        });
+
+
+    }*//*
+
+
 }
+*/

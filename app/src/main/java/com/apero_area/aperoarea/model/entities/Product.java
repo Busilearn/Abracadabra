@@ -20,24 +20,24 @@ public class Product {
     private List<Images> images;
     private String short_description;
     private String orderQty;
-    private String discount;
-    private String mrp;
-    private String imageUrl;
+    //private String discount;
+    private String sku;
+    //private String imageUrl;
 
 
 
     public Product(String itemName, String itemShortDesc, String itemDetail,
                    String MRP, String discount, String sellMRP, String quantity,String imageUrl, String orderId) {
         this.name = itemName;
-        this.short_description = itemShortDesc;
-        this.description = itemDetail;
-        this.mrp = MRP;
-        this.discount = discount;
-        this.price = sellMRP;
-        this.orderQty = quantity;
-        this.imageUrl = imageUrl;
+        //this.short_description = itemShortDesc;
+        //this.description = itemDetail;
+        //this.sku = MRP;
+        //this.discount = discount;
+        //this.price = sellMRP;
+        //this.orderQty = quantity;
+        //this.imageUrl = imageUrl;
         //imageUrl = getImages().get(0).getSrc();
-        this.productId = orderId;
+        //this.productId = orderId;
     }
 
 
@@ -131,14 +131,14 @@ public class Product {
     }
 
     public String getMRP() {
-        return this.mrp;
+        return this.sku;
     }
 
     public void setMRP(String MRP) {
-        this.mrp = MRP;
+        this.sku = MRP;
     }
 
-    public String getDiscount() {
+    /*public String getDiscount() {
         return discount + "%";
     }
 
@@ -153,7 +153,7 @@ public class Product {
 
     public void setImageURL(String imageURL) {
         this.imageUrl = imageURL;
-    }
+    }*/
 
 
 

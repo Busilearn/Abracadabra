@@ -536,9 +536,9 @@ public class ProductDetailsFragment extends Fragment {
 
             LabelView label = new LabelView(getActivity());
 
-            label.setText(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
+            /*label.setText(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
                     .get(subcategoryKey).get(productListNumber).getDiscount());
-            label.setBackgroundColor(0xffE91E63);
+            label.setBackgroundColor(0xffE91E63);*/
 
             label.setTargetView(itemImage, 10, LabelView.Gravity.RIGHT_TOP);
         } else {
@@ -614,9 +614,9 @@ public class ProductDetailsFragment extends Fragment {
 
             LabelView label = new LabelView(getActivity());
 
-            label.setText(CenterRepository.getCenterRepository()
+            /*label.setText(CenterRepository.getCenterRepository()
                     .getListOfProductsInShoppingList().get(productListNumber).getDiscount());
-            label.setBackgroundColor(0xffE91E63);
+            label.setBackgroundColor(0xffE91E63);*/
 
             label.setTargetView(itemImage, 10, LabelView.Gravity.RIGHT_TOP);
 

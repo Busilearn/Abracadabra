@@ -78,7 +78,7 @@ public class ProductListAdapter extends
         holder.itemName.setText(productList.get(position)
                 .getItemName());
 
-        holder.itemDesc.setText(productList.get(position)
+        /*holder.itemDesc.setText(productList.get(position)
                 .getItemShortDesc());
 
         String sellCostString = Money.rupees(

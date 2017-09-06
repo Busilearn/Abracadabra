@@ -150,8 +150,8 @@ public class SimilarProductsPagerAdapter extends PagerAdapter {
                                 .getSellMRP()))).toString());
 
         LabelView label = new LabelView(mContext);
-        label.setText(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
-                .get(productCategory).get(position).getDiscount());
+        /*label.setText(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
+                .get(productCategory).get(position).getDiscount());*/
         label.setBackgroundColor(0xffE91E63);
         label.setTargetView(itemView.findViewById(R.id.imageView), 10,
                 LabelView.Gravity.RIGHT_TOP);

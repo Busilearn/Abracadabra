@@ -1,5 +1,9 @@
 package com.apero_area.aperoarea.model;
 
+import android.util.Log;
+
+import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.api.CallbackT;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
@@ -13,6 +17,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by stran on 24/08/2017.
@@ -50,7 +56,8 @@ public class CenterRepository {
         return mapOfProductsInCategory;
     }
 
-    public void setMapOfProductsInCategory(ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory) {
+        public void setMapOfProductsInCategory(ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory) {
+
         this.mapOfProductsInCategory = mapOfProductsInCategory;
     }
 
