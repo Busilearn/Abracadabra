@@ -82,15 +82,17 @@ public class WebServer {
 
 
 
-                        ArrayList<Product> products = response.body();
-                        productlist.add(0, products.get(0));
+                        ArrayList<Product> productlist = response.body();
 
                         for (Product item : productlist) {
                         Log.i("Body %s", item.getItemName());
                         }
 
                         //Log.i("test", "Inside onresponse" + productlist.toString());
-                        callback.next(productlist);
+
+                    productMap.put("Microwave oven", productlist);
+                    CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+                        //callback.next(productlist);
 
                 }
 
@@ -104,7 +106,7 @@ public class WebServer {
                 }
             });
 
-            productlist
+            /*productlist
                     .add(new Product(
                             "Solo Microwave Oven",
                             "<ul>\\n<li>1 bouteille de Label 5 70cl</li>\\n<li>1 bouteille de Coca 1,5L</li>\\n<li>x5 gobelets</li>\\n<li>Springles</li>\\n</ul>\\n",
@@ -114,7 +116,7 @@ public class WebServer {
                             "4290",
                             "0",
                             "http://img6a.flixcart.com/image/microwave-new/3/3/z/ifb-17pmmec1-400x400-imae4g4uzzjsumhk.jpeg",
-                            "oven_1"));
+                            "oven_1"));*/
 
 
 
@@ -135,8 +137,7 @@ public class WebServer {
                 public void next(ArrayList<Product> productlist) {
 
                                final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
-                               productMap.put("Microwave oven", productlist);
-                               CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+
                                 //Log.i("test", "Inside next" + productMap.toString());
                                 //Log.i("test", "Inside center repo getWebProducts next" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
 

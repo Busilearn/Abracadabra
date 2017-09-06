@@ -60,8 +60,11 @@ public class ProductOverviewFragment extends Fragment {
 
         // Not simulate Web service calls
 
-        WebServer.getWebServer().getAllProducts(
-                AppConstants.CURRENT_CATEGORY);
+       /* WebServerSync.getWebServerSync().getAllProducts(
+                AppConstants.CURRENT_CATEGORY);*/
+
+
+        new WebServerSync().execute();
 
 
 

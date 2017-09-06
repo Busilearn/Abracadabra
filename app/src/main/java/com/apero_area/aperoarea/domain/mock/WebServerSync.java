@@ -43,7 +43,6 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
     }
 
 
-
     void initiateWebServerSync() {
 
         addCategory();
@@ -64,12 +63,6 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
 
     }
 
-    @Override
-    protected Void doInBackground(String... params) {
-        getRemoteProducts();
-
-        return null;
-    }
 
     public void addCategory() {
 
@@ -92,9 +85,10 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
 
-    public void getRemoteProducts(){
+    public void getRemoteProducts() {
 
-        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+        ArrayList<Product> productlist = new ArrayList<Product>();
 
 
         // Build of the retrofit object
@@ -103,59 +97,117 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
         Call<ArrayList<Product>> call = apiInterface.getProduct();
 
         try {
-            ArrayList<Product> productlist = call.execute().body();
+            productlist = call.execute().body();
+            Log.d("test", "test synch" + productlist.size() + " " + productlist.get(0).getItemName());
             productMap.put("Alcool", productlist);
 
-            Log.i("test", "Inside try" + productlist.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        productlist
+                .add(new Product(
+                        "Test",
+                        "Royal Oak Engineered aintWood Coffee Table",
+                        "With a contemporary design and gorgeous finish, this coffee table will be a brilliant addition to modern homes and even offices. The table has a glass table top with a floral print, and a pull-out drawer in the center.",
+                        "10200",
+                        "12",
+                        "7000",
+                        "0",
+                        "http://img6a.flixcart.com/image/coffee-table/q/f/4/ct15bl-mdf-royal-oak-dark-400x400-imaeehkd8xuheh2u.jpeg",
+                        "table_1"));
+
+        productMap.put("Test", productlist);
+
+        //Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
+
+        //productMap.put("Microwave oven", productlist);
+        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+
+        Log.i("test", "Inside getElec " + productMap.toString());
+        Log.i("test", "Inside hash " + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
+    }
+
+    public void getAllFurnitures() {
+
+        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
+
+        ArrayList<Product> productlist = new ArrayList<Product>();
+
+        // Table
+        productlist
+                .add(new Product(
+                        " Wood Coffee Table",
+                        "Royal Oak Engineered Wood Coffee Table",
+                        "With a contemporary design and gorgeous finish, this coffee table will be a brilliant addition to modern homes and even offices. The table has a glass table top with a floral print, and a pull-out drawer in the center.",
+                        "10200",
+                        "12",
+                        "7000",
+                        "0",
+                        "http://img6a.flixcart.com/image/coffee-table/q/f/4/ct15bl-mdf-royal-oak-dark-400x400-imaeehkd8xuheh2u.jpeg",
+                        "table_1"));
+
+
+        productMap.put("Tables", productlist);
+
+
+        productlist = new ArrayList<Product>();
+
+        // Chair
+        productlist
+                .add(new Product(
+                        "l Collapsible Wardrobe",
+                        "Everything Imported Carbon Steel Collapsible Wardrobe",
+                        "Portable Wardrobe Has Hanging Space And Shelves Which Are Very Practical And The Roll Down Cover Keeps The Dust Out",
+                        "2999",
+                        "20",
+                        "1999",
+                        "0",
+                        "http://img5a.flixcart.com/image/collapsible-wardrobe/h/h/g/best-quality-3-5-feet-foldable-storage-cabinet-almirah-shelf-400x400-imaees5fq7wbndak.jpeg",
+                        "almirah_1"));
+
+        productlist
+                .add(new Product(
+                        "l Collapsible Wardrobe",
+                        "Everything Imported Carbon Steel Collapsible Wardrobe",
+                        "Portable Wardrobe Has Hanging Space And Shelves Which Are Very Practical And The Roll Down Cover Keeps The Dust Out",
+                        "2999",
+                        "20",
+                        "1999",
+                        "0",
+                        "http://img6a.flixcart.com/image/collapsible-wardrobe/d/n/s/cb265-carbon-steel-cbeeso-dark-beige-400x400-imaefn9vha2hm9qk.jpeg",
+                        "almirah_2"));
+
+
+        productMap.put("Almirah", productlist);
+
+        productMap.put("Almirah", productlist);
 
         CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
     }
 
+    @Override
+    protected Void doInBackground(Integer... productCategory) {
 
-    public void getfakeProducts() {
+        if (productCategory[0] == 0) {
+            getRemoteProducts();
 
-        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
-        final ArrayList<Product> productlist = new ArrayList<Product>();
-
-            productlist
-                    .add(new Product(
-                            "Solo Microwave Oven",
-                            "IFB 17PMMEC1 17 L Solo Microwave Oven",
-                            "Explore the joys of cooking with IFB 17PM MEC1 Solo Microwave Oven. The budget-friendly appliance has several nifty features including Multi Power Levels and Speed Defrost to make cooking a fun-filled experience.",
-                            "5490",
-                            "10",
-                            "4290",
-                            "0",
-                            "http://img6a.flixcart.com/image/microwave-new/3/3/z/ifb-17pmmec1-400x400-imae4g4uzzjsumhk.jpeg",
-                            "oven_1"));
-
-        productMap.put("Alcool", productlist);
-        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
-
-
-            //Log.i("test", "Inside center repo getWebProducts" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().tostring());
-            //Log.i("test", "Inside center repo getWebProducts" + productlist.get(0).getItemName());
+        } else {
+            getAllFurnitures();
         }
 
+        return null;
+    }
 
 
     public void getAllProducts(int productCategory) {
 
         if (productCategory == 0) {
-            //getRemoteProducts();
-            //Log.i("test", "Inside center repo getWebProducts next" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().get("Alcool").toString());
 
+            getRemoteProducts();
         } else {
-            getfakeProducts();
+            getAllFurnitures();
         }
-
-
-
     }
-
 
 }

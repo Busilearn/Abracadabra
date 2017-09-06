@@ -2,8 +2,6 @@ package com.apero_area.aperoarea.model;
 
 import android.util.Log;
 
-import com.apero_area.aperoarea.domain.api.ApiClient;
-import com.apero_area.aperoarea.domain.api.CallbackT;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
