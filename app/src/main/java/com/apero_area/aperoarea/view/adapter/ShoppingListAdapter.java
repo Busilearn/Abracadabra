@@ -2,16 +2,19 @@ package com.apero_area.aperoarea.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.customview.ItemTouchHelperViewHolder;
@@ -71,15 +74,15 @@ public class ShoppingListAdapter extends
         holder.itemDesc.setText(productList.get(position).getItemShortDesc());
 
         String sellCostString = Money.rupees(
-                BigDecimal.valueOf(Long.valueOf(productList.get(position)
+                BigDecimal.valueOf(Double.valueOf(productList.get(position)
                         .getSellMRP()))).toString()
                 + "  ";
 
-        String buyMRP = Money.rupees(
+        /*String buyMRP = Money.rupees(
                 BigDecimal.valueOf(Long.valueOf(productList.get(position)
-                        .getMRP()))).toString();
+                        .getMRP()))).toString();*/
 
-        String costString = sellCostString + buyMRP;
+        String costString = sellCostString /*+ buyMRP*/;
 
         holder.itemCost.setText(costString, TextView.BufferType.SPANNABLE);
 
@@ -95,7 +98,7 @@ public class ShoppingListAdapter extends
                 .get(position).getItemName().charAt(0)), mColorGenerator
                 .getColor(productList.get(position).getItemName()));
 
-        /*ImageUrl = productList.get(position).getImageURL();
+        ImageUrl = productList.get(position).getImageUrl();
 
         holder.quanitity.setText(CenterRepository.getCenterRepository()
                 .getListOfProductsInShoppingList().get(position).getQuantity());
@@ -113,7 +116,7 @@ public class ShoppingListAdapter extends
                 }
                 return false;
             }
-        });*/
+        });
 
         holder.addItem.setOnClickListener(new View.OnClickListener() {
 
@@ -137,7 +140,7 @@ public class ShoppingListAdapter extends
                 Utils.vibrate(context);
 
                 ((MainActivity) context).updateCheckOutAmount(
-                        BigDecimal.valueOf(Long.valueOf(CenterRepository
+                        BigDecimal.valueOf(Double.valueOf(CenterRepository
                                 .getCenterRepository().getListOfProductsInShoppingList()
                                 .get(position).getSellMRP())), true);
 
@@ -169,7 +172,7 @@ public class ShoppingListAdapter extends
                             .get(position).getQuantity());
 
                     ((MainActivity) context).updateCheckOutAmount(
-                            BigDecimal.valueOf(Long.valueOf(CenterRepository
+                            BigDecimal.valueOf(Double.valueOf(CenterRepository
                                     .getCenterRepository().getListOfProductsInShoppingList()
                                     .get(position).getSellMRP())), false);
 
@@ -179,7 +182,7 @@ public class ShoppingListAdapter extends
                     ((MainActivity) context).updateItemCount(false);
 
                     ((MainActivity) context).updateCheckOutAmount(
-                            BigDecimal.valueOf(Long.valueOf(CenterRepository
+                            BigDecimal.valueOf(Double.valueOf(CenterRepository
                                     .getCenterRepository().getListOfProductsInShoppingList()
                                     .get(position).getSellMRP())), false);
 
@@ -207,7 +210,7 @@ public class ShoppingListAdapter extends
         ((MainActivity) context).updateItemCount(false);
 
         ((MainActivity) context).updateCheckOutAmount(
-                BigDecimal.valueOf(Long.valueOf(CenterRepository
+                BigDecimal.valueOf(Double.valueOf(CenterRepository
                         .getCenterRepository().getListOfProductsInShoppingList().get(position)
                         .getSellMRP())), false);
 

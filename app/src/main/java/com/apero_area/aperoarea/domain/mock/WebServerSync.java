@@ -58,17 +58,17 @@ public class WebServerSync {
 
         listOfCategory
                 .add(new ProductCategoryModel(
-                        "Electronic",
-                        "Electric Items",
+                        "Pour les fêtard",
+                        "Envie de s'amuser partager un moment de délire, trouve tout ce dont tu as envie ici",
                         "10%",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));
+                        "http://www.filsantejeunes.com/wp-content/uploads/2012/06/alcool.jpg"));
 
-        listOfCategory
+        /*listOfCategory
                 .add(new ProductCategoryModel(
                         "Furnitures",
                         "Furnitures Items",
                         "15%",
-                        "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRaUR5_wzLgBOuNtkWjOxhgaYaPBm821Hb_71xTyQ-OdUd-ojMMvw"));
+                        "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRaUR5_wzLgBOuNtkWjOxhgaYaPBm821Hb_71xTyQ-OdUd-ojMMvw"));*/
 
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
@@ -101,7 +101,7 @@ public class WebServerSync {
 
 
 
-    public void getAllFurnitures() {
+    /*public void getAllFurnitures() {
 
         Log.i("test", "Dans getAllfourniture");
 
@@ -160,7 +160,7 @@ public class WebServerSync {
 
         CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
-    }
+    }*/
 
 
 
@@ -171,7 +171,7 @@ public class WebServerSync {
 
 
         } else {
-            getAllFurnitures();
+            //getAllFurnitures();
         }
     }
 

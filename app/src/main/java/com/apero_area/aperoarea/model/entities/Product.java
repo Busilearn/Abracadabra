@@ -22,11 +22,11 @@ public class Product {
     private String orderQty;
     private String discount;
     private String sku;
-    //private String imageUrl;
+    private String imageUrl;
 
 
-
-    public Product(String itemName, String itemShortDesc, String itemDetail, String MRP, String discount, String sellMRP, String quantity,String imageUrl, String orderId) {
+   /* N'est pas utilisé
+   public Product(String itemName, String itemShortDesc, String itemDetail, String MRP, String discount, String sellMRP, String quantity,String imageUrl, String orderId) {
         this.name = itemName;
         this.short_description = itemShortDesc;
         this.description = itemDetail;
@@ -34,10 +34,9 @@ public class Product {
         this.discount = discount;
         this.price = sellMRP;
         this.orderQty = quantity;
-        //this.imageUrl = imageUrl;
-        //imageUrl = getImages().get(0).getSrc();
+        this.imageUrl = imageUrl;
         this.productId = orderId;
-    }
+    }*/
 
 
     //getters & setters
@@ -137,22 +136,23 @@ public class Product {
         this.sku = MRP;
     }
 
-    /*public String getDiscount() {
-        return discount + "%";
+    public String getDiscount() {
+        //TODO Recupérer la valeur du server
+        return /*discount*/ "10" + "%";
     }
 
     public void setDiscount(String discount) {
         this.discount = discount;
     }
 
-    public String getImageURL() {
-        //imageUrl = getImages().get(0).getSrc();
+    public String getImageUrl() {
+        imageUrl = this.getImages().get(0).getSrc();
         return imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageUrl = imageURL;
-    }*/
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
 
 
@@ -166,5 +166,6 @@ public class Product {
         }
         return result;
     }
+
 }
 

@@ -136,7 +136,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/hot_offers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
             android:textColor="#000"
             android:textSize="20sp" />
 
-        <com.hitesh_sahu.retailapp.view.customview.ClickableViewPager
+        <com.apero_area.aperoarea.view.customview.ClickableViewPager
             android:id="@+id/similar_products_pager"
             android:layout_width="match_parent"
             android:layout_height="280dp"
@@ -175,13 +175,13 @@
             android:textColor="#000"
             android:textSize="20sp" />
 
-        <com.hitesh_sahu.retailapp.view.customview.ClickableViewPager
+        <com.apero_area.aperoarea.view.customview.ClickableViewPager
             android:id="@+id/top_selleing_pager"
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:layout_below="@+id/best_value"
             android:layout_marginTop="2dp"
-            android:visibility="visible" />
+            android:visibility="visible" />-->
     </LinearLayout>
 
 </ScrollView>

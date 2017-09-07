@@ -144,7 +144,7 @@ public class SimilarProductsPagerAdapter extends PagerAdapter {
 
         ((TextView) itemView.findViewById(R.id.category_discount))
                 .setText(Money.rupees(
-                        BigDecimal.valueOf(Long.valueOf(CenterRepository
+                        BigDecimal.valueOf(Double.valueOf(CenterRepository
                                 .getCenterRepository().getMapOfProductsInCategory()
                                 .get(productCategory).get(position)
                                 .getSellMRP()))).toString());

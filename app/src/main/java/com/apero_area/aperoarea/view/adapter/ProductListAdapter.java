@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.customview.TextDrawable;
@@ -106,12 +108,12 @@ public class ProductListAdapter extends
                 .get(position).getItemName().charAt(0)), mColorGenerator
                 .getColor(productList.get(position).getItemName()));
 
-        /*ImageUrl = productList.get(position).getImage();
+        ImageUrl = productList.get(position).getImageUrl();
 
 
         Glide.with(context).load(ImageUrl).placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
-                .centerCrop().into(holder.imagView);*/
+                .centerCrop().into(holder.imagView);
 
 
 

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                     .getListOfProductsInShoppingList()) {
 
                 updateCheckOutAmount(
-                        BigDecimal.valueOf(Long.valueOf(product.getSellMRP())),
+                        BigDecimal.valueOf(Double.valueOf(product.getSellMRP())),
                         true);
             }
         }

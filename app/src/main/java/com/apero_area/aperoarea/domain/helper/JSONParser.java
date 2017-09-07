@@ -162,7 +162,7 @@ public class JSONParser {
 
                                     if (productListObjecty.length() != 0) {
 
-                                        tempProductList.add(new Product(
+                                        /*tempProductList.add(new Product(
                                                 productListObjecty
 
                                                         .getString("productName"),
@@ -180,17 +180,17 @@ public class JSONParser {
                                                         .getString("discount"),
                                                 productListObjecty
 
-                                                        .getString("salePrice"),
+                                                        .getString("salePrice"),*/
                                             /*
                                              * productListObjecty
 											 *
 											 * .getString("avbleQuantity"),
 											 */
-                                                "0", productListObjecty
+                                              /*  "0", productListObjecty
 
                                                 .getString("imageUrl"),
                                                 productListObjecty
-                                                        .getString("productId")));
+                                                        .getString("productId")));*/
 
                                         Log.d("Parse:GetAllProduct",
                                                 "tempProductList" + tempProductList);
@@ -262,7 +262,7 @@ public class JSONParser {
 
                             if (productListObjecty.length() != 0) {
 
-                                CenterRepository
+                               /* CenterRepository
                                         .getCenterRepository()
                                         .getListOfProductsInShoppingList().add(new Product(productListObjecty
 
@@ -282,10 +282,10 @@ public class JSONParser {
 							 *
 							 * .getString("avbleQuantity"),
 							 */
-                                        "0", productListObjecty
+                                        /*"0", productListObjecty
 
                                         .getString("imageUrl"), productListObjecty
-                                        .getString("productId")));
+                                        .getString("productId")));*/
 
                                 Log.d("GetAllProduct",
                                         "tempProductList" + tempProductList);
