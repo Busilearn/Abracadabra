@@ -77,14 +77,15 @@ public class ProductCategoryLoaderTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... params) {
 
-        try {
-            Thread.sleep(2000);
+        /*try {
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
 
         WebServerSync.getWebServerSync().addCategory();
-        WebServerSync.getWebServerSync().getWebProducts();
+
+        //WebServerSync.getWebServerSync().getWebProducts();
 
 
         return null;

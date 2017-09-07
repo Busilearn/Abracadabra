@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        WebServer.getWebServer();
+        //WebServer.getWebServer();
 
         //Log.i("test", "Inside getProductsremote" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
 

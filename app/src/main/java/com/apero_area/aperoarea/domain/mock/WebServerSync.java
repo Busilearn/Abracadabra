@@ -56,12 +56,12 @@ public class WebServerSync {
 
         ArrayList<ProductCategoryModel> listOfCategory = new ArrayList<ProductCategoryModel>();
 
-        /*listOfCategory
+        listOfCategory
                 .add(new ProductCategoryModel(
                         "Electronic",
                         "Electric Items",
                         "10%",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));*/
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));
 
         listOfCategory
                 .add(new ProductCategoryModel(
@@ -85,7 +85,9 @@ public class WebServerSync {
 
         try {
             ArrayList<Product> productlist = call.execute().body();
-            productMap.put("Alcool", productlist);
+            if (productlist != null) {
+                productMap.put("Alcool", productlist);
+            }
 
             Log.i("test", "Inside try" + productlist.toString());
         } catch (IOException e) {
@@ -100,6 +102,8 @@ public class WebServerSync {
 
 
     public void getAllFurnitures() {
+
+        Log.i("test", "Dans getAllfourniture");
 
         ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
@@ -154,7 +158,7 @@ public class WebServerSync {
 
         productMap.put("Almirah", productlist);
 
-        //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
     }
 
@@ -163,10 +167,10 @@ public class WebServerSync {
     public void getAllProducts(int productCategory) {
 
         if (productCategory == 0) {
+            getWebProducts();
 
 
         } else {
-            getWebProducts();
             getAllFurnitures();
         }
     }

@@ -61,17 +61,7 @@ public class ProductOverviewFragment extends Fragment {
 
         // Not simulate Web service calls
 
-        WebServerSync.getWebServerSync().getAllProducts(
-                AppConstants.CURRENT_CATEGORY);
-
-
-
-
-        // TODO We Can use Async task But pallete creation is problemitic job
-        // will
-        // get back to it later
-
-        // new ProductLoaderTask(null, getActivity(), viewPager, tabLayout);
+       // WebServerSync.getWebServerSync().getAllProducts(AppConstants.CURRENT_CATEGORY);
 
         // Volley can be used here very efficiently but Fake JSON creation is
         // time consuming Leain it now
@@ -86,6 +76,13 @@ public class ProductOverviewFragment extends Fragment {
         header.setImageResource(R.drawable.header);
 
         tabLayout = (TabLayout) view.findViewById(R.id.htab_tabs);
+
+
+        // TODO We Can use Async task But pallete creation is problemitic job
+        // will
+        // get back to it later
+
+        new ProductLoaderTask(null, getActivity(), viewPager, tabLayout).execute();
 
         mToolbar = (Toolbar) view.findViewById(R.id.htab_toolbar);
         if (mToolbar != null) {
@@ -263,6 +260,7 @@ public class ProductOverviewFragment extends Fragment {
         for (String string : keys) {
             adapter.addFrag(new ProductListFragment(string), string);
         }
+        Log.i("test","dans setupViewPager" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
         viewPager.setAdapter(adapter);
 //		viewPager.setPageTransformer(true,
 //				Utils.currentPageTransformer(getActivity()));
