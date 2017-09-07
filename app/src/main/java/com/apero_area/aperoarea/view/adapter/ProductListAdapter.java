@@ -187,7 +187,7 @@ public class ProductListAdapter extends
                                                             .getSellMRP())),
                                     true);
 
-                            
+
                         }
 
                         Utils.vibrate(getContext());
