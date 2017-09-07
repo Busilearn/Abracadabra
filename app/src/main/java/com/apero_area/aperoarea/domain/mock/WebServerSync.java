@@ -29,7 +29,7 @@ import retrofit2.Response;
  * Created by stran on 05/09/2017.
  */
 
-public class WebServerSync extends AsyncTask<String, Void, Void> {
+public class WebServerSync {
 
 
     private static WebServerSync webServerSync;
@@ -49,31 +49,19 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
 
     }
 
-    @Override
-    protected void onPreExecute() {
 
-        super.onPreExecute();
-
-    }
-
-    @Override
-    protected void onPostExecute(Void result) {
-        super.onPostExecute(result);
-
-
-    }
 
 
     public void addCategory() {
 
         ArrayList<ProductCategoryModel> listOfCategory = new ArrayList<ProductCategoryModel>();
 
-        listOfCategory
+        /*listOfCategory
                 .add(new ProductCategoryModel(
                         "Electronic",
                         "Electric Items",
                         "10%",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeNSONF3fr9bZ6g0ztTAIPXPRCYN9vtKp1dXQB2UnBm8n5L34r"));*/
 
         listOfCategory
                 .add(new ProductCategoryModel(
@@ -85,10 +73,9 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
         CenterRepository.getCenterRepository().setListOfCategory(listOfCategory);
     }
 
-    public void getRemoteProducts() {
+    public void getWebProducts(){
 
-        ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
-        ArrayList<Product> productlist = new ArrayList<Product>();
+        final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
 
         // Build of the retrofit object
@@ -97,35 +84,20 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
         Call<ArrayList<Product>> call = apiInterface.getProduct();
 
         try {
-            productlist = call.execute().body();
-            Log.d("test", "test synch" + productlist.size() + " " + productlist.get(0).getItemName());
+            ArrayList<Product> productlist = call.execute().body();
             productMap.put("Alcool", productlist);
 
+            Log.i("test", "Inside try" + productlist.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        productlist
-                .add(new Product(
-                        "Test",
-                        "Royal Oak Engineered aintWood Coffee Table",
-                        "With a contemporary design and gorgeous finish, this coffee table will be a brilliant addition to modern homes and even offices. The table has a glass table top with a floral print, and a pull-out drawer in the center.",
-                        "10200",
-                        "12",
-                        "7000",
-                        "0",
-                        "http://img6a.flixcart.com/image/coffee-table/q/f/4/ct15bl-mdf-royal-oak-dark-400x400-imaeehkd8xuheh2u.jpeg",
-                        "table_1"));
 
-        productMap.put("Test", productlist);
-
-        //Log.i("test", String.valueOf(productMap.get("Microwave oven").size()));
-
-        //productMap.put("Microwave oven", productlist);
         CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
-        Log.i("test", "Inside getElec " + productMap.toString());
-        Log.i("test", "Inside hash " + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
     }
+
+
+
 
     public void getAllFurnitures() {
 
@@ -182,30 +154,19 @@ public class WebServerSync extends AsyncTask<String, Void, Void> {
 
         productMap.put("Almirah", productlist);
 
-        CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
+        //CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
 
     }
 
-    @Override
-    protected Void doInBackground(Integer... productCategory) {
-
-        if (productCategory[0] == 0) {
-            getRemoteProducts();
-
-        } else {
-            getAllFurnitures();
-        }
-
-        return null;
-    }
 
 
     public void getAllProducts(int productCategory) {
 
         if (productCategory == 0) {
 
-            getRemoteProducts();
+
         } else {
+            getWebProducts();
             getAllFurnitures();
         }
     }

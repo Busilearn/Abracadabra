@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
+import com.apero_area.aperoarea.domain.mock.WebServerSync;
 import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.view.adapter.ProductsInCategoryPagerAdapter;
@@ -91,6 +92,8 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
         }
 
         //FakeWebServer.getFakeWebServer().getProducts();
+
+        //WebServerSync.getWebServerSync().getWebProducts();
 
         return null;
     }

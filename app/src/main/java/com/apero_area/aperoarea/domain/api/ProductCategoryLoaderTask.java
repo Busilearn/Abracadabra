@@ -84,6 +84,7 @@ public class ProductCategoryLoaderTask extends AsyncTask<String, Void, Void> {
         }
 
         WebServerSync.getWebServerSync().addCategory();
+        WebServerSync.getWebServerSync().getWebProducts();
 
 
         return null;

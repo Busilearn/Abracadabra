@@ -2,6 +2,7 @@ package com.apero_area.aperoarea.view.fragment;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.domain.api.ApiClient;
+import com.apero_area.aperoarea.domain.api.ProductLoaderTask;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.domain.mock.WebServerSync;
 import com.apero_area.aperoarea.model.entities.Product;
@@ -60,11 +61,8 @@ public class ProductOverviewFragment extends Fragment {
 
         // Not simulate Web service calls
 
-       /* WebServerSync.getWebServerSync().getAllProducts(
-                AppConstants.CURRENT_CATEGORY);*/
-
-
-        new WebServerSync().execute();
+        WebServerSync.getWebServerSync().getAllProducts(
+                AppConstants.CURRENT_CATEGORY);
 
 
 

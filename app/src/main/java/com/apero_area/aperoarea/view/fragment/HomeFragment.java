@@ -20,8 +20,12 @@ import android.support.v7.graphics.Palette;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.domain.api.ProductCategoryLoaderTask;
+import com.apero_area.aperoarea.domain.api.ProductLoaderTask;
+import com.apero_area.aperoarea.domain.mock.WebServerSync;
+import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.apero_area.aperoarea.util.Utils;
+import com.apero_area.aperoarea.view.adapter.CategoryListAdapter;
 
 /**
  * Created by dany on 29/08/2017.
@@ -107,32 +111,33 @@ public class HomeFragment extends Fragment {
         new ProductCategoryLoaderTask(recyclerView, getActivity()).execute();
 
 //
-//		if (simpleRecyclerAdapter == null) {
-//			simpleRecyclerAdapter = new CategoryListAdapter(getActivity());
-//			recyclerView.setAdapter(simpleRecyclerAdapter);
-//
-//			simpleRecyclerAdapter
-//					.SetOnItemClickListener(new OnItemClickListener() {
-//
-//						@Override
-//						public void onItemClick(View view, int position) {
-//
-//							if (position == 0) {
-//								CenterRepository.getCenterRepository()
-//										.getAllElectronics();
-//							} else if (position == 1) {
-//								CenterRepository.getCenterRepository()
-//										.getAllFurnitures();
-//							}
-//							Utils.switchFragmentWithAnimation(
-//									R.id.frag_container,
-//									new ProductOverviewFragment(),
-//									((ECartHomeActivity) getActivity()), null,
-//									AnimationType.SLIDE_LEFT);
-//
-//						}
-//					});
-//		}
+/*        CategoryListAdapter simpleRecyclerAdapter = null;
+        if (simpleRecyclerAdapter == null) {
+			simpleRecyclerAdapter = new CategoryListAdapter(getActivity());
+			recyclerView.setAdapter(simpleRecyclerAdapter);
+
+			simpleRecyclerAdapter
+					.SetOnItemClickListener(new CategoryListAdapter.OnItemClickListener() {
+
+						@Override
+						public void onItemClick(View view, int position) {
+
+							if (position == 0) {
+                                WebServerSync.getWebServerSync()
+										.getWebProducts();
+							} else if (position == 1) {
+                                WebServerSync.getWebServerSync()
+                                        .getAllFurnitures();
+							}
+							Utils.switchFragmentWithAnimation(
+									R.id.frag_container,
+									new ProductOverviewFragment(),
+									((MainActivity) getActivity()), null,
+									Utils.AnimationType.SLIDE_LEFT);
+
+						}
+					});
+		}*/
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
