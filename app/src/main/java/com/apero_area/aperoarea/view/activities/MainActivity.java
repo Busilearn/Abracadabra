@@ -1,6 +1,7 @@
 package com.apero_area.aperoarea.view.activities;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -62,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
     private NavigationView mNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_main);
 
 

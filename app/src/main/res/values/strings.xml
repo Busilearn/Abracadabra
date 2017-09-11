@@ -23,5 +23,6 @@
     <string name="similar_product">Regarder aussi</string>
     <string name="action_settings">Paramètre</string>
     <string name="slogan">Les rois de l\'Apero</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

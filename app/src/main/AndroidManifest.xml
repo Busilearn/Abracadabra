@@ -38,6 +38,15 @@ package="com.apero_area.aperoarea">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
+
+    <activity
+        android:name=".view.activities.MapsActivity"
+        android:label="@string/title_activity_maps">
+    </activity>
 </application>
 
 </manifest>
