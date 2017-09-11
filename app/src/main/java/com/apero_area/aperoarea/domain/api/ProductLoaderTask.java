@@ -87,7 +87,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

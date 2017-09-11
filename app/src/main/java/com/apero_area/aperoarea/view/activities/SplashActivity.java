@@ -1,7 +1,9 @@
 package com.apero_area.aperoarea.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -22,6 +24,7 @@ public class SplashActivity extends FragmentActivity {
     private ImageView logo;
     private TextView appTitle;
     private TextView appSlogan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

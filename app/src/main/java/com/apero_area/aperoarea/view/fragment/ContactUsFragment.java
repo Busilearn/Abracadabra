@@ -120,7 +120,7 @@ public class ContactUsFragment extends Fragment {
                     public void onClick(View v) {
                         Intent browserIntent = new Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse("http://hiteshsahu.com/"));
+                                Uri.parse("http://apero-area.com/"));
                         startActivity(browserIntent);
 
                     }
@@ -138,7 +138,7 @@ public class ContactUsFragment extends Fragment {
                         emailIntent
                                 .putExtra(
                                         android.content.Intent.EXTRA_EMAIL,
-                                        new String[]{"hiteshkrsahu@gmail.com"});
+                                        new String[]{"daniel.sautot@gmail.com"});
                         emailIntent.putExtra(
                                 android.content.Intent.EXTRA_SUBJECT,
                                 "Hello There");

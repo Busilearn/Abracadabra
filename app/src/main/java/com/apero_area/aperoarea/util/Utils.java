@@ -18,6 +18,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.view.fragment.ContactUsFragment;
+import com.apero_area.aperoarea.view.fragment.HomeFragment;
+import com.apero_area.aperoarea.view.fragment.MyCartFragment;
+import com.apero_area.aperoarea.view.fragment.ProductOverviewFragment;
+import com.apero_area.aperoarea.view.fragment.SettingsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +35,7 @@ public class Utils {
 
     public static final String ATTRIBUTE_TTF_KEY = "ttf_name";
 
-    public static final String ATTRIBUTE_SCHEMA = "http://schemas.android.com/apk/lib/com.hitesh_sahu.retailapp.util";
+    public static final String ATTRIBUTE_SCHEMA = "http://schemas.android.com/apk/lib/com.apero_area.aperoarea.util";
 
     public final static String SHOPPING_LIST_TAG = "SHoppingListFragment";
     public static final String PRODUCT_OVERVIEW_FRAGMENT_TAG = "ProductOverView";
@@ -327,7 +332,7 @@ public class Utils {
 
             // If the new fragment can't be found in the manager, create a new
             // one
-            /*if (fragment == null) {
+            if (fragment == null) {
 
                 if (TAG.equals(HOME_FRAGMENT)) {
                     fragmentToReplace = new HomeFragment();
@@ -357,7 +362,7 @@ public class Utils {
                 } else if (TAG.equals(CONTACT_US_FRAGMENT)) {
                     fragmentToReplace = (ContactUsFragment) fragment;
                 }
-            }*/
+            }
 
             CURRENT_TAG = TAG;
 
