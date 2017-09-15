@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.checkout.PayActivity;
 import com.apero_area.aperoarea.domain.api.ApiClient;
 import com.apero_area.aperoarea.domain.helper.ApiInterface;
 import com.apero_area.aperoarea.domain.mock.WebServer;
@@ -33,6 +34,8 @@ import com.apero_area.aperoarea.util.TinyDB;
 import com.apero_area.aperoarea.util.Utils;
 import com.apero_area.aperoarea.view.fragment.WhatsNewDialog;
 import com.google.gson.Gson;
+import com.stripe.android.Stripe;
+import com.stripe.exception.AuthenticationException;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.math.BigDecimal;
@@ -48,6 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    Stripe stripe;
 
     public static final double MINIMUM_SUPPORT = 0.1;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -67,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_main);
 
+        stripe = new Stripe();
+        try {
+            stripe.setDefaultPublishableKey("pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0");
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
 
         //WebServer.getWebServer();
 
@@ -156,7 +163,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Utils.vibrate(getApplicationContext());
 
-                        showPurchaseDialog();
+                        Intent buyIntent = new Intent(MainActivity.this,PayActivity.class);
+                        buyIntent.putExtra("plan_price",Money.rupees(checkoutAmount).toStringForStripe());
+                        startActivity(buyIntent);
+                        //showPurchaseDialog();
 
                     }
                 });

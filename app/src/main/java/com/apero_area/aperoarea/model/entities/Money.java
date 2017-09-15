@@ -49,6 +49,10 @@ public class Money {
         return getCurrency().getSymbol() + " " + getAmount();
     }
 
+    public String toStringForStripe() {
+        return String.valueOf(getAmount().multiply(new BigDecimal(100)).intValueExact());
+    }
+
     public String toString(Locale locale) {
         return getCurrency().getSymbol(locale) + " " + getAmount();
     }
