@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.apero_area.aperoarea.view.activities.MapsActivity" >
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,4 +12,55 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.apero_area.aperoarea.view.activities.MapsActivity" />
+        />
+
+        <Button
+        android:id="@+id/checkBoxOui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oui"
+            android:layout_marginRight="62dp"
+            android:layout_marginEnd="62dp"
+            android:layout_alignBaseline="@+id/checkBoxNon"
+            android:layout_alignBottom="@+id/checkBoxNon"
+            android:layout_toLeftOf="@+id/checkBoxNon"
+            android:layout_toStartOf="@+id/checkBoxNon"
+            android:visibility="invisible"
+            android:background="#2f221a"
+            android:textColor="#efc941"
+            />
+
+    <Button
+        android:id="@+id/checkBoxNon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:text="Non"
+        android:layout_marginBottom="196dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        android:background="#2f221a"
+        android:textColor="#efc941"/>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="43dp"
+            android:gravity="center"
+            android:text="Vous n'êtes pas dans la zone de livraison, voulez-vous continuez la navigation ?"
+            android:textSize="20sp"
+            android:layout_above="@+id/checkBoxNon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible"
+            android:textColor="#2f221a"
+            />
+
+
+
+
+</RelativeLayout>

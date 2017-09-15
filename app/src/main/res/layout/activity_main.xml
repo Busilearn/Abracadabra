@@ -15,7 +15,8 @@
             android:id="@+id/frag_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/control_overview" />
+            android:layout_above="@+id/control_overview" >
+        </FrameLayout>
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/loading_bar"
