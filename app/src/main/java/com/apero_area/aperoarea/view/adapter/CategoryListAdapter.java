@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.view.customview.LabelView;
 import com.apero_area.aperoarea.view.customview.TextDrawable;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.model.entities.ProductCategoryModel;
 import com.apero_area.aperoarea.util.ColorGenerator;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +69,11 @@ public class CategoryListAdapter extends
 
         ImageUrl = categoryList.get(categoryIndex).getProductCategoryImageUrl();
 
-        /*Glide.with(context).load(ImageUrl).placeholder(drawable)
+        Glide.with(context).load(ImageUrl).placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
                 .centerCrop().into(versionViewHolder.imagView);
 
-        LabelView label = new LabelView(context);
+        /*LabelView label = new LabelView(context);
         label.setText(categoryList.get(categoryIndex)
                 .getProductCategoryDiscount());
         label.setBackgroundColor(0xffE91E63);

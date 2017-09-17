@@ -13,8 +13,8 @@ import java.util.Locale;
 
 public class Money {
 
-    private static final Currency INR = Currency.getInstance(new Locale("en",
-            "in"));
+    private static final Currency INR = Currency.getInstance(new Locale("fr",
+            "fr"));
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
     private BigDecimal amount;

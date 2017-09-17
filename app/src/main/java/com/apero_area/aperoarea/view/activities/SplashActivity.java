@@ -42,7 +42,7 @@ public class SplashActivity extends FragmentActivity {
 
         // Applying font
         appTitle.setTypeface(tf);
-        appSlogan.setTypeface(tf);
+        //appSlogan.setTypeface(tf);
 
         if (savedInstanceState == null) {
             flyIn();

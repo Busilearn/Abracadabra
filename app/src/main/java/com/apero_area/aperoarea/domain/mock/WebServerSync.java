@@ -58,10 +58,10 @@ public class WebServerSync {
 
         listOfCategory
                 .add(new ProductCategoryModel(
-                        "Pour les fêtard",
-                        "Envie de s'amuser partager un moment de délire, trouve tout ce dont tu as envie ici",
+                        "Pour les fêtards",
+                        "Envie de partager un moment arrosé, tu es au bon endroit",
                         "10%",
-                        "http://www.filsantejeunes.com/wp-content/uploads/2012/06/alcool.jpg"));
+                        "https://apero-area.com/wp-content/uploads/2017/09/trinke-fetard.jpg"));
 
         /*listOfCategory
                 .add(new ProductCategoryModel(

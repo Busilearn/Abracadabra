@@ -67,4 +67,5 @@ public class ColorGenerator {
     public int getColor(Object key) {
         return mColors.get(Math.abs(key.hashCode()) % mColors.size());
     }
+
 }

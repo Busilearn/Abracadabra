@@ -8,10 +8,10 @@
     android:layout_gravity="center_horizontal|top"
     android:orientation="vertical">
 
-    <View
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimaryDark" />-->
 
     <TextView
         android:id="@+id/new_offers_banner"
@@ -63,7 +63,7 @@
                 android:background="@drawable/round_text_cart_item"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="#2f221a" />
+                android:textColor="@android:color/white" />
         </FrameLayout>
 
         <TextView
@@ -82,7 +82,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:text="0"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <FrameLayout
@@ -108,8 +108,8 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:padding="5dp"
                 android:scrollHorizontally="true"
-                android:text="checkout"
-                android:textColor="#2f221a"
+                android:text="Commander"
+                android:textColor="@android:color/white"
                 android:textSize="15sp" />
         </FrameLayout>
     </RelativeLayout>

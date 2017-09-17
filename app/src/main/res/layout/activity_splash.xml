@@ -4,7 +4,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_blue_500"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center">
 
     <RelativeLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/pro_txt"
-            android:src="@drawable/app_icon" />
+            android:src="@mipmap/app_icon" />
 
         <com.apero_area.aperoarea.util.FontText xmlns:font="http://schemas.android.com/apk/lib/com.thoughtworks.aperoarea.util"
             android:id="@+id/pro_txt"

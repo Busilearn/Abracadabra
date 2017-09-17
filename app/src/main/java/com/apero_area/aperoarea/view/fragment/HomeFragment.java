@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_product_category, container, false);
 
-        view.findViewById(R.id.search_item).setOnClickListener(
+        /*view.findViewById(R.id.search_item).setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
                                 Utils.AnimationType.SLIDE_UP);
 
                     }
-                });
+                });*/
 
         final Toolbar toolbar = (Toolbar) view.findViewById(R.id.anim_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
         collapsingToolbar = (CollapsingToolbarLayout) view
                 .findViewById(R.id.collapsing_toolbar);
 
-        collapsingToolbar.setTitle("Categories");
+        collapsingToolbar.setTitle("Catégories");
 
         ImageView header = (ImageView) view.findViewById(R.id.header);
 
@@ -163,7 +163,7 @@ public class HomeFragment extends Fragment {
 
                     doubleBackToExitPressedOnce = true;
                     Toast.makeText(getActivity(),
-                            "Please click BACK again to exit",
+                            "Cliquer une seconde fois pour quitter",
                             Toast.LENGTH_SHORT).show();
 
                     mHandler.postDelayed(mRunnable, 2000);
