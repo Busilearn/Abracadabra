@@ -7,10 +7,75 @@
     android:layout_height="match_parent"
     tools:context="com.apero_area.aperoarea.checkout.PayActivity">
 
+    <EditText
+        android:id="@+id/cardName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginTop="22dp"
+        android:hint="Nom"
+        android:layout_below="@+id/mail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/cardFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Prenom"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/cardName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="Notes"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="27dp" />
+
+    <EditText
+        android:id="@+id/cardMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cardPhoneNumber"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Mail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/cardPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:layout_marginTop="95dp"
+        android:hint="Numéro"
+        android:layout_below="@+id/cardName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:id="@+id/relativeLayout3"
+        android:layout_below="@+id/cardMail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="43dp">
 
 
         <EditText

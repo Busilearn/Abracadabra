@@ -3,11 +3,12 @@ package com.apero_area.aperoarea.checkout;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
-import com.apero_area.aperoarea.model.entities.Money;
 import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.squareup.otto.Produce;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -22,10 +23,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class Communicator {
-    private static  final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://demo.apero-area.com";
 
-    public void loginPost(String description, String token, String amount, String currency, final Context context){
+    private static  final String TAG = "Communicator";
+    private static final String SERVER_URL = "https://apero-area.com";
+
+    public void loginPost(String methode, String name, String firstName, String phoneNumber, String mail, String token, String amount, String currency, String notes, final Context context){
+
 
         //Here a logging interceptor is created
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -43,7 +46,7 @@ public class Communicator {
                 .build();
         Interface service = retrofit.create(Interface.class);
 
-        Call<ServerResponse> call = service.post("charge",description,token, amount, currency);
+        Call<ServerResponse> call = service.post(methode, name, firstName, phoneNumber , mail, token, amount, currency, notes);
 
         call.enqueue(new Callback<ServerResponse>() {
             @Override

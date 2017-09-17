@@ -16,13 +16,18 @@ import com.stripe.exception.AuthenticationException;
 
 
 public class PayActivity extends AppCompatActivity {
-    private Communicator communicator;
 
+    private Communicator communicator;
     Stripe stripe;
     String amount;
-    String name;
     Card card;
     Token tok;
+    private TextView cardName;
+    private TextView cardFirstName;
+    private TextView cardMail;
+    private TextView cardPhoneNumber;
+    private TextView notes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,6 @@ public class PayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay);
 
         communicator = new Communicator();
-
 
         Bundle extras = getIntent().getExtras();
         amount = extras.getString("plan_price");
@@ -40,7 +44,6 @@ public class PayActivity extends AppCompatActivity {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
-
     }
 
     public void submitCard(View view) {
@@ -48,6 +51,11 @@ public class PayActivity extends AppCompatActivity {
         TextView monthField = (TextView) findViewById(R.id.month);
         TextView yearField = (TextView) findViewById(R.id.year);
         TextView cvcField = (TextView) findViewById(R.id.cvc);
+        cardName = (TextView) findViewById(R.id.cardName);
+        cardFirstName = (TextView) findViewById(R.id.cardFirstName);
+        cardMail = (TextView) findViewById(R.id.cardMail);
+        cardPhoneNumber = (TextView) findViewById(R.id.cardPhoneNumber);
+        notes = (TextView) findViewById(R.id.notes);
 
         card = new Card(
                 cardNumberField.getText().toString(),
@@ -57,24 +65,14 @@ public class PayActivity extends AppCompatActivity {
         );
 
         card.setCurrency("eur");
-        card.setName("Mickael Guillard");
-        card.setAddressZip("1000");
-        /*
-        card.setNumber(4242424242424242);
-        card.setExpMonth(12);
-        card.setExpYear(19);
-        card.setCVC("123");
-        */
-
+        card.setName(cardName.getText().toString() + " " + cardFirstName.getText().toString());
 
         stripe.createToken(card, "pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0", new TokenCallback() {
             public void onSuccess(Token token) {
-                // TODO: Send Token information to your backend to initiate a charge
                 Toast.makeText(getApplicationContext(), "Token created: " + token.getId(), Toast.LENGTH_LONG).show();
                 tok = token;
                 //new StripeCharge(token.getId()).execute();
-                communicator.loginPost("mickaelguillard@hotmail.fr", token.getId(),amount, "eur", getApplicationContext());
-
+                communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), getApplicationContext());
             }
 
             public void onError(Exception error) {

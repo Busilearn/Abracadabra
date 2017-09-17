@@ -13,13 +13,17 @@ public interface Interface {
 
     //This method is used for "POST"
     @FormUrlEncoded
-    @POST("/charge.php")
+    @POST("/wp-content/plugins/apero-area/payment_api/charge.php")
     Call<ServerResponse> post(
             @Field("method") String method,
+            @Field("name") String name,
+            @Field("firstName") String firstName,
+            @Field("phoneNumber") String phoneNumber,
             @Field("mail") String mail,
             @Field("token") String token,
             @Field("amount") String amount,
-            @Field("currency") String currency
+            @Field("currency") String currency,
+            @Field("notes") String notes
 
     );
 

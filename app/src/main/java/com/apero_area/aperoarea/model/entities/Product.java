@@ -138,7 +138,7 @@ public class Product {
 
     public String getDiscount() {
         //TODO Recupérer la valeur du server
-        return /*discount*/ "10" + "%";
+        return /*discount*/ "" + "%";
     }
 
     public void setDiscount(String discount) {
