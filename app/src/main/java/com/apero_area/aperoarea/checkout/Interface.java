@@ -24,7 +24,5 @@ public interface Interface {
             @Field("amount") String amount,
             @Field("currency") String currency,
             @Field("notes") String notes
-
     );
-
 }
