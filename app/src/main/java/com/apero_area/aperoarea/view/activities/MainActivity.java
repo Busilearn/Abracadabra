@@ -1,7 +1,6 @@
 package com.apero_area.aperoarea.view.activities;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -19,9 +18,6 @@ import android.widget.TextView;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.checkout.PayActivity;
-import com.apero_area.aperoarea.domain.api.ApiClient;
-import com.apero_area.aperoarea.domain.helper.ApiInterface;
-import com.apero_area.aperoarea.domain.mock.WebServer;
 import com.apero_area.aperoarea.view.fragment.HomeFragment;
 import com.apero_area.aperoarea.domain.helper.Connectivity;
 import com.apero_area.aperoarea.domain.mining.AprioriFrequentItemsetGenerator;
@@ -32,8 +28,6 @@ import com.apero_area.aperoarea.model.entities.Product;
 import com.apero_area.aperoarea.util.PreferenceHelper;
 import com.apero_area.aperoarea.util.TinyDB;
 import com.apero_area.aperoarea.util.Utils;
-import com.apero_area.aperoarea.view.fragment.WhatsNewDialog;
-import com.google.gson.Gson;
 import com.stripe.android.Stripe;
 import com.stripe.exception.AuthenticationException;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -42,13 +36,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     Stripe stripe;
@@ -79,10 +67,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
-
-        //WebServer.getWebServer();
-
-        //Log.i("test", "Inside getProductsremote" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
 
 
         CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
@@ -225,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                                         Utils.AnimationType.SLIDE_LEFT);
                                 return true;
 
-                            case R.id.settings:
+                            /*case R.id.settings:
 
                                 mDrawerLayout.closeDrawers();
 
@@ -233,7 +217,8 @@ public class MainActivity extends AppCompatActivity {
                                         Utils.SETTINGS_FRAGMENT_TAG,
                                         MainActivity.this,
                                         Utils.AnimationType.SLIDE_LEFT);
-                                return true;
+                                return true;*/
+
                             default:
                                 return true;
                         }
@@ -246,21 +231,24 @@ public class MainActivity extends AppCompatActivity {
         return progressBar;
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
+        switch (item.getItemId()){
+            case R.id.action_about:
+                Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     public void updateItemCount(boolean ifIncrement) {
         if (ifIncrement) {
@@ -323,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Show Whats New Features If Requires
-        new WhatsNewDialog(this);
+        //new WhatsNewDialog(this);
     }
 
     /*
@@ -333,8 +321,8 @@ public class MainActivity extends AppCompatActivity {
     public void toggleBannerVisibility() {
         if (itemCount == 0) {
 
-            findViewById(R.id.checkout_item_root).setVisibility(View.GONE);
-            findViewById(R.id.new_offers_banner).setVisibility(View.VISIBLE);
+            findViewById(R.id.checkout_item_root).setVisibility(View.VISIBLE);
+            findViewById(R.id.new_offers_banner).setVisibility(View.GONE);
 
         } else {
             findViewById(R.id.checkout_item_root).setVisibility(View.VISIBLE);

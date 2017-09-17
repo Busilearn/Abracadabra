@@ -5,25 +5,26 @@
         <item
             android:id="@+id/home"
             android:checked="true"
-            android:icon="@mipmap/ic_cart"
-            android:title="Home" />
+            android:icon="@drawable/ic_home"
+            android:title="Accueil" />
         <item
             android:id="@+id/my_cart"
-            android:icon="@android:drawable/ic_menu_info_details"
-            android:title="My Cart" />
+            android:icon="@drawable/ic_menu_cart"
+            android:title="Mon Panier" />
 
-        <item
+        <!--<item
             android:id="@+id/apriori_result"
             android:icon="@android:drawable/ic_menu_info_details"
-            android:title="Apriori Mining Result" />
+            android:title="Apriori Mining Result" />-->
         <item
             android:id="@+id/contact_us"
             android:icon="@android:drawable/ic_menu_call"
-            android:title="Contact US" />
-        <item
-            android:id="@+id/settings"
-            android:icon="@android:drawable/ic_menu_preferences"
-            android:title="Settings" />
+            android:title="Contact" />
+        <!--<item
+        android:id="@+id/settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Settings" />-->
+
     </group>
 
 </menu>

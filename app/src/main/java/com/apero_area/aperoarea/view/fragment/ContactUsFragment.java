@@ -45,7 +45,7 @@ public class ContactUsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.frag_about, container,
                 false);
 
-        getActivity().setTitle("Contact Us");
+        getActivity().setTitle("Nous contacter");
 
 
         mToolbar = (Toolbar) rootView.findViewById(R.id.htab_toolbar);
@@ -120,7 +120,7 @@ public class ContactUsFragment extends Fragment {
                     public void onClick(View v) {
                         Intent browserIntent = new Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse("http://apero-area.com/"));
+                                Uri.parse("http://trinke.com/"));
                         startActivity(browserIntent);
 
                     }
@@ -141,18 +141,18 @@ public class ContactUsFragment extends Fragment {
                                         new String[]{"daniel.sautot@gmail.com"});
                         emailIntent.putExtra(
                                 android.content.Intent.EXTRA_SUBJECT,
-                                "Hello There");
+                                "Hello");
                         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                                "Add Message here");
+                                "Ajouter votre messaye ici");
 
                         emailIntent.setType("message/rfc822");
 
                         try {
                             startActivity(Intent.createChooser(emailIntent,
-                                    "Send email using..."));
+                                    "Envoyer un email avec..."));
                         } catch (android.content.ActivityNotFoundException ex) {
                             Toast.makeText(getActivity(),
-                                    "No email clients installed.",
+                                    "Vous n'avez pas d'application d'email installé",
                                     Toast.LENGTH_SHORT).show();
                         }
 
