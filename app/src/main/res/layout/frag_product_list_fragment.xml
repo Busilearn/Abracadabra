@@ -67,7 +67,9 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/no_items_found" />
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/no_items_found"
+                    android:scaleType="centerCrop"/>
 
                 <LinearLayout
                     android:id="@+id/top_icon_detail"
@@ -113,7 +115,8 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:text="Lets fill it by shopping new items"
+                        android:text="Sélectionner des produits"
+                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <Button
@@ -124,9 +127,9 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="20dp"
-                        android:background="#03A14D"
+                        android:background="#2f221a"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="START SHOPPING"
+                        android:text="Commencer les achats"
                         android:textColor="@color/white"
                         android:textSize="25sp" />
                 </LinearLayout>

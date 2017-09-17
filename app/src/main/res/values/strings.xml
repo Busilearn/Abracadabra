@@ -6,7 +6,7 @@
     <string name="title_activity_checkout">Paiement</string>
 
     <string name="addPayment">Add Payment Method</string>
-    <string name="save">Save</string>
+    <string name="save">Sauvegarder</string>
     <string name="saverx">Save Rx</string>
     <string name="saveService">Save with Service</string>
     <string name="paymentMethods">Payment Methods</string>
@@ -18,7 +18,7 @@
     <string name="title_changelog">change log</string>
     <string name="changelog_close">Fermer</string>
     <string name="email_developer_">daniel.sautot@gmail.com</string>
-    <string name="personal_website_">Apero Area</string>
+    <string name="personal_website_">www.trinke.fr</string>
     <string name="contact_number">0686986046</string>
     <string name="similar_product">Regarder aussi</string>
     <string name="action_settings">Paramètre</string>
