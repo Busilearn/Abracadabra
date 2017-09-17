@@ -39,6 +39,11 @@ package="com.apero_area.aperoarea">
         </intent-filter>
     </activity>
 
+    <activity
+        android:name=".checkout.PayActivity"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"></activity>
+
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />

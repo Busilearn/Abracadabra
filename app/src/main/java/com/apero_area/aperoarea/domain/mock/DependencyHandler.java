@@ -1,13 +1,8 @@
 package com.apero_area.aperoarea.domain.mock;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-import android.widget.ListView;
+
 
 import com.stripe.android.model.Card;
-import com.stripe.android.view.CardInputWidget;
 
 /**
  * A dagger-free simple way to handle dependencies in the Example project. Most of this work would
