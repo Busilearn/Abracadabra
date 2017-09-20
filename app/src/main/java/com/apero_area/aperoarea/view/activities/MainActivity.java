@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.checkout.PayActivity;
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView checkout = (TextView)findViewById(R.id.checkout);
+        if(getIntent().getExtras().get("CheckoutDisable") != null)
+            checkout.setEnabled(false);
+
 
         stripe = new Stripe();
         try {
@@ -468,5 +474,7 @@ public class MainActivity extends AppCompatActivity {
         alert11.show();
 
     }
+
+
 
 }

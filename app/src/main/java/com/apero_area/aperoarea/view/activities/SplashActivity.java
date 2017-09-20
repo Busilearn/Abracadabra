@@ -1,12 +1,14 @@
 package com.apero_area.aperoarea.view.activities;
 
-import android.content.Context;
+
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -24,6 +26,8 @@ public class SplashActivity extends FragmentActivity {
     private ImageView logo;
     private TextView appTitle;
     private TextView appSlogan;
+    private boolean mLocationPermissionGranted;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
 
     @Override
@@ -41,8 +45,8 @@ public class SplashActivity extends FragmentActivity {
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
         // Applying font
-        appTitle.setTypeface(tf);
-        //appSlogan.setTypeface(tf);
+        //appTitle.setTypeface(tf);
+        appSlogan.setTypeface(tf);
 
         if (savedInstanceState == null) {
             flyIn();
@@ -53,11 +57,15 @@ public class SplashActivity extends FragmentActivity {
             @Override
             public void run() {
                 endSplash();
+
             }
         }, 3000);
+
+
     }
 
     private void flyIn() {
+
         animation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
         logo.startAnimation(animation);
 
@@ -70,6 +78,7 @@ public class SplashActivity extends FragmentActivity {
     }
 
     private void endSplash() {
+
         animation = AnimationUtils.loadAnimation(this,
                 R.anim.logo_animation_back);
         logo.startAnimation(animation);
@@ -85,11 +94,13 @@ public class SplashActivity extends FragmentActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationEnd(Animation arg0) {
+                /*requestPermissionAndContinue();
+                if (mLocationPermissionGranted)*/
+                    Intent intent = new Intent(getApplicationContext(),
+                            MapsActivity.class);
+                    startActivity(intent);
+                    finish();
 
-                Intent intent = new Intent(getApplicationContext(),
-                        MapsActivity.class);
-                startActivity(intent);
-                finish();
             }
 
             @Override
@@ -108,5 +119,24 @@ public class SplashActivity extends FragmentActivity {
         // Do nothing
     }
 
-}
+
+    private void requestPermissionAndContinue() {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
+        }
+
+    }
+
+
+
+
+
+
 

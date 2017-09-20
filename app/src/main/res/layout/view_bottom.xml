@@ -110,7 +110,8 @@
                 android:scrollHorizontally="true"
                 android:text="Commander"
                 android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:clickable= "true" />
         </FrameLayout>
     </RelativeLayout>
 

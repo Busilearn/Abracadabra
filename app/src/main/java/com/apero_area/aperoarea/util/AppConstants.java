@@ -1,5 +1,7 @@
 package com.apero_area.aperoarea.util;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by stran on 30/08/2017.
  */
