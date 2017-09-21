@@ -63,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView checkout = (TextView)findViewById(R.id.checkout);
-        if(getIntent().getExtras().get("CheckoutDisable") != null)
-            checkout.setEnabled(false);
+        Boolean CheckoutDisable = getIntent().getExtras().getBoolean("CheckoutDisable");
+        if(CheckoutDisable){
+            checkout.setEnabled(false);} else {
+            checkout.setEnabled(true);
+        }
 
 
         stripe = new Stripe();
