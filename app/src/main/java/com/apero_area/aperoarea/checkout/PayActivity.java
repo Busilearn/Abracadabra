@@ -8,15 +8,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apero_area.aperoarea.R;
+import com.apero_area.aperoarea.model.CenterRepository;
+import com.apero_area.aperoarea.model.entities.Product;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
 import com.stripe.exception.AuthenticationException;
 
+import java.util.ArrayList;
 
 public class PayActivity extends AppCompatActivity {
-
     private Communicator communicator;
     Stripe stripe;
     String amount;
@@ -27,7 +29,8 @@ public class PayActivity extends AppCompatActivity {
     private TextView cardMail;
     private TextView cardPhoneNumber;
     private TextView notes;
-
+    private ArrayList<String> idProduct = new ArrayList<String>();
+    private ArrayList<String> quantityProduct = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,6 @@ public class PayActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         amount = extras.getString("plan_price");
-        Log.e("test",amount);
         try {
             stripe = new Stripe("pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0");
         } catch (AuthenticationException e) {
@@ -69,10 +71,16 @@ public class PayActivity extends AppCompatActivity {
 
         stripe.createToken(card, "pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0", new TokenCallback() {
             public void onSuccess(Token token) {
-                Toast.makeText(getApplicationContext(), "Token created: " + token.getId(), Toast.LENGTH_LONG).show();
                 tok = token;
                 //new StripeCharge(token.getId()).execute();
-                communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), getApplicationContext());
+
+                for (Product productFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
+                    //add product ids to array
+                    idProduct.add(productFromShoppingList.getId());
+                    quantityProduct.add(productFromShoppingList.getQuantity());
+                }
+
+                communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), idProduct, quantityProduct, getApplicationContext());
             }
 
             public void onError(Exception error) {

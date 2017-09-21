@@ -10,6 +10,9 @@ import com.apero_area.aperoarea.view.activities.MainActivity;
 import com.squareup.otto.Produce;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -27,7 +30,8 @@ public class Communicator {
     private static  final String TAG = "Communicator";
     private static final String SERVER_URL = "https://apero-area.com";
 
-    public void loginPost(String methode, String name, String firstName, String phoneNumber, String mail, String token, String amount, String currency, String notes, final Context context){
+    public void loginPost(String methode, String name, String firstName, String phoneNumber, String mail, String token, String amount, String currency, String notes, ArrayList<String> idProduct, ArrayList<String> quantityProduct,
+            final Context context){
 
 
         //Here a logging interceptor is created
@@ -46,7 +50,7 @@ public class Communicator {
                 .build();
         Interface service = retrofit.create(Interface.class);
 
-        Call<ServerResponse> call = service.post(methode, name, firstName, phoneNumber , mail, token, amount, currency, notes);
+        Call<ServerResponse> call = service.post(methode, name, firstName, phoneNumber , mail, token, amount, currency, notes, idProduct, quantityProduct);
 
         call.enqueue(new Callback<ServerResponse>() {
             @Override

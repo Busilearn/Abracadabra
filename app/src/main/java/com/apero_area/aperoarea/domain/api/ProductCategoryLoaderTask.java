@@ -77,12 +77,11 @@ public class ProductCategoryLoaderTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... params) {
 
-        try {
+        try {//TODO supprimer le chargement fictif remplacer par les categories de woo
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         WebServerSync.getWebServerSync().addCategory();
 
         //WebServerSync.getWebServerSync().getWebProducts();

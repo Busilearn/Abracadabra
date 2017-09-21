@@ -41,8 +41,8 @@ public class Product {
 
     //getters & setters
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return String.valueOf(id);
     }
 
     public void setId(int id) {
