@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -286,6 +287,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        getLocationPermission();
+
+        updateLocationUI();
+
+        if (mLocationPermissionGranted) {getDeviceLocation();}
+    }
 
 
 }
