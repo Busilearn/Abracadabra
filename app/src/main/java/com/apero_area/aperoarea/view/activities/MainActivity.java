@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (itemCount == 0) {
+            checkout.setEnabled(false);
+        }
+
 
 
         if (itemCount != 0) {
