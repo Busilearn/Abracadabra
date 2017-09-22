@@ -224,7 +224,7 @@ public class ShoppingListAdapter extends
 
         Utils.vibrate(context);
 
-        // productList.remove(position);
+        productList.remove(position);
         notifyItemRemoved(position);
     }
 

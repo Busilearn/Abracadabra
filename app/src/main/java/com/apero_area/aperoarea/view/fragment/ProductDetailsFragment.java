@@ -297,8 +297,7 @@ public class ProductDetailsFragment extends Fragment {
                                         .getListOfProductsInShoppingList()
                                         .remove(productListNumber);
 
-                                if (Integer
-                                        .valueOf(((MainActivity) getActivity())
+                                if ((((MainActivity) getActivity())
                                                 .getItemCount()) == 0) {
 
                                     MyCartFragment.updateMyCartFragment(false);
@@ -409,9 +408,9 @@ public class ProductDetailsFragment extends Fragment {
 
         if (isFromCart) {
 
-            similarProductsPager.setVisibility(View.GONE);
+            /*similarProductsPager.setVisibility(View.GONE);
 
-            topSellingPager.setVisibility(View.GONE);
+            topSellingPager.setVisibility(View.GONE);*/
 
         } else {
             //showRecomondation();
