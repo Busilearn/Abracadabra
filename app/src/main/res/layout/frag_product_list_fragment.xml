@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#efc941"
+                    android:background="#70000000"
                     android:gravity="bottom"
                     android:orientation="vertical">
 
