@@ -547,7 +547,7 @@ public class ProductDetailsFragment extends Fragment {
                     .get(subcategoryKey).get(productListNumber).getDiscount());
             label.setBackgroundColor(0xffE91E63);
 
-            label.setTargetView(itemImage, 10, LabelView.Gravity.RIGHT_TOP);
+            //label.setTargetView(itemImage, 10, LabelView.Gravity.RIGHT_TOP);
         } else {
 
 

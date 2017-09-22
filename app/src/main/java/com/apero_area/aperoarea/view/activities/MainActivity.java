@@ -122,11 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (itemCount == 0) {
-            checkout.setEnabled(false);
-        }
-
-
 
         if (itemCount != 0) {
             for (Product product : CenterRepository.getCenterRepository()
@@ -144,10 +139,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Utils.vibrate(getApplicationContext());
-                        Utils.switchContent(R.id.frag_container,
-                                Utils.SHOPPING_LIST_TAG,
-                                MainActivity.this, Utils.AnimationType.SLIDE_UP);
+                            Utils.vibrate(getApplicationContext());
+                            Utils.switchContent(R.id.frag_container,
+                                    Utils.SHOPPING_LIST_TAG,
+                                    MainActivity.this, Utils.AnimationType.SLIDE_UP);
+
 
                     }
                 });
@@ -158,12 +154,20 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Utils.vibrate(getApplicationContext());
+                        BigDecimal minimumCheckout = new BigDecimal(15);
 
-                        Intent buyIntent = new Intent(MainActivity.this,PayActivity.class);
-                        buyIntent.putExtra("plan_price",Money.rupees(checkoutAmount).toStringForStripe());
-                        startActivity(buyIntent);
-                        //showPurchaseDialog();
+                        if (checkoutAmount.compareTo(minimumCheckout) < 0) {
+                            Toast.makeText(getBaseContext(), "Le minimum d'achat est à 15 euros", Toast.LENGTH_LONG).show();
+                        } else if (checkoutAmount.compareTo(minimumCheckout) > 0) {
+
+                            Utils.vibrate(getApplicationContext());
+
+                            Intent buyIntent = new Intent(MainActivity.this, PayActivity.class);
+                            buyIntent.putExtra("plan_price", Money.rupees(checkoutAmount).toStringForStripe());
+                            startActivity(buyIntent);
+                            //showPurchaseDialog();
+
+                        }
 
                     }
                 });

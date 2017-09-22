@@ -189,8 +189,8 @@ public class ShoppingListAdapter extends
                     CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
                             .remove(position);
 
-                    if (Integer.valueOf(((MainActivity) context)
-                            .getItemCount()) == 0) {
+                    if (((MainActivity) context)
+                            .getItemCount() == 0) {
 
                         MyCartFragment.updateMyCartFragment(false);
 
