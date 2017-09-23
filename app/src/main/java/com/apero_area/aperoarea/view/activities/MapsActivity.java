@@ -55,6 +55,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     Marker mCurrLocationMarker;
+    private LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         updateLocationUI();
 
-        if (mLocationPermissionGranted) {getDeviceLocation();}
+        if (mLocationPermissionGranted) {
+            Log.e("test", "in nmLocationPermissionGranted: ");
+
+            getDeviceLocation();}
 
     }
 
@@ -165,7 +169,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getDeviceLocation();
+                    // TODO getDeviceLocation();
                     mLocationPermissionGranted = true;
                     progress = ProgressDialog.show(this, "Géolocalisation",
                             "En cours de chargement, veuillez patienter", true);
@@ -190,7 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mLastKnownLocation = null;
-                getLocationPermission();
+                //TODO getLocationPermission();
 
 
             }
@@ -229,8 +233,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            latLng = new LatLng(location.getLatitude(), location.getLongitude());
             boolean shipping = PolyUtil.containsLocation(latLng, area, true);
+            Log.e("test", String.valueOf(latLng));
+
+            Log.e("test", "in location ok shipping : " + shipping);
+
 
             if (shipping) {
                 progress.dismiss();
@@ -241,6 +249,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Intent intent = new Intent(getApplicationContext(),
                                 MainActivity.class);
                         intent.putExtra("CheckoutDisable", false);
+                        intent.putExtra("latLng", latLng);
                         startActivity(intent);
                         Toast.makeText(getBaseContext(), "Vous êtes bien dans la zone de livraison", Toast.LENGTH_LONG).show();
                     }
@@ -250,6 +259,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
             } else {
+                Log.e("test", "in not shiping : ");
 
                 progress.dismiss();
                 View v = getSupportFragmentManager().findFragmentById(R.id.map).getView();

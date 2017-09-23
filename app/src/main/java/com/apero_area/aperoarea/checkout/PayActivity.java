@@ -1,5 +1,6 @@
 package com.apero_area.aperoarea.checkout;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.apero_area.aperoarea.R;
 import com.apero_area.aperoarea.model.CenterRepository;
 import com.apero_area.aperoarea.model.entities.Product;
+import com.google.android.gms.maps.model.LatLng;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
@@ -31,6 +33,7 @@ public class PayActivity extends AppCompatActivity {
     private TextView notes;
     private ArrayList<String> idProduct = new ArrayList<String>();
     private ArrayList<String> quantityProduct = new ArrayList<String>();
+    LatLng loc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class PayActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         amount = extras.getString("plan_price");
+        /*loc = (LatLng) extras.get("latLng");
+        Log.e("test", String.valueOf(loc));*/
+
         try {
             stripe = new Stripe("pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0");
         } catch (AuthenticationException e) {

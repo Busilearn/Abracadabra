@@ -77,8 +77,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
         if (null != ((MainActivity) context).getProgressBar())
             ((MainActivity) context).getProgressBar().setVisibility(
                     View.GONE);
-        Log.i("test",CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
-
         setUpUi();
 
     }
@@ -92,7 +90,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Log.i("test", "Dans doInBackground de productLoaderTask");
         //FakeWebServer.getFakeWebServer().getProducts();
 
         WebServerSync.getWebServerSync().getAllProducts(AppConstants.CURRENT_CATEGORY);
@@ -237,7 +234,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
                         adapter.addFrag(new ProductListFragment(string), string);
 
                     }
-        Log.i("test","inside setupviewpager " + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
 
                     viewPager.setAdapter(adapter);
 

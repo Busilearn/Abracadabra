@@ -88,7 +88,6 @@ public class WebServer {
                         Log.i("Body %s", item.getItemName());
                         }
 
-                        //Log.i("test", "Inside onresponse" + productlist.toString());
 
                     productMap.put("Microwave oven", productlist);
                     CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
@@ -122,8 +121,7 @@ public class WebServer {
 
             productMap.put("Microwave oven", productlist);
             CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
-            //Log.i("test", "Inside center repo getWebProducts" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
-            //Log.i("test", "Inside center repo getWebProducts" + productlist.get(0).getItemName());
+
 
 
     }
@@ -138,8 +136,7 @@ public class WebServer {
 
                                final ConcurrentHashMap<String, ArrayList<Product>> productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
 
-                                //Log.i("test", "Inside next" + productMap.toString());
-                                //Log.i("test", "Inside center repo getWebProducts next" + CenterRepository.getCenterRepository().getMapOfProductsInCategory().toString());
+
 
 
                            }

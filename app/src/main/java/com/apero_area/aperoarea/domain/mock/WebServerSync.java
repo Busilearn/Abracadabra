@@ -88,8 +88,6 @@ public class WebServerSync {
             if (productlist != null) {
                 productMap.put("Alcool", productlist);
             }
-
-            Log.i("test", "Inside try" + productlist.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
