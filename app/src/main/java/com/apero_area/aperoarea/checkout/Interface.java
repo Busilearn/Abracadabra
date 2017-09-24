@@ -31,7 +31,8 @@ public interface Interface {
             //Send the id en quantity of each product in the cart
             //@FieldMap Map<String, String> product
             @Field("idProduct[]") ArrayList<String> idProduct,
-            @Field("quantityProduct[]") ArrayList<String> quantityProduct
+            @Field("quantityProduct[]") ArrayList<String> quantityProduct,
+            @Field("posGps") String posGps
 
     );
 }

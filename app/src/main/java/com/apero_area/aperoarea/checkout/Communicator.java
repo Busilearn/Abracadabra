@@ -30,7 +30,7 @@ public class Communicator {
     private static  final String TAG = "Communicator";
     private static final String SERVER_URL = "https://apero-area.com";
 
-    public void loginPost(String methode, String name, String firstName, String phoneNumber, String mail, String token, String amount, String currency, String notes, ArrayList<String> idProduct, ArrayList<String> quantityProduct,
+    public void loginPost(String methode, String name, String firstName, String phoneNumber, String mail, String token, String amount, String currency, String notes, ArrayList<String> idProduct, ArrayList<String> quantityProduct, String posGps,
             final Context context){
 
 
@@ -50,7 +50,7 @@ public class Communicator {
                 .build();
         Interface service = retrofit.create(Interface.class);
 
-        Call<ServerResponse> call = service.post(methode, name, firstName, phoneNumber , mail, token, amount, currency, notes, idProduct, quantityProduct);
+        Call<ServerResponse> call = service.post(methode, name, firstName, phoneNumber , mail, token, amount, currency, notes, idProduct, quantityProduct, posGps);
 
         call.enqueue(new Callback<ServerResponse>() {
             @Override

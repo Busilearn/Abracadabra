@@ -69,7 +69,7 @@ public class CategoryListAdapter extends
 
         ImageUrl = categoryList.get(categoryIndex).getProductCategoryImageUrl();
 
-        Glide.with(context).load(ImageUrl).placeholder(drawable)
+        Glide.with(context).load(ImageUrl).dontAnimate().placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
                 .centerCrop().into(versionViewHolder.imagView);
 

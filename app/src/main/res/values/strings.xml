@@ -10,7 +10,6 @@
     <string name="saverx">Save Rx</string>
     <string name="saveService">Save with Service</string>
     <string name="paymentMethods">Payment Methods</string>
-    <string name="validationErrors">Validation Errors</string>
     <string name="ok">OK</string>
     <string name="progressMessage">Creating Token&#8230;</string>
     <string name="endingIn">Card ending in </string>
@@ -24,5 +23,7 @@
     <string name="action_settings">Paramètre</string>
     <string name="slogan">Les rois de l\'Apero</string>
     <string name="title_activity_maps">Map</string>
+    <string name="enter_details">Enter card details</string>
+    <string name="validationErrors">Validation Errors</string>
 
 </resources>

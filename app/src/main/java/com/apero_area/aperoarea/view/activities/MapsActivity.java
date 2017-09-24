@@ -56,6 +56,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String KEY_LOCATION = "location";
     Marker mCurrLocationMarker;
     private LatLng latLng;
+    private Location loc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,8 +151,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
-            progress = ProgressDialog.show(this, "Géolocalisation",
-                    "En cours de chargement, veuillez patienter", true);
+            //TODO progress = ProgressDialog.show(this, "Géolocalisation", "En cours de chargement, veuillez patienter", true);
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -171,8 +171,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // TODO getDeviceLocation();
                     mLocationPermissionGranted = true;
-                    progress = ProgressDialog.show(this, "Géolocalisation",
-                            "En cours de chargement, veuillez patienter", true);
+                    //TODO progress = ProgressDialog.show(this, "Géolocalisation", "En cours de chargement, veuillez patienter", true);
 
                 }
             }
@@ -234,6 +233,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            loc = location;
+
             boolean shipping = PolyUtil.containsLocation(latLng, area, true);
             Log.e("test", String.valueOf(latLng));
 
@@ -241,7 +242,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
             if (shipping) {
-                progress.dismiss();
+                //TODO progress.dismiss();
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
@@ -249,7 +250,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Intent intent = new Intent(getApplicationContext(),
                                 MainActivity.class);
                         intent.putExtra("CheckoutDisable", false);
-                        intent.putExtra("latLng", latLng);
+                        intent.putExtra("loc", loc);
                         startActivity(intent);
                         Toast.makeText(getBaseContext(), "Vous êtes bien dans la zone de livraison", Toast.LENGTH_LONG).show();
                     }
@@ -261,7 +262,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             } else {
                 Log.e("test", "in not shiping : ");
 
-                progress.dismiss();
+                //TODO progress.dismiss();
                 View v = getSupportFragmentManager().findFragmentById(R.id.map).getView();
                 v.setAlpha(0.2f);
 
@@ -276,6 +277,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(getBaseContext(), "Vous ne pourrez pas commander", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("CheckoutDisable", true);
+                        intent.putExtra("loc", loc);
                         startActivity(intent);
                     }
                 });

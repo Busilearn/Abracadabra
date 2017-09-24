@@ -13,7 +13,7 @@ import org.acra.annotation.ReportsCrashes;
  * Created by dany on 25/08/2017.
  */
 
-@ReportsCrashes(mailTo = "daniel.sautot@gmail.com", customReportContent = {
+@ReportsCrashes(mailTo = "daniel.sautot@gmail.com, mickael.guillard94@gmail.com", customReportContent = {
         ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME,
         ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL,
         ReportField.CUSTOM_DATA, ReportField.STACK_TRACE, ReportField.LOGCAT}, mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text)

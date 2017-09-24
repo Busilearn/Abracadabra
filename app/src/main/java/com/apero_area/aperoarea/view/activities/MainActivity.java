@@ -3,6 +3,7 @@ package com.apero_area.aperoarea.view.activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -30,7 +31,7 @@ import com.apero_area.aperoarea.util.PreferenceHelper;
 import com.apero_area.aperoarea.util.TinyDB;
 import com.apero_area.aperoarea.util.Utils;
 import com.stripe.android.Stripe;
-import com.stripe.exception.AuthenticationException;
+import com.stripe.android.exception.AuthenticationException;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.math.BigDecimal;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private AVLoadingIndicatorView progressBar;
 
     private NavigationView mNavigationView;
+    private Location loc = null;
 
 
     @Override
@@ -62,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loc = (Location) getIntent().getParcelableExtra("loc");
         TextView checkout = (TextView)findViewById(R.id.checkout);
-        Boolean CheckoutDisable = getIntent().getExtras().getBoolean("CheckoutDisable");
+        Boolean CheckoutDisable = false; //TODO replacer getIntent().getExtras().getBoolean("CheckoutDisable");
+
+
         if(CheckoutDisable){
-            checkout.setEnabled(false);} else {
+            checkout.setEnabled(false);
+        } else {
             checkout.setEnabled(true);
         }
 
 
-        stripe = new Stripe();
-        try {
-            stripe.setDefaultPublishableKey("pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0");
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-        }
+        stripe = new Stripe(getApplicationContext());
+        stripe.setDefaultPublishableKey("pk_test_QxNQHsJ0MaEiKDtVAlcj7Qk0");
 
 
         CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
@@ -164,9 +166,10 @@ public class MainActivity extends AppCompatActivity {
 
                             Intent buyIntent = new Intent(MainActivity.this, PayActivity.class);
                             buyIntent.putExtra("plan_price", Money.rupees(checkoutAmount).toStringForStripe());
+                            buyIntent.putExtra("loc", loc);
+
                             startActivity(buyIntent);
                             //showPurchaseDialog();
-
                         }
 
                     }
