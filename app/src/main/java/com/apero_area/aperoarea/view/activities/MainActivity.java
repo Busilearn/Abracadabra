@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView checkOutAmount, itemCountTextView;
     private TextView offerBanner;
     private AVLoadingIndicatorView progressBar;
+    private Location loc;
 
     private NavigationView mNavigationView;
-    private Location loc = null;
 
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         loc = (Location) getIntent().getParcelableExtra("loc");
         TextView checkout = (TextView)findViewById(R.id.checkout);
-        Boolean CheckoutDisable = false; //TODO replacer getIntent().getExtras().getBoolean("CheckoutDisable");
+        Boolean CheckoutDisable = getIntent().getExtras().getBoolean("CheckoutDisable");
 
 
         if(CheckoutDisable){

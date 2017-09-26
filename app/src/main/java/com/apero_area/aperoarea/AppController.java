@@ -35,7 +35,7 @@ public class AppController extends Application {
         // The following line triggers the initialization of ACRA for crash Log Reposrting
         if (PreferenceHelper.getPrefernceHelperInstace().getBoolean(
                 this, PreferenceHelper.SUBMIT_LOGS, true)) {
-            ACRA.init(this);
+            //ACRA.init(this);
         }
     }
 

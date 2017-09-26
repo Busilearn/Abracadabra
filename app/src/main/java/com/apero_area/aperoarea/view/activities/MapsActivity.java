@@ -125,6 +125,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             markerOptions.title("Votre position");
                             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                             mCurrLocationMarker = mMap.addMarker(markerOptions);
+                            //progress.dismiss();
 
 
                         } else {
@@ -169,7 +170,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // TODO getDeviceLocation();
+                    getDeviceLocation();
                     mLocationPermissionGranted = true;
                     //TODO progress = ProgressDialog.show(this, "Géolocalisation", "En cours de chargement, veuillez patienter", true);
 
@@ -193,7 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mLastKnownLocation = null;
-                //TODO getLocationPermission();
+                getLocationPermission();
 
 
             }
@@ -218,6 +219,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         area.add(new LatLng(48.887362, 2.423654));//Deuxième point extrémité de Pantin (proche de Collège Marie Curie)
         area.add(new LatLng(48.879142, 2.412828));//200m outside Porte des Lilas
         area.add(new LatLng(48.846136, 2.421416));//200m outside Porte de Vincennes
+        //area.add(new LatLng(48.862605, 2.543670));//200m jardiland Neuilly sur Marne
+        //area.add(new LatLng(48.828157, 2.532143));//200m ikea
         area.add(new LatLng(48.827322, 2.405320));//200m outside Porte de Charenton
         area.add(new LatLng(48.812033, 2.361685));//200m outside Porte d'Italie
         area.add(new LatLng(48.832119, 2.253060));//200m outside Porte de Saint Cloud
@@ -238,9 +241,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             boolean shipping = PolyUtil.containsLocation(latLng, area, true);
             Log.e("test", String.valueOf(latLng));
 
-            Log.e("test", "in location ok shipping : " + shipping);
-
-
             if (shipping) {
                 //TODO progress.dismiss();
                 new Handler().postDelayed(new Runnable() {
@@ -249,7 +249,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(),
                                 MainActivity.class);
-                        intent.putExtra("CheckoutDisable", false);
                         intent.putExtra("loc", loc);
                         startActivity(intent);
                         Toast.makeText(getBaseContext(), "Vous êtes bien dans la zone de livraison", Toast.LENGTH_LONG).show();
@@ -277,7 +276,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(getBaseContext(), "Vous ne pourrez pas commander", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("CheckoutDisable", true);
-                        intent.putExtra("loc", loc);
+                        intent.putExtra("localisation", loc);
                         startActivity(intent);
                     }
                 });

@@ -241,6 +241,9 @@ public class ProductListAdapter extends
                                     .remove(indexOfTempInShopingList);
 
                             notifyDataSetChanged();
+                            productList.remove(position);
+                            notifyItemRemoved(position);
+
 
                             ((MainActivity) getContext())
                                     .updateItemCount(false);

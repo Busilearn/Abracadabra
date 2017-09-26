@@ -5,14 +5,14 @@
     <string name="euros">€</string>
     <string name="title_activity_checkout">Paiement</string>
 
-    <string name="addPayment">Add Payment Method</string>
+    <string name="addPayment">Ajouter un moyen de paiement</string>
     <string name="save">Sauvegarder</string>
     <string name="saverx">Save Rx</string>
-    <string name="saveService">Save with Service</string>
-    <string name="paymentMethods">Payment Methods</string>
+    <string name="saveService">Sauvegarder le service</string>
+    <string name="paymentMethods">Methodes de paiement</string>
     <string name="ok">OK</string>
-    <string name="progressMessage">Creating Token&#8230;</string>
-    <string name="endingIn">Card ending in </string>
+    <string name="progressMessage">En cours&#8230;</string>
+    <string name="endingIn">Votre carte finie... </string>
     <string name="crash_toast_text">oups</string>
     <string name="title_changelog">change log</string>
     <string name="changelog_close">Fermer</string>
@@ -23,7 +23,7 @@
     <string name="action_settings">Paramètre</string>
     <string name="slogan">Les rois de l\'Apero</string>
     <string name="title_activity_maps">Map</string>
-    <string name="enter_details">Enter card details</string>
-    <string name="validationErrors">Validation Errors</string>
+    <string name="enter_details">Entrer votre carte</string>
+    <string name="validationErrors">Erreur de validation</string>
 
 </resources>

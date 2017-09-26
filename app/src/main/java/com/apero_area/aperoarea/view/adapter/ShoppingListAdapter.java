@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.apero_area.aperoarea.R.id.remove_item;
+
 /**
  * Created by stran on 29/08/2017.
  */
@@ -189,20 +191,48 @@ public class ShoppingListAdapter extends
                     CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
                             .remove(position);
 
+                    notifyItemRemoved(position);
+
                     if (((MainActivity) context)
                             .getItemCount() == 0) {
-
                         MyCartFragment.updateMyCartFragment(false);
 
                     }
 
                     Utils.vibrate(context);
 
+                } else if (Integer.valueOf(CenterRepository.getCenterRepository()
+                        .getListOfProductsInShoppingList().get(position).getQuantity()) == 2) {
+
+                    CenterRepository
+                            .getCenterRepository()
+                            .getListOfProductsInShoppingList()
+                            .get(position)
+                            .setQuantity(
+                                    String.valueOf(
+
+                                            Integer.valueOf(CenterRepository
+                                                    .getCenterRepository()
+                                                    .getListOfProductsInShoppingList().get(position)
+                                                    .getQuantity()) - 1));
+
+                    holder.quanitity.setText(CenterRepository
+                            .getCenterRepository().getListOfProductsInShoppingList()
+                            .get(position).getQuantity());
+
+                    ((MainActivity) context).updateCheckOutAmount(
+                            BigDecimal.valueOf(Double.valueOf(CenterRepository
+                                    .getCenterRepository().getListOfProductsInShoppingList()
+                                    .get(position).getSellMRP())), false);
+
+                    Utils.vibrate(context);
                 }
 
             }
         });
     }
+
+
 
     @Override
     public void onItemDismiss(int position) {
@@ -286,7 +316,7 @@ public class ShoppingListAdapter extends
 
             addItem = ((TextView) itemView.findViewById(R.id.add_item));
 
-            removeItem = ((TextView) itemView.findViewById(R.id.remove_item));
+            removeItem = ((TextView) itemView.findViewById(remove_item));
 
             itemView.setOnClickListener(this);
         }
