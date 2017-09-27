@@ -24,7 +24,7 @@
         android:textColor="@color/holo_gray_dark"
         android:textSize="18sp" />
 
-    <com.apero_area.area.ClickableViewPager
+    <com.oloh.area.ClickableViewPager
         android:id="@+id/play_list_pager"
         android:layout_width="match_parent"
         android:layout_height="280dp"
