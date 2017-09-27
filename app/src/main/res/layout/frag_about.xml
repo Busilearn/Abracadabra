@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Developeur :"
+                android:text="Developeur"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
-                android:text="elfuego@gmail.com"
+                android:text="contact@oloh.fr"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="italic" />
@@ -93,19 +93,28 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="7dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Site internet"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/pay_source_head"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
                 android:text="@string/personal_website_"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
@@ -127,10 +136,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/contact_number"
+                android:layout_marginTop="10dp"
+                android:text="Service client"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/contact_number"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="italic" />
 
 <!--            <TextView
                 android:layout_width="fill_parent"
@@ -179,7 +198,7 @@
                 android:textStyle="italic" />-->
         </LinearLayout>
 
-        <View
+        <!--<View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="10dp"
@@ -201,7 +220,7 @@
                 android:text="Address"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold" />-->
 
            <!-- <TextView
                 android:id="@+id/login"
@@ -212,14 +231,14 @@
                 android:text="@string/address_value"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:textStyle="italic" />-->
+                android:textStyle="italic" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="10dp"
-            android:background="@color/white" />
+            android:background="@color/white" />-->
     </LinearLayout>
 
 </ScrollView>

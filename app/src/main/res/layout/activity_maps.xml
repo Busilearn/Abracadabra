@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="43dp"
             android:gravity="center"
-            android:text="Vous n'êtes pas dans la zone de livraison, voulez-vous continuez la navigation ?"
+            android:text="Nous livrons que à Paris, voulez-vous continuez la navigation ?"
             android:textSize="20sp"
             android:layout_above="@+id/checkBoxNon"
             android:layout_alignParentLeft="true"

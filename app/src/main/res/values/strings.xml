@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trinke</string>
+    <string name="app_name">Oloh</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="title_activity_product_view">Détails</string>
     <string name="euros">€</string>
@@ -17,7 +17,7 @@
     <string name="title_changelog">change log</string>
     <string name="changelog_close">Fermer</string>
     <string name="email_developer_">daniel.sautot@gmail.com</string>
-    <string name="personal_website_">www.trinke.fr</string>
+    <string name="personal_website_">www.oloh.fr</string>
     <string name="contact_number">0686986046</string>
     <string name="similar_product">Regarder aussi</string>
     <string name="action_settings">Paramètre</string>

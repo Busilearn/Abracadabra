@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        BigDecimal minimumCheckout = new BigDecimal(15);
+                        BigDecimal minimumCheckout = new BigDecimal(0);
 
                         if (checkoutAmount.compareTo(minimumCheckout) < 0) {
                             Toast.makeText(getBaseContext(), "Le minimum d'achat est à 15 euros", Toast.LENGTH_LONG).show();
@@ -416,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder exitScreenDialog = new AlertDialog.Builder(MainActivity.this, R.style.PauseDialog);
 
         exitScreenDialog.setTitle("Order Confirmation")
-                .setMessage("Would you like to place this order ?");
+                .setMessage("Voulez-vous confimer ?");
         exitScreenDialog.setCancelable(true);
 
         exitScreenDialog.setPositiveButton(
