@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
-                android:text="El Fuego"
+                android:text="El Fuego et Micado"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="italic" />
