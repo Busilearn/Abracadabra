@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oloh.oloh.R;
-import com.oloh.oloh.checkout.PayActivity;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.view.fragment.HomeFragment;
 import com.oloh.oloh.domain.helper.Connectivity;

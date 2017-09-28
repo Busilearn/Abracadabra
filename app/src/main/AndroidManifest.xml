@@ -40,7 +40,7 @@ package="com.oloh.oloh">
     </activity>
 
     <activity
-        android:name="com.oloh.oloh.checkout.PayActivity"
+        android:name="com.oloh.oloh.view.activities.PayActivity"
         android:label="@string/app_name"
         android:screenOrientation="portrait"></activity>
 

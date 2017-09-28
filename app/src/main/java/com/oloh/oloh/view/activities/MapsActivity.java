@@ -214,8 +214,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         area.add(new LatLng(48.899486, 2.306624));//200m outside Porte de Clichy
         area.add(new LatLng(48.904734, 2.344236));//200m outside Porte de Clignancourt
         area.add(new LatLng(48.904466, 2.393116));//200m outside Porte de la Villette
-        //area.add(new LatLng(48.896420, 2.419133));//Premier point extrémité de Pantin (proche de BETC)
-        //area.add(new LatLng(48.887362, 2.423654));//Deuxième point extrémité de Pantin (proche de Collège Marie Curie)
+        area.add(new LatLng(48.896420, 2.419133));//Premier point extrémité de Pantin (proche de BETC)
+        area.add(new LatLng(48.887362, 2.423654));//Deuxième point extrémité de Pantin (proche de Collège Marie Curie)
         area.add(new LatLng(48.879142, 2.412828));//200m outside Porte des Lilas
         area.add(new LatLng(48.846136, 2.421416));//200m outside Porte de Vincennes
         //area.add(new LatLng(48.862605, 2.543670));//200m jardiland Neuilly sur Marne

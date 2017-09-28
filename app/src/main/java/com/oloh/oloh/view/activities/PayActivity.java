@@ -1,4 +1,4 @@
-package com.oloh.oloh.checkout;
+package com.oloh.oloh.view.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oloh.oloh.R;
+import com.oloh.oloh.checkout.Communicator;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.AppConstants;
