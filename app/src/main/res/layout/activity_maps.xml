@@ -50,13 +50,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="43dp"
             android:gravity="center"
-            android:text="Nous livrons que à Paris, voulez-vous continuez la navigation ?"
+            android:text="Nous livrons qu'à Paris, voulez-vous continuez la navigation ?"
             android:textSize="20sp"
             android:layout_above="@+id/checkBoxNon"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:visibility="invisible"
             android:textColor="#2f221a"
+            android:layout_margin="10dp"
             />
 
 

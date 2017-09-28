@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         if (CheckoutDisable) {
-                                Toast.makeText(getBaseContext(), "Désolé vous n'êtes pas dans la bonne zone pour commander", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getBaseContext(), "Vous n'êtes pas dans la zone de livraison", Toast.LENGTH_LONG).show();
                             }
                             else {
                             BigDecimal minimumCheckout = new BigDecimal(0);
