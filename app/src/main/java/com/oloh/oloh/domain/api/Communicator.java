@@ -2,13 +2,12 @@ package com.oloh.oloh.domain.api;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.oloh.oloh.domain.helper.NetworkConstants;
-import com.oloh.oloh.util.AppConstants;
+import com.oloh.oloh.model.entities.ServerResponse;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.squareup.otto.Produce;
 

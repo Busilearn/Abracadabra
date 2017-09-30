@@ -1,4 +1,4 @@
-package com.oloh.oloh.domain.api;
+package com.oloh.oloh.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 

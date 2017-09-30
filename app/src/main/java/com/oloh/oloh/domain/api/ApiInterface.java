@@ -2,6 +2,8 @@ package com.oloh.oloh.domain.api;
 
 import com.oloh.oloh.domain.helper.NetworkConstants;
 import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.ProductCategoryModel;
+import com.oloh.oloh.model.entities.ServerResponse;
 
 import java.util.ArrayList;
 
@@ -12,16 +14,23 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
- * Created by stran on 01/09/2017.
+ * Created by micka on 01/09/2017.
  */
 
 public interface ApiInterface {
-    //This method is used for "GET" data
+    //This method is used for "GET" products
     @GET(NetworkConstants.URL_GET_PRODUCTS_MAP)
     Call<ArrayList<Product>> getProduct();
 
+    //This method is used for "GET" categories
+    @GET(NetworkConstants.URL_GET_ALL_CATEGORY)
+    Call<ArrayList<ProductCategoryModel>> getCategories();
 
-    //This method is used for "POST" data
+    /*//This method is used for "GET" minimum order
+    @GET(NetworkConstants.URL_GET_OLOH_MINIMUM_ORDER)
+    Call<ArrayList<Product>> getMinimumOrder();*/
+
+    //This method is used for "POST" order
     @FormUrlEncoded
     @POST(NetworkConstants.URL_POST_OLOH_CHARGE)
     Call<ServerResponse> post(

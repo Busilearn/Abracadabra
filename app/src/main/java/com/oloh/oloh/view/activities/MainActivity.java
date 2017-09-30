@@ -32,7 +32,6 @@ import java.math.BigInteger;
 public class MainActivity extends AppCompatActivity {
     Stripe stripe;
 
-    public static final double MINIMUM_SUPPORT = 0.1;
     private static final String TAG = MainActivity.class.getSimpleName();
     private int itemCount = 0;
     private BigDecimal checkoutAmount = new BigDecimal(BigInteger.ZERO);

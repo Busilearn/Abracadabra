@@ -21,7 +21,10 @@ public class Product {
     private String orderQty;
     private String discount;
     private String sku;
-    private String imageUrl;
+    private String imageUrl = "";
+    private String stock_quantity;
+    private Boolean in_stock;
+    private List<ProductCategoryModel> productCategoryModels;
 
     //getters & setters
 
@@ -138,7 +141,29 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public String getStock_quantity() {
+        return stock_quantity;
+    }
 
+    public void setStock_quantity(String stock_quantity) {
+        this.stock_quantity = stock_quantity;
+    }
+
+    public Boolean getIn_stock() {
+        return in_stock;
+    }
+
+    public void setIn_stock(Boolean in_stock) {
+        this.in_stock = in_stock;
+    }
+
+    public List<ProductCategoryModel> getProductCategoryModels() {
+        return productCategoryModels;
+    }
+
+    public void setProductCategoryModels(List<ProductCategoryModel> productCategoryModels) {
+        this.productCategoryModels = productCategoryModels;
+    }
 
     @SuppressWarnings("deprecation")
     private static Spanned fromHtml(String html){

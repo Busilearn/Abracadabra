@@ -4,29 +4,21 @@ package com.oloh.oloh.domain.api;
  * Created by stran on 30/08/2017.
  */
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 
-import com.oloh.oloh.R;
 import com.oloh.oloh.domain.mock.WebServerSync;
-import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.adapter.ProductsInCategoryPagerAdapter;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.view.fragment.ProductListFragment;
-import com.google.gson.Gson;
 
-import java.util.List;
 import java.util.Set;
 
 /**

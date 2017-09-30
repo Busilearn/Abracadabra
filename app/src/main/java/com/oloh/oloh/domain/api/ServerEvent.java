@@ -1,5 +1,7 @@
 package com.oloh.oloh.domain.api;
 
+import com.oloh.oloh.model.entities.ServerResponse;
+
 /**
  * Created by micka on 15-Sep-17.
  */
