@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), "Vous n'êtes pas dans la zone de livraison", Toast.LENGTH_LONG).show();
                             }
                             else {
-                            BigDecimal minimumCheckout = new BigDecimal(15);
+                            BigDecimal minimumCheckout = new BigDecimal(0.5);
 
                             if (checkoutAmount.compareTo(minimumCheckout) == -1) {
                                 Toast.makeText(getBaseContext(), "Le minimum d'achat est de 15 euros", Toast.LENGTH_LONG).show();

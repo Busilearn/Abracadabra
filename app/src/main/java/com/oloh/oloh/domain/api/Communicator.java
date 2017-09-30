@@ -2,6 +2,7 @@ package com.oloh.oloh.domain.api;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -56,12 +57,20 @@ public class Communicator {
         call.enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                BusProvider.getInstance().post(new ServerEvent(response.body()));
+                //Permet l'affichage de la réponse du serveur BusProvider.getInstance().post(new ServerEvent(response.body()));
                 progressBarContainer.setVisibility(View.GONE);
-                Toast.makeText(context, "Merci pour votre achat, vous serez livré prochainement à votre position GPS", Toast.LENGTH_LONG).show();
+                ServerResponse serverResponse = response.body();
 
-                Intent Intent = new Intent(context,MainActivity.class);
-                context.startActivity(Intent);
+                if ((serverResponse != null ? serverResponse.getResponseCode() : 0) == 1){
+                    Toast.makeText(context, "Merci pour votre achat, vous serez livré prochainement à votre position GPS", Toast.LENGTH_LONG).show();
+                    Intent Intent = new Intent(context,MainActivity.class);
+                    context.startActivity(Intent);
+                }else {
+                    Toast.makeText(context, "Une erreur s'est produite veuillez réessayer ultérieurement", Toast.LENGTH_LONG).show();
+                    Intent Intent = new Intent(context,MainActivity.class);
+                    context.startActivity(Intent);
+                }
+
             }
 
             @Override
