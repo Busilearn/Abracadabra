@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oloh.oloh.R;
-import com.oloh.oloh.checkout.Communicator;
+import com.oloh.oloh.domain.api.Communicator;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.AppConstants;
@@ -43,7 +46,7 @@ public class PayActivity extends AppCompatActivity {
     private ArrayList<String> quantityProduct = new ArrayList<String>();
     String posGps = null;
     CardInputWidget mCardInputWidget = null;
-    Boolean test = false;
+    private FrameLayout progressBarContainerPay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class PayActivity extends AppCompatActivity {
         cardPhoneNumber = (TextView) findViewById(R.id.cardPhoneNumber);
         notes = (TextView) findViewById(R.id.notes);
         submitButton = (Button) findViewById(R.id.submitButton);
-
+        progressBarContainerPay= (FrameLayout) findViewById(R.id.progressBarContainerPay);
         submitButton.setClickable(false);
 
 
@@ -125,36 +128,49 @@ public class PayActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    public void submitCard(View view) {
 
-        Card cardToSave = mCardInputWidget.getCard();
-        if (cardToSave != null) {
-            cardToSave.setCurrency("eur");
-            cardToSave.setName(cardName.getText().toString() + " " + cardFirstName.getText().toString());
+    submitButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Card cardToSave = mCardInputWidget.getCard();
 
-            stripe.createToken(cardToSave, AppConstants.PUBLISHABLE_KEY, new TokenCallback() {
-                public void onSuccess(Token token) {
-                    tok = token;
-                    //new StripeCharge(token.getId()).execute();
+            if (cardName.getText().length() < 3) {
+                Toast.makeText(getBaseContext(), "Merci d'entrer un nom valide", Toast.LENGTH_LONG).show();
+            }else if (cardFirstName.getText().length() < 3) {
+                Toast.makeText(getBaseContext(), "Merci d'entrer un prénom valide", Toast.LENGTH_LONG).show();
+            }else if (cardPhoneNumber.getText().length() < 10) {
+                Toast.makeText(getBaseContext(), "Merci d'entrer un numéro de téléphone valide", Toast.LENGTH_LONG).show();
+            }else if (!(isEmailValid(cardMail.getText().toString()))) {
+                Toast.makeText(getBaseContext(), "Merci d'entrer une adresse mail valide", Toast.LENGTH_LONG).show();
+            }else if (cardToSave == null) {
+                Toast.makeText(getBaseContext(), "Merci d'entrer un numéro de carte valide", Toast.LENGTH_LONG).show();
+            }else {
+                progressBarContainerPay.setVisibility(View.VISIBLE);
 
-                    for (Product productFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
-                        //add product ids to array
-                        idProduct.add(productFromShoppingList.getId());
-                        quantityProduct.add(productFromShoppingList.getQuantity());
+                cardToSave.setCurrency("eur");
+                cardToSave.setName(cardName.getText().toString() + " " + cardFirstName.getText().toString());
+
+                stripe.createToken(cardToSave, AppConstants.PUBLISHABLE_KEY, new TokenCallback() {
+                    public void onSuccess(Token token) {
+                        tok = token;
+                        //new StripeCharge(token.getId()).execute();
+
+                        for (Product productFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
+                            //add product ids to array
+                            idProduct.add(productFromShoppingList.getId());
+                            quantityProduct.add(productFromShoppingList.getQuantity());
+                        }
+                        communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), idProduct, quantityProduct, posGps, getApplicationContext(), progressBarContainerPay);
                     }
-                    communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), idProduct, quantityProduct, posGps, getApplicationContext());
-                }
 
-                public void onError(Exception error) {
-                    Log.d("Stripe", error.getLocalizedMessage());
-                }
-            });
+                    public void onError(Exception error) {
+                        Log.d("Stripe", error.getLocalizedMessage());
+                    }
+                });
+            }
         }
-        else {
-            Toast.makeText(getBaseContext(), "Le numéro de carte entré n'est pas valide", Toast.LENGTH_LONG).show();
-        }
+    });
     }
 
     public boolean isEmailValid(String email)

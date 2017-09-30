@@ -1,4 +1,4 @@
-package com.oloh.oloh.checkout;
+package com.oloh.oloh.domain.api;
 
 import com.google.gson.annotations.SerializedName;
 

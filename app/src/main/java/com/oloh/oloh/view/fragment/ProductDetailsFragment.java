@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.oloh.oloh.R;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.customview.ClickableViewPager;
@@ -30,9 +31,6 @@ import com.oloh.oloh.model.entities.Money;
 import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.ColorGenerator;
 import com.oloh.oloh.util.Utils;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Callback;
 
 
 import java.math.BigDecimal;
@@ -455,32 +453,11 @@ public class ProductDetailsFragment extends Fragment {
                             .getItemName()));
 
 
-                    Picasso.with(getActivity())
-                            .load(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
-                                    .get(subcategoryKey).get(productListNumber)
-                                    .getImageUrl()).placeholder(drawable)
-                            .error(drawable).fit().centerCrop()
-                            .networkPolicy(NetworkPolicy.OFFLINE)
-                            .into(itemImage, new Callback() {
-                                @Override
-                                public void onSuccess() {
-
-                                }
-
-                                @Override
-                                public void onError() {
-                                    // Try again online if cache failed
-
-                                    Picasso.with(getActivity())
-                                            .load(CenterRepository.getCenterRepository()
-                                                    .getMapOfProductsInCategory()
-                                                    .get(subcategoryKey)
-                                                    .get(productListNumber)
-                                                    .getImageUrl())
-                                            .placeholder(drawable).error(drawable)
-                                            .fit().centerCrop().into(itemImage);
-                                }
-                            });
+            Glide.with(getActivity()).load(CenterRepository.getCenterRepository().getMapOfProductsInCategory()
+                    .get(subcategoryKey).get(productListNumber)
+                    .getImageUrl()).placeholder(drawable)
+                    .error(drawable).animate(R.anim.base_slide_right_in)
+                    .centerCrop().into(itemImage);
 
             LabelView label = new LabelView(getActivity());
 
@@ -533,33 +510,11 @@ public class ProductDetailsFragment extends Fragment {
                             .getCenterRepository().getListOfProductsInShoppingList()
                             .get(productListNumber).getItemName()));
 
-            Picasso.with(getActivity())
-                    .load(CenterRepository.getCenterRepository()
-                            .getListOfProductsInShoppingList().get(productListNumber)
-                            .getImageUrl()).placeholder(drawable)
-                    .error(drawable).fit().centerCrop()
-                    .networkPolicy(NetworkPolicy.OFFLINE)
-                    .into(itemImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            // Try again online if cache failed
-
-                            Picasso.with(getActivity())
-                                    .load(CenterRepository.getCenterRepository()
-                                            .getListOfProductsInShoppingList()
-                                            .get(productListNumber)
-                                            .getImageUrl())
-                                    .placeholder(drawable).error(drawable)
-                                    .fit().centerCrop().into(itemImage);
-                        }
-                    });
-
-
+            Glide.with(getActivity()).load(CenterRepository.getCenterRepository()
+                    .getListOfProductsInShoppingList().get(productListNumber)
+                    .getImageUrl()).placeholder(drawable)
+                    .error(drawable).animate(R.anim.base_slide_right_in)
+                    .centerCrop().into(itemImage);
 
             LabelView label = new LabelView(getActivity());
 

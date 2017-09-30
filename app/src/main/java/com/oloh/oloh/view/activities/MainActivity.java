@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,6 @@ import com.oloh.oloh.util.PreferenceHelper;
 import com.oloh.oloh.util.TinyDB;
 import com.oloh.oloh.util.Utils;
 import com.stripe.android.Stripe;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView checkOutAmount, itemCountTextView;
     private TextView offerBanner;
-    private AVLoadingIndicatorView progressBar;
+    private FrameLayout progressBarContainerMain;
 
     private NavigationView mNavigationView;
     private Boolean CheckoutDisable;
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView checkout = (TextView)findViewById(R.id.checkout);
         CheckoutDisable = getIntent().getExtras().getBoolean("CheckoutDisable");
 
         stripe = new Stripe(getApplicationContext());
@@ -77,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        progressBar = (AVLoadingIndicatorView) findViewById(R.id.loading_bar);
+        progressBarContainerMain= (FrameLayout) findViewById(R.id.progressBarContainerMain);
 
         checkOutAmount.setOnClickListener(new View.OnClickListener() {
 
@@ -127,14 +125,12 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), "Vous n'êtes pas dans la zone de livraison", Toast.LENGTH_LONG).show();
                             }
                             else {
-                            BigDecimal minimumCheckout = new BigDecimal(0);
+                            BigDecimal minimumCheckout = new BigDecimal(15);
 
-                            if (checkoutAmount.compareTo(minimumCheckout) < 0) {
-                                Toast.makeText(getBaseContext(), "Le minimum d'achat est à 15 euros", Toast.LENGTH_LONG).show();
-                            } else if (checkoutAmount.compareTo(minimumCheckout) > 0) {
-
+                            if (checkoutAmount.compareTo(minimumCheckout) == -1) {
+                                Toast.makeText(getBaseContext(), "Le minimum d'achat est de 15 euros", Toast.LENGTH_LONG).show();
+                            } else if (checkoutAmount.compareTo(minimumCheckout) == 1 || checkoutAmount.compareTo(minimumCheckout) == 0) {
                                 Utils.vibrate(getApplicationContext());
-
                                 Intent buyIntent = new Intent(MainActivity.this, PayActivity.class);
                                 buyIntent.putExtra("plan_price", Money.euro(checkoutAmount).toStringForStripe());
                                 startActivity(buyIntent);
@@ -194,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public AVLoadingIndicatorView getProgressBar() {
-        return progressBar;
+    public FrameLayout getProgressBar() {
+        return progressBarContainerMain;
     }
 
     public void updateItemCount(boolean ifIncrement) {

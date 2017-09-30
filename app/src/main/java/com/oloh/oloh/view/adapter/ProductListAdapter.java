@@ -109,12 +109,9 @@ public class ProductListAdapter extends
 
         ImageUrl = productList.get(position).getImageUrl();
 
-
         Glide.with(context).load(ImageUrl).placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
                 .centerCrop().into(holder.imagView);
-
-
 
         holder.addItem.findViewById(R.id.add_item).setOnClickListener(
                 new View.OnClickListener() {

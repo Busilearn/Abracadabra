@@ -1,4 +1,4 @@
-package com.oloh.oloh.checkout;
+package com.oloh.oloh.domain.api;
 
 /**
  * Created by micka on 15-Sep-17.

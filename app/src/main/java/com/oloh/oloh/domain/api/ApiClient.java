@@ -1,5 +1,6 @@
 package com.oloh.oloh.domain.api;
 
+import com.oloh.oloh.domain.helper.NetworkConstants;
 import com.oloh.oloh.util.AppConstants;
 
 import okhttp3.OkHttpClient;
@@ -24,7 +25,7 @@ public class ApiClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(AppConstants.BASE_URL)
+                    .baseUrl(NetworkConstants.SERVER_URL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

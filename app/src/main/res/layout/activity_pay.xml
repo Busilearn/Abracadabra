@@ -84,20 +84,16 @@
                 android:layout_marginLeft="10dp"
                 />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valider"
+                android:layout_gravity="end"
+                android:background="#2f221a"
+                android:textColor="#efc941"/>
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="submitCard"
-        android:text="Valider"
-        android:layout_below="@+id/group_manual_entry"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="#2f221a"
-        android:textColor="#efc941"
-        android:layout_marginRight="10dp"/>
+        </LinearLayout>
 
     <EditText
         android:id="@+id/notes"
@@ -110,5 +106,21 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="27dp" />
+
+    <FrameLayout
+        android:id="@+id/progressBarContainerPay"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+             />
+    </FrameLayout>
 
 </RelativeLayout>

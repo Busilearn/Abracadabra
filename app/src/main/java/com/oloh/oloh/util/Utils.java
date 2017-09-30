@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 
 import com.oloh.oloh.R;
+import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.fragment.ContactUsFragment;
 import com.oloh.oloh.view.fragment.HomeFragment;
 import com.oloh.oloh.view.fragment.MyCartFragment;
@@ -226,5 +228,4 @@ public class Utils {
     public enum AnimationType {
         SLIDE_LEFT, SLIDE_RIGHT, SLIDE_UP, SLIDE_DOWN, FADE_IN, SLIDE_IN_SLIDE_OUT, FADE_OUT
     }
-
 }

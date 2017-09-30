@@ -8,11 +8,6 @@
     android:layout_gravity="center_horizontal|top"
     android:orientation="vertical">
 
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark" />-->
-
     <TextView
         android:id="@+id/new_offers_banner"
         android:layout_width="match_parent"
@@ -91,7 +86,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true">
 
-            <TextView
+            <Button
                 android:id="@+id/checkout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

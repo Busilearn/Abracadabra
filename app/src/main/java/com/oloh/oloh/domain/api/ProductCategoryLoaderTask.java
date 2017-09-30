@@ -34,18 +34,15 @@ public class ProductCategoryLoaderTask extends AsyncTask<String, Void, Void> {
         super.onPreExecute();
 
         if (null != ((MainActivity) context).getProgressBar())
-            ((MainActivity) context).getProgressBar().setVisibility(
-                    View.VISIBLE);
-
-    }
+            ((MainActivity) context).getProgressBar().setVisibility(View.VISIBLE);
+        }
 
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
 
         if (null != ((MainActivity) context).getProgressBar())
-            ((MainActivity) context).getProgressBar().setVisibility(
-                    View.GONE);
+            ((MainActivity) context).getProgressBar().setVisibility(View.GONE);
 
         if (recyclerView != null) {
             CategoryListAdapter simpleRecyclerAdapter = new CategoryListAdapter(

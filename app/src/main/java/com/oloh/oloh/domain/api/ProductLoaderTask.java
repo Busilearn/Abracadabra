@@ -4,14 +4,19 @@ package com.oloh.oloh.domain.api;
  * Created by stran on 30/08/2017.
  */
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 
+import com.oloh.oloh.R;
 import com.oloh.oloh.domain.mock.WebServerSync;
 import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.AppConstants;
@@ -32,9 +37,6 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
     private Context context;
     private ViewPager viewPager;
     private TabLayout tabs;
-    private ApiInterface apiInterface;
-    private List<Product> products;
-    private AlertDialog alertDialog;
 
     public ProductLoaderTask(RecyclerView listView, Context context,
                              ViewPager viewpager, TabLayout tabs) {
@@ -50,24 +52,25 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
         super.onPreExecute();
 
-        if (null != ((MainActivity) context).getProgressBar())
-            ((MainActivity) context).getProgressBar().setVisibility(
-                    View.VISIBLE);
-
+        if (null != ((MainActivity) context).getProgressBar()) {
+            ((MainActivity) context).getProgressBar().setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
 
-        if (null != ((MainActivity) context).getProgressBar())
-            ((MainActivity) context).getProgressBar().setVisibility(
-                    View.GONE);
+        if (null != ((MainActivity) context).getProgressBar()) {
+            ((MainActivity) context).getProgressBar().setVisibility(View.GONE);
+        }
+
         setupViewPager();
     }
 
     @Override
     protected Void doInBackground(String... params) {
+
         WebServerSync.getWebServerSync().getAllProducts(AppConstants.CURRENT_CATEGORY);
 
         return null;
@@ -91,7 +94,4 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
                     viewPager.setAdapter(adapter);
                     tabs.setupWithViewPager(viewPager);
     }
-
-
-
 }
