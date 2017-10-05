@@ -2,34 +2,43 @@ package com.oloh.oloh.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by stran on 25/08/2017.
  */
 
-public class ProductCategoryModel {
-    private String id;
-    private String parent;
+public class Category extends RealmObject {
+    @PrimaryKey
+    private int id;
+
+    private int parent;
+
     @SerializedName("name")
     private String categoryName;
+
     @SerializedName("description")
     private String categoryDescription;
+
     private String categoryDiscount = "0"; // A implémenter plus tard
-    private Images image = new Images("");
+    private Images image;
     private String categoryImageUrl;
 
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getParent() {
+    public int getParent() {
         return parent;
     }
 
-    public void setParent(String parent) {
+    public void setParent(int parent) {
         this.parent = parent;
     }
 

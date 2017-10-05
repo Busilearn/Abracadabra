@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.oloh.oloh.R;
+import com.oloh.oloh.model.entities.Category;
 import com.oloh.oloh.view.customview.TextDrawable;
 import com.oloh.oloh.model.CenterRepository;
-import com.oloh.oloh.model.entities.ProductCategoryModel;
 import com.oloh.oloh.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 
@@ -25,7 +25,7 @@ import java.util.List;
 public class CategoryListAdapter extends
         RecyclerView.Adapter<CategoryListAdapter.VersionViewHolder> {
 
-    public static List<ProductCategoryModel> categoryList = new ArrayList<ProductCategoryModel>();
+    public static List<Category> categoryList = new ArrayList<Category>();
     OnItemClickListener clickListener;
     private ColorGenerator mColorGenerator = ColorGenerator.MATERIAL;
     private TextDrawable.IBuilder mDrawableBuilder;

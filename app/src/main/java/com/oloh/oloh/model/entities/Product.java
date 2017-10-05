@@ -4,11 +4,13 @@ package com.oloh.oloh.model.entities;
 import android.text.Html;
 import android.text.Spanned;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 
-public class Product {
-
+public class Product extends RealmObject {
+    @PrimaryKey
     private int id;
     private String productId;
     private String name;
@@ -16,7 +18,7 @@ public class Product {
     private String price;
     private String average_rating;
     private String rating_count;
-    private List<Images> images;
+    private RealmList<Images> images;
     private String short_description;
     private String orderQty;
     private String discount;
@@ -24,7 +26,7 @@ public class Product {
     private String imageUrl = "";
     private String stock_quantity;
     private Boolean in_stock;
-    private List<ProductCategoryModel> productCategoryModels;
+    private RealmList<SubCat> categories;
 
     //getters & setters
 
@@ -99,11 +101,11 @@ public class Product {
         this.price = sellMRP;
     }
 
-    public List<Images> getImages() {
+    public RealmList<Images> getImages() {
         return images;
     }
 
-    public void setImages(List<Images> images) {
+    public void setImages(RealmList<Images> images) {
         this.images = images;
     }
 
@@ -157,12 +159,12 @@ public class Product {
         this.in_stock = in_stock;
     }
 
-    public List<ProductCategoryModel> getProductCategoryModels() {
-        return productCategoryModels;
+    public RealmList<SubCat> getCategories() {
+        return categories;
     }
 
-    public void setProductCategoryModels(List<ProductCategoryModel> productCategoryModels) {
-        this.productCategoryModels = productCategoryModels;
+    public void setCategories(RealmList<SubCat> categories) {
+        this.categories = categories;
     }
 
     @SuppressWarnings("deprecation")

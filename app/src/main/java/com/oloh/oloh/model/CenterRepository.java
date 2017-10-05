@@ -1,12 +1,11 @@
 package com.oloh.oloh.model;
 
 import com.oloh.oloh.domain.api.ApiInterface;
+import com.oloh.oloh.model.entities.Category;
 import com.oloh.oloh.model.entities.Product;
-import com.oloh.oloh.model.entities.ProductCategoryModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +20,8 @@ public class CenterRepository {
     private static CenterRepository centerRepository;
     private ApiInterface apiInterface;
 
-    private ArrayList<ProductCategoryModel> listOfCategory = new ArrayList<ProductCategoryModel>();
-    private ArrayList<ProductCategoryModel> listOfSubCategory = new ArrayList<ProductCategoryModel>();
+    private ArrayList<Category> listOfCategory = new ArrayList<Category>();
+    private ArrayList<Category> listOfSubCategory = new ArrayList<Category>();
     private ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory = new ConcurrentHashMap<String, ArrayList<Product>>();
     private List<Product> listOfProductsInShoppingList = Collections.synchronizedList(new ArrayList<Product>());
     private List<Set<String>> listOfItemSetsForDataMining = new ArrayList<>();
@@ -54,20 +53,20 @@ public class CenterRepository {
         this.mapOfProductsInCategory = mapOfProductsInCategory;
     }
 
-    public ArrayList<ProductCategoryModel> getListOfCategory() {
+    public ArrayList<Category> getListOfCategory() {
 
         return listOfCategory;
     }
 
-    public void setListOfCategory(ArrayList<ProductCategoryModel> listOfCategory) {
+    public void setListOfCategory(ArrayList<Category> listOfCategory) {
         this.listOfCategory = listOfCategory;
     }
 
-    public ArrayList<ProductCategoryModel> getListOfSubCategory() {
+    public ArrayList<Category> getListOfSubCategory() {
         return listOfSubCategory;
     }
 
-    public void setListOfSubCategory(ArrayList<ProductCategoryModel> listOfSubCategory) {
+    public void setListOfSubCategory(ArrayList<Category> listOfSubCategory) {
         this.listOfSubCategory = listOfSubCategory;
     }
 }

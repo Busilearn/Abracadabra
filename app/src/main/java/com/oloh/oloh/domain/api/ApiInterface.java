@@ -2,7 +2,7 @@ package com.oloh.oloh.domain.api;
 
 import com.oloh.oloh.domain.helper.NetworkConstants;
 import com.oloh.oloh.model.entities.Product;
-import com.oloh.oloh.model.entities.ProductCategoryModel;
+import com.oloh.oloh.model.entities.Category;
 import com.oloh.oloh.model.entities.ServerResponse;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public interface ApiInterface {
 
     //This method is used for "GET" categories
     @GET(NetworkConstants.URL_GET_ALL_CATEGORY)
-    Call<ArrayList<ProductCategoryModel>> getCategories();
+    Call<ArrayList<Category>> getCategories();
 
     /*//This method is used for "GET" minimum order
     @GET(NetworkConstants.URL_GET_OLOH_MINIMUM_ORDER)
