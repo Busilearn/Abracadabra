@@ -7,11 +7,11 @@ package com.oloh.oloh.domain.helper;
 
 public interface NetworkConstants {
 
-    String SERVER_URL = "https://apero-area.com";
+    String SERVER_URL = "https://oloh.fr";
 
     String SERVER_WOO_ENDPOINT = "/wp-json/wc/v2/";
 
-    String SERVER_OLOH_ENDPOINT = "/wp-content/plugins/apero-area/";
+    String SERVER_OLOH_ENDPOINT = "/wp-content/plugins/oloh/";
 
     String URL_GET_ALL_CATEGORY = SERVER_URL + SERVER_WOO_ENDPOINT + "products/categories";
 
@@ -20,5 +20,8 @@ public interface NetworkConstants {
     String URL_POST_OLOH_CHARGE= SERVER_URL + SERVER_OLOH_ENDPOINT + "payment_api/charge.php";
 
     String URL_GET_OLOH_MINIMUM_ORDER= SERVER_URL + SERVER_OLOH_ENDPOINT + "MinimumOrder.php";
+
+    String AUTH_URL = "http://demo.apero-area.com:9080/auth";
+    String REALM_URL = "realm://demo.apero-area.com:9080/~";
 
 }

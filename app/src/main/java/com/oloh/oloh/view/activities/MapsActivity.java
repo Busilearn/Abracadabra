@@ -142,6 +142,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
+        //TODOCorriger le crash de l'appli a la loc
+        catch (NullPointerException e) {
+            //create new reference or whatever
+        }
     }
 
 

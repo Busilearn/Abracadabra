@@ -22,6 +22,8 @@ public class Product extends RealmObject {
     private String short_description;
     private String orderQty;
     private String discount;
+    private String catalog_visibility;
+    private String status;
     private String sku;
     private String imageUrl = "";
     private String stock_quantity;
@@ -165,6 +167,22 @@ public class Product extends RealmObject {
 
     public void setCategories(RealmList<SubCat> categories) {
         this.categories = categories;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCatalog_visibility() {
+        return catalog_visibility;
+    }
+
+    public void setCatalog_visibility(String catalog_visibility) {
+        this.catalog_visibility = catalog_visibility;
     }
 
     @SuppressWarnings("deprecation")

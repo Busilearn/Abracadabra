@@ -44,7 +44,6 @@ public class WebServerSync {
         //Load category
         ArrayList<Category> listRawCategory = new ArrayList<Category>();
         ArrayList<Category> listFinalCategory = new ArrayList<Category>();
-        ArrayList<Category> listFinalSubCategory = new ArrayList<Category>();
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         // Make the request
@@ -84,8 +83,9 @@ public class WebServerSync {
         Realm realm = Realm.getDefaultInstance();
 
         // Load Product
-        RealmResults<Category> resultCat = realm.where(Category.class).findAll();
+        RealmResults<Category> catRealm = realm.where(Category.class).findAll();
         ArrayList<Product> listFinalProduct = new ArrayList<Product>();
+        String nomSubCat = null;
 
         productMap = new ConcurrentHashMap<String, ArrayList<Product>>();
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -94,27 +94,24 @@ public class WebServerSync {
 
         try {
             ArrayList<Product> productlist = callProduct.execute().body();
-            if (productlist != null) {
+            if (productlist != null && productlist.size() != 0) {
                 realm.beginTransaction();
                     List<Product> productRealm = realm.copyToRealmOrUpdate(productlist);
                 realm.commitTransaction();
 
                 for (Product product : productlist) {
-                    if (product.getCategories() != null){
-                        //if (product.getCategories().get(0).getId() == 0){
+                    if (product.getCategories().size() != 0 && product.getCategories().get(0).getId() != 0 &&
+                            product.getStatus().equals("publish") && product.getIn_stock() && product.getCatalog_visibility().equals("visible")) {
 
-                            subCat = realm.where(Category.class).equalTo("id", product.getCategories().get(0).getId()).findAll();
+                        subCat = realm.where(Category.class).equalTo("id", product.getCategories().get(0).getId()).findAll();
+                        Log.e("test",subCat.toString());
 
-                            if ((subCat.get(0).getParent() == resultCat.get(categoryPosition).getId())) {
+                            if ((subCat.get(0).getParent() == catRealm.get(categoryPosition).getId())) {
+
                                 listFinalProduct.add(product);
                             }
-                        //}
                     }
                 }
-
-                Log.e("test",listFinalProduct.toString());
-                Log.e("test",listFinalProduct.get(0).getCategories().get(0).getName());
-
                 productMap.put(listFinalProduct.get(0).getCategories().get(0).getName(), listFinalProduct);
                 CenterRepository.getCenterRepository().setMapOfProductsInCategory(productMap);
             }

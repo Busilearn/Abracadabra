@@ -2,6 +2,7 @@ package com.oloh.oloh.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,18 +13,16 @@ import io.realm.annotations.PrimaryKey;
 public class Category extends RealmObject {
     @PrimaryKey
     private int id;
-
     private int parent;
-
     @SerializedName("name")
     private String categoryName;
-
     @SerializedName("description")
     private String categoryDescription;
-
     private String categoryDiscount = "0"; // A implémenter plus tard
     private Images image;
     private String categoryImageUrl;
+    private RealmList<SubCat> subCategories;
+
 
 
     public int getId() {
@@ -77,5 +76,13 @@ public class Category extends RealmObject {
     public String getProductCategoryImageUrl() {
         categoryImageUrl = this.getImage().getSrc();
         return categoryImageUrl;
+    }
+
+    public RealmList<SubCat> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(RealmList<SubCat> subCategories) {
+        this.subCategories = subCategories;
     }
 }
