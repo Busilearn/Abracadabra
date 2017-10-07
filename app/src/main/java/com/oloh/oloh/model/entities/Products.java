@@ -9,7 +9,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 
-public class Product extends RealmObject {
+public class Products extends RealmObject {
     @PrimaryKey
     private int id;
     private String productId;
@@ -28,7 +28,7 @@ public class Product extends RealmObject {
     private String imageUrl = "";
     private String stock_quantity;
     private Boolean in_stock;
-    private RealmList<SubCat> categories;
+    private RealmList<Category> categories;
 
     //getters & setters
 
@@ -161,11 +161,11 @@ public class Product extends RealmObject {
         this.in_stock = in_stock;
     }
 
-    public RealmList<SubCat> getCategories() {
+    public RealmList<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(RealmList<SubCat> categories) {
+    public void setCategories(RealmList<Category> categories) {
         this.categories = categories;
     }
 

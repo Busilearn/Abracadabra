@@ -24,7 +24,7 @@ import com.oloh.oloh.view.customview.TextDrawable;
 import com.oloh.oloh.view.fragment.MyCartFragment;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Money;
-import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.util.ColorGenerator;
 import com.oloh.oloh.util.Utils;
 
@@ -49,7 +49,7 @@ public class ShoppingListAdapter extends
     private TextDrawable.IBuilder mDrawableBuilder;
     private TextDrawable drawable;
     private String ImageUrl;
-    private List<Product> productList = new ArrayList<Product>();
+    private List<Products> productsList = new ArrayList<Products>();
     private Context context;
 
     public ShoppingListAdapter(Context context,
@@ -58,7 +58,7 @@ public class ShoppingListAdapter extends
 
         this.context = context;
 
-        productList = CenterRepository.getCenterRepository().getListOfProductsInShoppingList();
+        productsList = CenterRepository.getCenterRepository().getListOfProductsInShoppingList();
     }
 
     @Override
@@ -71,17 +71,17 @@ public class ShoppingListAdapter extends
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
-        holder.itemName.setText(productList.get(position).getItemName());
+        holder.itemName.setText(productsList.get(position).getItemName());
 
-        holder.itemDesc.setText(productList.get(position).getItemShortDesc());
+        holder.itemDesc.setText(productsList.get(position).getItemShortDesc());
 
         String sellCostString = Money.euro(
-                BigDecimal.valueOf(Double.valueOf(productList.get(position)
+                BigDecimal.valueOf(Double.valueOf(productsList.get(position)
                         .getSellMRP()))).toString()
                 + "  ";
 
         /*String buyMRP = Money.rupees(
-                BigDecimal.valueOf(Long.valueOf(productList.get(position)
+                BigDecimal.valueOf(Long.valueOf(productsList.get(position)
                         .getMRP()))).toString();*/
 
         String costString = sellCostString /*+ buyMRP*/;
@@ -96,11 +96,11 @@ public class ShoppingListAdapter extends
         mDrawableBuilder = TextDrawable.builder().beginConfig().withBorder(4)
                 .endConfig().roundRect(10);
 
-        drawable = mDrawableBuilder.build(String.valueOf(productList
+        drawable = mDrawableBuilder.build(String.valueOf(productsList
                 .get(position).getItemName().charAt(0)), mColorGenerator
-                .getColor(productList.get(position).getItemName()));
+                .getColor(productsList.get(position).getItemName()));
 
-        ImageUrl = productList.get(position).getImageUrl();
+        ImageUrl = productsList.get(position).getImageUrl();
 
         holder.quanitity.setText(CenterRepository.getCenterRepository()
                 .getListOfProductsInShoppingList().get(position).getQuantity());
@@ -254,21 +254,21 @@ public class ShoppingListAdapter extends
 
         Utils.vibrate(context);
 
-        productList.remove(position);
+        productsList.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
 
-        Collections.swap(productList, fromPosition, toPosition);
+        Collections.swap(productsList, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return productsList.size();
 
     }
 

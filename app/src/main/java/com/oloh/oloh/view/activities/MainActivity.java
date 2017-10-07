@@ -15,12 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oloh.oloh.R;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.view.fragment.HomeFragment;
 import com.oloh.oloh.domain.helper.Connectivity;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Money;
-import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.PreferenceHelper;
 import com.oloh.oloh.util.TinyDB;
 import com.oloh.oloh.util.Utils;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         CenterRepository.getCenterRepository().setListOfProductsInShoppingList(
 
                 new TinyDB(getApplicationContext()).getListObject(
-                        PreferenceHelper.MY_CART_LIST_LOCAL, Product.class));
+                        PreferenceHelper.MY_CART_LIST_LOCAL, Products.class));
 
         itemCount = CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
                 .size();
@@ -92,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (itemCount != 0) {
-            for (Product product : CenterRepository.getCenterRepository()
+            for (Products products : CenterRepository.getCenterRepository()
                     .getListOfProductsInShoppingList()) {
 
                 updateCheckOutAmount(
-                        BigDecimal.valueOf(Double.valueOf(product.getSellMRP())),
+                        BigDecimal.valueOf(Double.valueOf(products.getSellMRP())),
                         true);
             }
         }
@@ -283,6 +283,5 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout getmDrawerLayout() {
         return mDrawerLayout;
     }
-
 
 }

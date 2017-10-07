@@ -2,7 +2,7 @@ package com.oloh.oloh.model;
 
 import com.oloh.oloh.domain.api.ApiInterface;
 import com.oloh.oloh.model.entities.Category;
-import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.Products;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +22,8 @@ public class CenterRepository {
 
     private ArrayList<Category> listOfCategory = new ArrayList<Category>();
     private ArrayList<Category> listOfSubCategory = new ArrayList<Category>();
-    private ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory = new ConcurrentHashMap<String, ArrayList<Product>>();
-    private List<Product> listOfProductsInShoppingList = Collections.synchronizedList(new ArrayList<Product>());
+    private ConcurrentHashMap<String, ArrayList<Products>> mapOfProductsInCategory = new ConcurrentHashMap<String, ArrayList<Products>>();
+    private List<Products> listOfProductsInShoppingList = Collections.synchronizedList(new ArrayList<Products>());
     private List<Set<String>> listOfItemSetsForDataMining = new ArrayList<>();
 
     public static CenterRepository getCenterRepository() {
@@ -35,20 +35,20 @@ public class CenterRepository {
     }
 
 
-    public List<Product> getListOfProductsInShoppingList() {
+    public List<Products> getListOfProductsInShoppingList() {
         return listOfProductsInShoppingList;
     }
 
-    public void setListOfProductsInShoppingList(ArrayList<Product> getShoppingList) {
+    public void setListOfProductsInShoppingList(ArrayList<Products> getShoppingList) {
         this.listOfProductsInShoppingList = getShoppingList;
     }
 
-    public Map<String, ArrayList<Product>> getMapOfProductsInCategory() {
+    public Map<String, ArrayList<Products>> getMapOfProductsInCategory() {
 
         return mapOfProductsInCategory;
     }
 
-        public void setMapOfProductsInCategory(ConcurrentHashMap<String, ArrayList<Product>> mapOfProductsInCategory) {
+        public void setMapOfProductsInCategory(ConcurrentHashMap<String, ArrayList<Products>> mapOfProductsInCategory) {
 
         this.mapOfProductsInCategory = mapOfProductsInCategory;
     }

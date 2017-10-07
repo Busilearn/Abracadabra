@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +21,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.oloh.oloh.R;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.customview.ClickableViewPager;
 import com.oloh.oloh.view.customview.LabelView;
 import com.oloh.oloh.view.customview.TextDrawable;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Money;
-import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.ColorGenerator;
 import com.oloh.oloh.util.Utils;
 
@@ -154,7 +153,7 @@ public class ProductDetailsFragment extends Fragment {
                         } else {
 
                             // current object
-                            Product tempObj = CenterRepository
+                            Products tempObj = CenterRepository
                                     .getCenterRepository().getMapOfProductsInCategory()
                                     .get(subcategoryKey).get(productListNumber);
 
@@ -300,7 +299,7 @@ public class ProductDetailsFragment extends Fragment {
 
                         } else {
 
-                            Product tempObj = CenterRepository
+                            Products tempObj = CenterRepository
                                     .getCenterRepository().getMapOfProductsInCategory()
                                     .get(subcategoryKey).get(productListNumber);
 

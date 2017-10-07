@@ -14,13 +14,13 @@
             1. User should be able to view list of products grouped by categories.
         </change>
         <change>
-            2. User should be able to view details by selecting a product from list.
+            2. User should be able to view details by selecting a products from list.
         </change>
         <change>
-            3. The product details includes an image, name and price of product.
+            3. The products details includes an image, name and price of products.
         </change>
         <change>
-            4. Product details page should have a button to add the product to cart.
+            4. Product details page should have a button to add the products to cart.
         </change>
         <change>
             5. Cart displays a list of products along with its price.
@@ -32,10 +32,10 @@
             7. User should be able to view cart at any time.
         </change>
         <change>
-            8. User should be able to navigate to product details from Cart as well.
+            8. User should be able to navigate to products details from Cart as well.
         </change>
         <change>
-            9. User should be able to delete any product from the cart.
+            9. User should be able to delete any products from the cart.
         </change>
         <change>
             10. Cart should be persisted in the app i.e. if user exits the app, the cart should be

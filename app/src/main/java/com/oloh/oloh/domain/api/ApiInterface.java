@@ -1,7 +1,7 @@
 package com.oloh.oloh.domain.api;
 
 import com.oloh.oloh.domain.helper.NetworkConstants;
-import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.model.entities.Category;
 import com.oloh.oloh.model.entities.ServerResponse;
 
@@ -20,7 +20,7 @@ import retrofit2.http.POST;
 public interface ApiInterface {
     //This method is used for "GET" products
     @GET(NetworkConstants.URL_GET_PRODUCTS_MAP)
-    Call<ArrayList<Product>> getProduct();
+    Call<ArrayList<Products>> getProduct();
 
     //This method is used for "GET" categories
     @GET(NetworkConstants.URL_GET_ALL_CATEGORY)
@@ -28,7 +28,7 @@ public interface ApiInterface {
 
     /*//This method is used for "GET" minimum order
     @GET(NetworkConstants.URL_GET_OLOH_MINIMUM_ORDER)
-    Call<ArrayList<Product>> getMinimumOrder();*/
+    Call<ArrayList<Products>> getMinimumOrder();*/
 
     //This method is used for "POST" order
     @FormUrlEncoded

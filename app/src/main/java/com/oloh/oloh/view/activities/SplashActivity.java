@@ -42,11 +42,11 @@ public class SplashActivity extends FragmentActivity {
         // Font path
         String fontPath = "fonts/arista.ttf";
         // Loading Font Face
-        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
+        //TODO Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
         // Applying font
         //appTitle.setTypeface(tf);
-        appSlogan.setTypeface(tf);
+        //appSlogan.setTypeface(tf);
 
         if (savedInstanceState == null) {
             flyIn();

@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.oloh.oloh.R;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.customview.TextDrawable;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.model.entities.Money;
-import com.oloh.oloh.model.entities.Product;
 import com.oloh.oloh.util.ColorGenerator;
 import com.oloh.oloh.util.Utils;
 
@@ -42,7 +42,7 @@ public class ProductListAdapter extends
 
     private String ImageUrl;
 
-    private List<Product> productList = new ArrayList<Product>();
+    private List<Products> productsList = new ArrayList<Products>();
     private OnItemClickListener clickListener;
 
     private Context context;
@@ -52,12 +52,12 @@ public class ProductListAdapter extends
 
         if (isCartlist) {
 
-            productList = CenterRepository.getCenterRepository()
+            productsList = CenterRepository.getCenterRepository()
                     .getListOfProductsInShoppingList();
 
         } else {
 
-            productList = CenterRepository.getCenterRepository().getMapOfProductsInCategory()
+            productsList = CenterRepository.getCenterRepository().getMapOfProductsInCategory()
                     .get(subcategoryKey);
         }
 
@@ -76,19 +76,19 @@ public class ProductListAdapter extends
     public void onBindViewHolder(final VersionViewHolder holder,
                                  final int position) {
 
-        holder.itemName.setText(productList.get(position)
+        holder.itemName.setText(productsList.get(position)
                 .getItemName());
 
-        holder.itemDesc.setText(productList.get(position)
+        holder.itemDesc.setText(productsList.get(position)
                 .getItemShortDesc());
 
        String sellCostString = Money.euro(
-                BigDecimal.valueOf(Double.valueOf(productList.get(position)
+                BigDecimal.valueOf(Double.valueOf(productsList.get(position)
                         .getSellMRP()))).toString()
                 + "  ";
 
         /*String buyMRP = Money.rupees(
-                BigDecimal.valueOf(Long.valueOf(productList.get(position)
+                BigDecimal.valueOf(Long.valueOf(productsList.get(position)
                         .getMRP()))).toString();*/
 
         String costString = sellCostString /*+ buyMRP*/;
@@ -103,11 +103,11 @@ public class ProductListAdapter extends
         mDrawableBuilder = TextDrawable.builder().beginConfig().withBorder(4)
                 .endConfig().roundRect(10);
 
-        drawable = mDrawableBuilder.build(String.valueOf(productList
+        drawable = mDrawableBuilder.build(String.valueOf(productsList
                 .get(position).getItemName().charAt(0)), mColorGenerator
-                .getColor(productList.get(position).getItemName()));
+                .getColor(productsList.get(position).getItemName()));
 
-        ImageUrl = productList.get(position).getImageUrl();
+        ImageUrl = productsList.get(position).getImageUrl();
 
         Glide.with(context).load(ImageUrl).placeholder(drawable)
                 .error(drawable).animate(R.anim.base_slide_right_in)
@@ -121,7 +121,7 @@ public class ProductListAdapter extends
 
 
                         //current object
-                        Product tempObj = productList.get(position);
+                        Products tempObj = productsList.get(position);
 
 
                         //if current object is lready in shopping list
@@ -158,7 +158,7 @@ public class ProductListAdapter extends
                             ((MainActivity) getContext()).updateCheckOutAmount(
                                     BigDecimal
                                             .valueOf(Double
-                                                    .valueOf(productList
+                                                    .valueOf(productsList
                                                             .get(position)
                                                             .getSellMRP())),
                                     true);
@@ -180,7 +180,7 @@ public class ProductListAdapter extends
                             ((MainActivity) getContext()).updateCheckOutAmount(
                                     BigDecimal
                                             .valueOf(Double
-                                                    .valueOf(productList
+                                                    .valueOf(productsList
                                                             .get(position)
                                                             .getSellMRP())),
                                     true);
@@ -198,7 +198,7 @@ public class ProductListAdapter extends
             @Override
             public void onClick(View v) {
 
-                Product tempObj = (productList).get(position);
+                Products tempObj = (productsList).get(position);
 
                 if (CenterRepository.getCenterRepository().getListOfProductsInShoppingList()
                         .contains(tempObj)) {
@@ -218,7 +218,7 @@ public class ProductListAdapter extends
                                                 .getQuantity()) - 1));
 
                         ((MainActivity) getContext()).updateCheckOutAmount(
-                                BigDecimal.valueOf(Double.valueOf(productList
+                                BigDecimal.valueOf(Double.valueOf(productsList
                                         .get(position).getSellMRP())),
                                 false);
 
@@ -262,7 +262,7 @@ public class ProductListAdapter extends
 
     @Override
     public int getItemCount() {
-        return productList == null ? 0 : productList.size();
+        return productsList == null ? 0 : productsList.size();
     }
 
     public void SetOnItemClickListener(
@@ -272,7 +272,7 @@ public class ProductListAdapter extends
 
     @Override
     public void onItemDismiss(int position) {
-        productList.remove(position);
+        productsList.remove(position);
         notifyItemRemoved(position);
     }
 
@@ -280,11 +280,11 @@ public class ProductListAdapter extends
     public void onItemMove(int fromPosition, int toPosition) {
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(productList, i, i + 1);
+                Collections.swap(productsList, i, i + 1);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(productList, i, i - 1);
+                Collections.swap(productsList, i, i - 1);
             }
         }
         notifyItemMoved(fromPosition, toPosition);

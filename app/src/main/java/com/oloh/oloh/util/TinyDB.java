@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.Products;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class TinyDB {
         return new ArrayList<String>(Arrays.asList(TextUtils.split(preferences.getString(key, ""), "‚‗‚")));
     }
 
-    public ArrayList<Product> getListObject(String key, Class<?> mClass) {
+    public ArrayList<Products> getListObject(String key, Class<?> mClass) {
         Gson gson = new Gson();
 
         ArrayList<String> objStrings = getListString(key);
-        ArrayList<Product> objects = new ArrayList<Product>();
+        ArrayList<Products> objects = new ArrayList<Products>();
 
         for (String jObjString : objStrings) {
-            Product value = (Product) gson.fromJson(jObjString, mClass);
+            Products value = (Products) gson.fromJson(jObjString, mClass);
             objects.add(value);
         }
         return objects;
@@ -50,7 +50,7 @@ public class TinyDB {
         preferences.edit().putString(key, TextUtils.join("‚‗‚", myStringList)).apply();
     }
 
-    public void putListObject(String key, List<Product> list) {
+    public void putListObject(String key, List<Products> list) {
         checkForNullKey(key);
         Gson gson = new Gson();
         ArrayList<String> objStrings = new ArrayList<String>();

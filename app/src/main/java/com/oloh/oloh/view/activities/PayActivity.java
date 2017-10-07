@@ -4,17 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oloh.oloh.R;
 import com.oloh.oloh.domain.api.Communicator;
 import com.oloh.oloh.model.CenterRepository;
-import com.oloh.oloh.model.entities.Product;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.util.TinyDB;
 import com.stripe.android.Stripe;
@@ -156,10 +154,10 @@ public class PayActivity extends AppCompatActivity {
                         tok = token;
                         //new StripeCharge(token.getId()).execute();
 
-                        for (Product productFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
+                        for (Products productsFromShoppingList : CenterRepository.getCenterRepository().getListOfProductsInShoppingList()) {
                             //add product ids to array
-                            idProduct.add(productFromShoppingList.getId());
-                            quantityProduct.add(productFromShoppingList.getQuantity());
+                            idProduct.add(productsFromShoppingList.getId());
+                            quantityProduct.add(productsFromShoppingList.getQuantity());
                         }
                         communicator.loginPost("charge", cardName.getText().toString(), cardFirstName.getText().toString(), cardPhoneNumber.getText().toString(), cardMail.getText().toString(), token.getId(),amount, "eur", notes.getText().toString(), idProduct, quantityProduct, posGps, getApplicationContext(), progressBarContainerPay);
                     }
