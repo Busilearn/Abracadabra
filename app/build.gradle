@@ -62,6 +62,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.stripe:stripe-android:5.0.0'
 
+    //realm
+    compile 'io.realm:android-adapters:2.0.0'
 
     testCompile 'junit:junit:4.12'
 }

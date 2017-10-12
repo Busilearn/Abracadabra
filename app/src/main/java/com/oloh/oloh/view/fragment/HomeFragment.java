@@ -20,7 +20,13 @@ import android.support.v7.graphics.Palette;
 
 import com.oloh.oloh.R;
 import com.oloh.oloh.domain.api.ProductCategoryLoaderTask;
+import com.oloh.oloh.domain.mock.WebServerSync;
+import com.oloh.oloh.model.CenterRepository;
+import com.oloh.oloh.model.entities.Category;
 import com.oloh.oloh.view.activities.MainActivity;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Created by dany on 29/08/2017.
@@ -89,6 +95,7 @@ public class HomeFragment extends Fragment {
                 getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        // Populate the recycler view
         new ProductCategoryLoaderTask(recyclerView, getActivity()).execute();
 
 

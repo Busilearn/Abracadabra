@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         CheckoutDisable = getIntent().getExtras().getBoolean("CheckoutDisable");
 
         stripe = new Stripe(getApplicationContext());

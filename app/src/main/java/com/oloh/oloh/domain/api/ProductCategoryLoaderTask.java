@@ -7,11 +7,22 @@ import android.view.View;
 
 import com.oloh.oloh.R;
 import com.oloh.oloh.domain.mock.WebServerSync;
+import com.oloh.oloh.model.CenterRepository;
+import com.oloh.oloh.model.entities.Category;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.adapter.CategoryListAdapter;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.util.Utils;
 import com.oloh.oloh.view.fragment.ProductOverviewFragment;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+import retrofit2.Call;
 
 /**
  * The Class ImageLoaderTask.

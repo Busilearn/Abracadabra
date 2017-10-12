@@ -13,13 +13,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.oloh.oloh.domain.mock.WebServerSync;
+import com.oloh.oloh.model.entities.Category;
+import com.oloh.oloh.model.entities.Products;
 import com.oloh.oloh.util.AppConstants;
 import com.oloh.oloh.view.activities.MainActivity;
 import com.oloh.oloh.view.adapter.ProductsInCategoryPagerAdapter;
 import com.oloh.oloh.model.CenterRepository;
 import com.oloh.oloh.view.fragment.ProductListFragment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import io.realm.Realm;
 
 /**
  * The Class ImageLoaderTask.
@@ -62,9 +69,7 @@ public class ProductLoaderTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... params) {
-
         WebServerSync.getWebServerSync().getAllProducts(AppConstants.CURRENT_CATEGORY);
-
         return null;
     }
 

@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CenterRepository {
 
     private static CenterRepository centerRepository;
-    private ApiInterface apiInterface;
 
     private ArrayList<Category> listOfCategory = new ArrayList<Category>();
     private ArrayList<Category> listOfSubCategory = new ArrayList<Category>();

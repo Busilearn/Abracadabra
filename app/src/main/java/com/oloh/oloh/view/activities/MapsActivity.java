@@ -63,12 +63,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO supprimer et corriger la map
+        Toast.makeText(getBaseContext(), "Vous ne pourrez pas commander", Toast.LENGTH_LONG).show();
+        // Store loc in DB
+        new TinyDB(getApplicationContext()).putLocation("48.84255697, 2.52018392");
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("CheckoutDisable", true);
+        startActivity(intent);
+        finish();
+
+/* TODO
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);*/
     }
 
 
@@ -109,6 +120,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
+
+                            Log.e("test", "loc : " +  mLastKnownLocation.getLongitude());
+
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -126,7 +140,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mCurrLocationMarker = mMap.addMarker(markerOptions);
                             //progress.dismiss();
 
-
                         } else {
 
                             Log.e("test", "Exception: %s", task.getException());
@@ -141,10 +154,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
-        }
-        //TODOCorriger le crash de l'appli a la loc
-        catch (NullPointerException e) {
-            //create new reference or whatever
         }
     }
 
@@ -180,7 +189,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         }
-        //updateLocationUI();
+        updateLocationUI();
     }
 
     private void updateLocationUI() {
